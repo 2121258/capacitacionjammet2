@@ -1,25 +1,24 @@
-/* Reset básico */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+  background-color: white;
+  color: #222;
+  padding-bottom: 40px;
 }
 
-/* CABECERA */
+/* ENCABEZADO */
 .main-header {
   background-color: #771766;
   color: white;
   padding: 15px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .logo-container {
@@ -29,71 +28,64 @@ body {
 }
 
 .logo {
-  height: 30px;
+  height: 40px;
 }
 
 .empresa {
   font-weight: bold;
-  font-size: 16px;
-}
-
-.nav-links a {
-  color: white;
-  margin-left: 20px;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.nav-links a:hover {
-  text-decoration: underline;
+  font-size: 18px;
 }
 
 /* CONTENIDO */
-.contenido {
-  padding: 20px;
+main {
+  padding: 30px 20px;
+  max-width: 800px;
+  margin: auto;
 }
 
-h2 {
-  margin-bottom: 15px;
+.section-title {
   font-size: 18px;
-  color: #333;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #771766;
 }
 
-/* CARDS DE CURSOS */
-.cards-container {
+.cards {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
   margin-bottom: 30px;
 }
 
 .card {
-  background-color: #fff;
+  background-color: white;
+  border: 1px solid #ddd;
   padding: 15px;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border-radius: 12px;
   font-size: 14px;
   font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
 .card:hover {
-  background-color: #f1e4f4;
+  background-color: #f5e6f5;
 }
 
-/* CALENDARIO */
-.calendario-titulo {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.calendario-placeholder {
-  background-color: #eee;
-  border: 1px dashed #ccc;
-  padding: 50px;
+.calendar-placeholder {
+  border: 2px dashed #ccc;
+  padding: 40px;
+  border-radius: 10px;
   text-align: center;
+  color: #777;
   font-style: italic;
-  color: #666;
-  border-radius: 4px;
+  background-color: #fafafa;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  color: #999;
+  font-size: 13px;
 }
