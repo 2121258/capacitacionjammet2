@@ -2,130 +2,102 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contacto - Jammet Consultora SRL</title>
+  <link rel="stylesheet" href="estilos.css" />
   <style>
     body {
       margin: 0;
-      font-family: "Segoe UI", sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background-color: #f9f9f9;
-      color: #333;
     }
+
     header {
-      background-color: #75025c;
-      color: white;
-      padding: 1em 2em;
+      background-color: #800061;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 10px 20px;
     }
+
     header img {
-      height: 40px;
-      margin-right: 10px;
+      height: 45px;
     }
-    header a {
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    nav li {
+      margin-left: 20px;
+    }
+
+    nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1.1em;
     }
+
     main {
-      max-width: 1000px;
-      margin: 2em auto;
-      padding: 2em;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
     }
+
+    h1 {
+      color: #800061;
+      margin-bottom: 20px;
+    }
+
     .persona {
-      margin-bottom: 3em;
+      margin-bottom: 25px;
     }
-    .nombre {
-      font-size: 1.5em;
-      font-weight: bold;
+
+    .persona strong {
+      display: block;
+      font-size: 18px;
+      color: #800061;
     }
-    .cargo {
-      color: #888;
-      margin-bottom: 1em;
-    }
-    .iconos {
-      display: flex;
-      gap: 1em;
-      margin-bottom: 1em;
-    }
-    .icono {
-      background-color: #f2eaf2;
-      padding: 1em;
-      border-radius: 10px;
-      flex: 1;
-      text-align: center;
-      font-size: 1.5em;
-      color: #75025c;
-    }
-    .datos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2em;
-      margin-bottom: 1em;
-    }
-    .datos div {
-      flex: 1;
-      min-width: 250px;
-    }
+
     footer {
       text-align: center;
-      margin: 3em 0 1em 0;
-      color: #aaa;
-      font-size: 0.85em;
+      margin-top: 60px;
+      color: #777;
     }
   </style>
 </head>
 <body>
+  <header>
+    <img src="logo-jammet.png" alt="Jammet Consultora SRL" />
+    <nav>
+      <ul>
+        <li><a href="certificado.html">Descargá tu certificado</a></li>
+        <li><a href="quienes.html">¿Quiénes somos?</a></li>
+        <li><a href="ubicacion.html">Ubicación</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<header>
-  <a href="index.html">
-    <img src="logo.jpg" alt="Jammet Logo">
-    Jammet Consultora SRL
-  </a>
-</header>
-
-<main>
-  <div class="persona">
-    <div class="nombre">Juliana Jammet</div>
-    <div class="cargo">Encargado Reservas</div>
-    <div class="iconos">
-      <div class="icono">✉️</div>
-      <div class="icono">📞</div>
-      <div class="icono">✏️</div>
+  <main>
+    <h1>Contacto</h1>
+    <div class="persona">
+      <strong>Juliana Jammet</strong>
+      <p>capacitacion@jammetconsultora.com.ar</p>
+      <p>Tel: 02974064006</p>
     </div>
-    <div class="datos">
-      <div><strong>Nombre:</strong><br>Juliana Jammet</div>
-      <div><strong>Email:</strong><br><a href="mailto:capacitacion@jammetconsultora.com.ar">capacitacion@jammetconsultora.com.ar</a></div>
-      <div><strong>Teléfono:</strong><br>02974373734</div>
+    <div class="persona">
+      <strong>Brian Jammet</strong>
+      <p>habilitaciones@jammetconsultora.com.ar</p>
+      <p>Tel: 02974064006</p>
     </div>
-    <div><strong>Mensaje</strong><br>Consultas y reservas sobre cursos</div>
-  </div>
+  </main>
 
-  <div class="persona">
-    <div class="nombre">Brian Jammet</div>
-    <div class="cargo">Encargado Reservas</div>
-    <div class="iconos">
-      <div class="icono">✉️</div>
-      <div class="icono">📞</div>
-      <div class="icono">✏️</div>
-    </div>
-    <div class="datos">
-      <div><strong>Nombre:</strong><br>Brian Jammet</div>
-      <div><strong>Email:</strong><br><a href="mailto:habilitaciones@jammetconsultora.com.ar">habilitaciones@jammetconsultora.com.ar</a></div>
-      <div><strong>Teléfono:</strong><br>02974064006</div>
-    </div>
-    <div><strong>Mensaje</strong><br>Consultas sobre cursos y reservas</div>
-  </div>
-</main>
-
-<footer>
-  © 2025 Jammet Consultora SRL
-</footer>
-
+  <footer>
+    © 2025 Jammet Consultora SRL
+  </footer>
 </body>
 </html>
