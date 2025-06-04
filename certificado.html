@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Descarga tu certificado - Jammet Consultora</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background-color: #75025c;
+      color: white;
+      padding: 1em 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .logo-container a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1.5em;
+      font-weight: bold;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 3em auto;
+      background: white;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    h2 {
+      color: #75025c;
+    }
+
+    input[type="text"] {
+      padding: 0.7em;
+      width: 100%;
+      margin-top: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      margin-top: 1.5em;
+      padding: 0.7em 2em;
+      background-color: #b05fa7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    iframe {
+      margin-top: 2em;
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+
+    .mensaje-error {
+      color: red;
+      margin-top: 1em;
+      font-weight: bold;
+    }
+
+    #descarga a {
+      display: inline-block;
+      background-color: #b05fa7;
+      color: white;
+      padding: 0.7em 1.5em;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      margin-top: 1em;
+    }
+
+    footer {
+      text-align: center;
+      margin: 3em 0 1em 0;
+      color: #aaa;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-container">
+    <a href="index.html">
+      <img src="logo.jpg" alt="Logo">
+      Jammet Consultora SRL
+    </a>
+  </div>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="quienes.html">¿Quiénes somos?</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Descargá tu certificado</h2>
+  <p>Ingresá tu DNI para verificar y acceder al certificado, si está validado.</p>
+  <input type="text" id="dni" placeholder="Ej: 12345678">
+  <button onclick="buscarCertificado()">Buscar certificado</button>
+  <div id="resultado"></div>
+  <div id="descarga" style="display:none;">
+    <a id="btn-descargar" href="#" target="_blank" download>Descargar certificado</a>
+  </div>
+</main>
+
+<footer>
+  © 2025 Jammet Consultora SRL
+</footer>
+
+<script>
+  function buscarCertificado() {
+    const dni = document.getElementById("dni").value.trim();
+    const resultado = document.getElementById("resultado");
+    const descarga = document.getElementById("descarga");
+    const boton = document.getElementById("btn-descargar");
+
+    resultado.innerHTML = "";
+    descarga.style.display = "none";
+
+    if (!dni) {
+      resultado.innerHTML = '<p class="mensaje-error">Por favor, ingresá un número de DNI.</p>';
+      return;
+    }
+
+    fetch(`https://script.google.com/macros/s/AKfycbwrSL_z2vguGWQqm2X9Ox3y0iN_QPH6p84CGY99VOylxfmEkAbQnX2EuAyRqUEHLe_4Rg/exec?dni=${dni}`)
+      .then(response => response.text())
+      .then(url => {
+        if (url.includes("http")) {
+          // Generar enlace de descarga directa
+          const directURL = url
+            .replace("/view?usp=drive_link", "")
+            .replace("file/d/", "uc?export=download&id=")
+            .replace("/preview", "");
+
+          resultado.innerHTML = `<iframe src="${url}"></iframe>`;
+          boton.href = directURL;
+          descarga.style.display = "block";
+        } else {
+          resultado.innerHTML = `<p class="mensaje-error">${url}</p>`;
+        }
+      })
+      .catch(() => {
+        resultado.innerHTML = `<p class="mensaje-error">Error de red. Intentá nuevamente más tarde.</p>`;
+      });
+  }
+</script>
+
+</body>
+</html>
