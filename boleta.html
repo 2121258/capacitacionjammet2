@@ -99,30 +99,10 @@ function generarBoleta() {
 
   setTimeout(() => {
     html2canvas(document.getElementById("boletaVisual")).then(canvas => {
-      // Descargar imagen local
       const enlace = document.createElement("a");
-      enlace.download = "boleta.jpg";
+      enlace.download = `boleta_${dni}.jpg`;
       enlace.href = canvas.toDataURL("image/jpeg");
       enlace.click();
-
-      // Enviar a Google Apps Script
-      fetch('SCRIPT_URL', {
-        method: 'POST',
-        body: JSON.stringify({
-          image: canvas.toDataURL("image/jpeg"),
-          nombre,
-          apellido,
-          dni,
-          email,
-          curso,
-          monto
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(res => res.json())
-        .then(data => alert("Boleta guardada correctamente en Drive."))
-        .catch(err => alert("Error al guardar en Drive."));
     });
   }, 500);
 
