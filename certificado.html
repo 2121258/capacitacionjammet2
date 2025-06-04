@@ -11,6 +11,7 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: #f9f9f9;
     }
+
     header {
       background-color: #800061;
       color: white;
@@ -19,9 +20,11 @@
       justify-content: space-between;
       padding: 10px 20px;
     }
+
     header img {
       height: 40px;
     }
+
     nav ul {
       list-style: none;
       margin: 0;
@@ -29,13 +32,21 @@
       display: flex;
       align-items: center;
     }
+
     nav li {
       margin-left: 20px;
     }
+
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
+    }
+
+    nav a.button {
+      background-color: #b85caf;
+      padding: 6px 12px;
+      border-radius: 6px;
     }
 
     .contenedor {
@@ -89,8 +100,10 @@
     <img src="logo-jammet.png" alt="Jammet Consultora SRL" />
     <nav>
       <ul>
-        <li><a href="index.html">Inicio</a></li>
         <li><a href="quienes.html">¿Quiénes somos?</a></li>
+        <li><a href="ubicacion.html">Ubicación</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="certificado.html" class="button">Descargá tu certificado</a></li>
       </ul>
     </nav>
   </header>
