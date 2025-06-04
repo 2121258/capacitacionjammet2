@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Transporte de Pasajeros</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-dhnvfs7BoU9cSeEFxY2kC+kqJ7gXxyWSIo4mF0vAfYi4Q8j74gU28UilPLpDPv5fMjT8zLkDw9sFYGnCXPLyIA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
@@ -17,8 +18,42 @@
     header {
       background-color: #75025c;
       color: white;
-      padding: 1em;
-      text-align: center;
+      padding: 1em 2em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    .logo-container img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .logo-container a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+    }
+    nav a i {
+      margin-right: 6px;
     }
     main {
       flex: 1;
@@ -72,13 +107,24 @@
 <body>
 
 <header>
-  <h1>Jammet Consultora SRL</h1>
+  <div class="logo-container">
+    <a href="index.html">
+      <img src="logo.jpg" alt="Jammet Logo">
+      Jammet Consultora SRL
+    </a>
+  </div>
+  <nav>
+    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
+  </nav>
 </header>
 
 <main>
   <form id="formulario" enctype="multipart/form-data">
     <h2>Transporte de Pasajeros</h2>
-    
+
     <label>Apellido</label>
     <input type="text" name="apellido" placeholder="Obligatorio" required>
 
