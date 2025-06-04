@@ -95,16 +95,18 @@
   <h2>Inicio Cargas Generales</h2>
   <form id="formulario" enctype="multipart/form-data">
     <label>Apellido</label>
-    <input type="text" name="apellido" required>
+    <input type="text" name="apellido" placeholder="Obligatorio" required>
 
     <label>Nombre</label>
-    <input type="text" name="nombre" required>
+    <input type="text" name="nombre" placeholder="Obligatorio" required>
 
     <label>DNI</label>
-    <input type="text" name="dni" required>
+    <input type="text" name="dni" placeholder="Obligatorio" required>
 
     <label>Fecha del curso</label>
-    <select name="fecha" required></select>
+    <select name="fecha" required>
+      <option value="">Obligatorio</option>
+    </select>
 
     <label>DNI Frente</label>
     <input type="file" name="dni_frente" accept=".jpg,.jpeg,.pdf" required>
@@ -119,7 +121,7 @@
     <input type="file" name="licencia_dorso" accept=".jpg,.jpeg,.pdf" required>
 
     <label>Comprobante de pago</label>
-    <input type="file" name="comprobante" accept=".jpg,.jpeg,.pdf" required>
+    <input type="file" name="comprobante" accept=".jpg,.jpeg,.pdf">
 
     <button type="submit">Enviar</button>
   </form>
@@ -130,7 +132,7 @@
 </footer>
 
 <script>
-  // Cargar fechas desde el endpoint de Apps Script
+  // Cargar fechas desde el endpoint
   fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
     .then(res => res.json())
     .then(data => {
@@ -143,7 +145,7 @@
       });
     });
 
-  // Enviar formulario al endpoint que guarda en Drive, Sheets y envía correo
+  // Envío al script de Google Apps
   document.getElementById("formulario").addEventListener("submit", function(e) {
     e.preventDefault();
     const form = e.target;
