@@ -42,6 +42,10 @@
       font-weight: bold;
     }
 
+    nav li:first-child {
+      display: none; /* Oculta el botón de certificado ya que estamos en esta página */
+    }
+
     .contenedor {
       max-width: 500px;
       margin: 60px auto;
@@ -93,6 +97,7 @@
     <img src="logo.jpg" alt="Jammet Consultora SRL" />
     <nav>
       <ul>
+        <li><a href="certificado.html">Descargá tu certificado</a></li>
         <li><a href="quienes.html">¿Quiénes somos?</a></li>
         <li><a href="ubicacion.html">Ubicación</a></li>
         <li><a href="contacto.html">Contacto</a></li>
@@ -128,7 +133,7 @@
       }
 
       try {
-        const response = await fetch(`https://script.google.com/macros/s/AKfycbwpvjJhrJcJKtg6ozbYA6lLRj4rAxK0N7OvWIdgABwiz7UJSN3W0SxJAL2FcQLhs/exec?dni=${dni}`);
+        const response = await fetch(`https://script.google.com/macros/s/AKfycbwpvjJhrJcJKtg60zbYA6ILRj4rAxK0N7OvWldgABwiz7UJSN3WOSxJAL2FcQLhwX0VoQ/exec?dni=${dni}`);
         const data = await response.json();
 
         if (data.estado === "ok") {
@@ -137,7 +142,7 @@
           mensaje.textContent = data.mensaje || "DNI no encontrado";
         }
       } catch (error) {
-        mensaje.textContent = "Error al buscar el certificado";
+        mensaje.textContent = "Error al buscar el certificado.";
       }
     }
   </script>
