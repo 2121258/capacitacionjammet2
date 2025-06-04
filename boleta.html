@@ -21,15 +21,39 @@
     }
     #boletaVisual h2 { color: #4b0082; margin-bottom: 5px; }
     #boletaVisual h3 { margin-top: 0; margin-bottom: 20px; }
-    #boletaVisual .datos, .boletaVisual .detalle { margin-bottom: 20px; }
-    #boletaVisual .label { font-weight: bold; }
     #logo { width: 150px; margin-bottom: 10px; }
+    #botonSuperior {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+    #botonSuperior button {
+      background-color: #4b0082;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+    #botonSuperior button:hover {
+      background-color: #36005c;
+    }
   </style>
 </head>
 <body>
 
+<!-- Botón superior derecho -->
+<div id="botonSuperior">
+  <a href="#formularioBoleta">
+    <button>🧾 Genera tu boleta de pago</button>
+  </a>
+</div>
+
 <h1>Generar Boleta de Pago</h1>
-<button onclick="mostrarFormulario()">Generar Boleta</button>
+<button onclick="mostrarFormulario()">Iniciar</button>
 
 <div id="formularioBoleta" style="display:none;">
   <form id="boletaForm" onsubmit="return generarBoleta();">
@@ -67,9 +91,9 @@
 <script>
 let valoresCursos = {};
 
-// Leer valores desde la planilla
 function mostrarFormulario() {
   document.getElementById("formularioBoleta").style.display = "block";
+
   fetch("https://script.google.com/macros/s/AKfycbyZQuvxu6t4x7zzx5bCDY0T2nO_lHMoh5XDCMOO6DWQpsLuzUWz9Wz8DzdkgdvWxZkrLg/exec")
     .then(res => res.json())
     .then(data => valoresCursos = data)
@@ -90,7 +114,6 @@ function generarBoleta() {
   const curso = document.getElementById("curso").value;
   const monto = document.getElementById("monto").value;
 
-  // Fecha emisión y vencimiento
   const hoy = new Date();
   const fechaEmision = hoy.toLocaleDateString();
   const vencimiento = new Date(hoy.setDate(hoy.getDate() + 30)).toLocaleDateString();
@@ -101,15 +124,15 @@ function generarBoleta() {
       <h2>Jammet Consultora</h2>
       <h3>Boleta de Pago</h3>
 
-      <p><span class="label">Nombre y Apellido:</span> ${nombre} ${apellido}</p>
-      <p><span class="label">DNI:</span> ${dni}</p>
-      <p><span class="label">Email:</span> ${email}</p>
-      <p><span class="label">Curso:</span> ${document.getElementById("curso").selectedOptions[0].text}</p>
-      <p><span class="label">Fecha de emisión:</span> ${fechaEmision}</p>
-      <p><span class="label">Vencimiento:</span> ${vencimiento}</p>
+      <p><strong>Nombre y Apellido:</strong> ${nombre} ${apellido}</p>
+      <p><strong>DNI:</strong> ${dni}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Curso:</strong> ${document.getElementById("curso").selectedOptions[0].text}</p>
+      <p><strong>Fecha de emisión:</strong> ${fechaEmision}</p>
+      <p><strong>Vencimiento:</strong> ${vencimiento}</p>
 
       <hr>
-      <p><span class="label">Importe total:</span> ${monto}</p>
+      <p><strong>Importe total:</strong> ${monto}</p>
       <hr>
 
       <p><em>Este comprobante es válido para abonar el curso indicado en cualquier sucursal habilitada.</em></p>
