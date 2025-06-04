@@ -74,6 +74,13 @@
       color: #75025c;
       text-align: center;
     }
+    p.subtitulo {
+      text-align: center;
+      font-size: 0.9em;
+      color: #555;
+      margin-top: -10px;
+      margin-bottom: 20px;
+    }
     label {
       display: block;
       margin-top: 1em;
@@ -124,6 +131,7 @@
 <main>
   <form id="formulario" enctype="multipart/form-data">
     <h2>Inicio Cargas Generales</h2>
+    <p class="subtitulo">El curso dura cinco días hábiles</p>
 
     <label>Apellido</label>
     <input type="text" name="apellido" placeholder="Obligatorio" required>
@@ -168,15 +176,10 @@
     .then(res => res.json())
     .then(data => {
       const select = document.getElementById("fechaCurso");
-      data.inicio.forEach(rawFecha => {
-        const fecha = new Date(rawFecha);
-        const dia = String(fecha.getDate()).padStart(2, '0');
-        const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-        const anio = fecha.getFullYear();
-        const formateada = `${dia}/${mes}/${anio}`;
+      data.inicio.forEach(fecha => {
         const option = document.createElement("option");
-        option.value = formateada;
-        option.textContent = formateada;
+        option.value = fecha;
+        option.textContent = fecha;
         select.appendChild(option);
       });
     });
