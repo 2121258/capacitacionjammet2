@@ -14,20 +14,14 @@
 
     header {
       background-color: #800061;
-      color: white;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 30px;
-    }
-
-    header .logo {
-      display: flex;
-      align-items: center;
+      padding: 10px 20px;
     }
 
     header img {
-      height: 50px;
+      height: 45px;
     }
 
     nav ul {
@@ -46,12 +40,6 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
-    }
-
-    nav a.button {
-      background-color: #b85caf;
-      padding: 6px 12px;
-      border-radius: 6px;
     }
 
     .contenedor {
@@ -102,9 +90,7 @@
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="logo-jammet.png" alt="Jammet Consultora SRL" />
-    </div>
+    <img src="logo-jammet.png" alt="Jammet Consultora SRL" />
     <nav>
       <ul>
         <li><a href="quienes.html">¿Quiénes somos?</a></li>
@@ -118,7 +104,7 @@
     <div class="contenedor">
       <h2>Descargá tu certificado</h2>
       <p>
-        Ingresá tu DNI para verificar y acceder al certificado, si está validado en unos segundos se generará el certificado en una ventana emergente.
+        Ingresá tu DNI para verificar y acceder al certificado, si está validado. En unos segundos se generará el certificado en una ventana emergente.
       </p>
       <input type="text" id="dni" placeholder="Ejemplo: 12345678" />
       <button onclick="buscarCertificado()">Buscar certificado</button>
@@ -142,7 +128,7 @@
       }
 
       try {
-        const response = await fetch(`https://script.google.com/macros/s/AKfycbyD8-VUmyGVXzMYZCN9aQqgvM6G7uVx3-W5zaPqtANoidimVDKKujiDhkjKIACAo7C3GA/exec?dni=${dni}`);
+        const response = await fetch(`https://script.google.com/macros/s/AKfycbwpvjJhrJcJKtg6ozbYA6lLRj4rAxK0N7OvWIdgABwiz7UJSN3W0SxJAL2FcQLhs/exec?dni=${dni}`);
         const data = await response.json();
 
         if (data.estado === "ok") {
