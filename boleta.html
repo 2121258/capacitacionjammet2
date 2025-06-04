@@ -30,9 +30,9 @@
     <label>Tipo de curso:</label>
     <select id="curso" required onchange="actualizarMonto()">
       <option value="">Seleccione un curso</option>
-      <option value="inicio">Inicio Cargas Generales ($5.000)</option>
-      <option value="renovacion">Renovación Cargas Generales ($4.000)</option>
-      <option value="pasajeros">Transporte de Pasajeros ($6.000)</option>
+      <option value="inicio">Inicio Cargas Generales</option>
+      <option value="renovacion">Renovación Cargas Generales</option>
+      <option value="pasajeros">Transporte de Pasajeros</option>
     </select>
 
     <label>Nombre:</label>
@@ -59,18 +59,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script>
+let valoresCursos = {};
+
 function mostrarFormulario() {
   document.getElementById("formularioBoleta").style.display = "block";
+
+  // Obtener valores actualizados desde la planilla
+  fetch("https://script.google.com/macros/s/AKfycbyZQuvxu6t4x7zzx5bCDY0T2nO_lHMoh5XDCMOO6DWQpsLuzUWz9Wz8DzdkgdvWxZkrLg/exec")
+    .then(res => res.json())
+    .then(data => {
+      valoresCursos = data;
+    })
+    .catch(err => {
+      alert("Error al cargar los valores desde la planilla.");
+      console.error(err);
+    });
 }
 
 function actualizarMonto() {
   const curso = document.getElementById("curso").value;
-  let monto = "";
-  switch (curso) {
-    case "inicio": monto = "5000"; break;
-    case "renovacion": monto = "4000"; break;
-    case "pasajeros": monto = "6000"; break;
-  }
+  const monto = valoresCursos[curso];
   document.getElementById("monto").value = monto ? `$${monto}` : "";
 }
 
@@ -105,7 +113,7 @@ function generarBoleta() {
       enlace.href = canvas.toDataURL("image/jpeg");
       enlace.click();
 
-      // Enviar a Google Apps Script (solo para vos)
+      // (Opcional) Enviar al Drive - si seguís usando el otro Apps Script
       fetch('https://script.google.com/macros/s/AKfycbyyT2K2H1vxSisz7QiCnHA_93XEIWhRMi_-6srC_1JD4qfk68FFXbd1_UCJRwLa0ACIww/exec', {
         method: 'POST',
         body: JSON.stringify({
@@ -120,10 +128,9 @@ function generarBoleta() {
         headers: {
           'Content-Type': 'application/json'
         }
-      })
-      .then(res => res.json())
-      .then(data => console.log("Boleta guardada en Drive:", data))
-      .catch(err => console.error("Error al guardar en Drive:", err));
+      }).then(res => res.json())
+        .then(data => console.log("Boleta guardada en Drive:", data))
+        .catch(err => console.error("Error al guardar en Drive:", err));
     });
   }, 500);
 
