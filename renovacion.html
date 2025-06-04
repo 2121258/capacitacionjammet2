@@ -89,7 +89,7 @@
     <input type="text" name="dni" placeholder="Obligatorio" required>
 
     <label>Email</label>
-    <input type="email" name="email" placeholder="Obligatorio" required pattern="^[^@\s]+@[^@\s]+$">
+    <input type="text" name="email" placeholder="Obligatorio" required>
 
     <label>Fecha del curso</label>
     <select name="fechaCurso" id="fechaCurso" required></select>
@@ -118,7 +118,6 @@
 </footer>
 
 <script>
-  // Cargar fechas disponibles desde la hoja de Google Sheets (columna 'renovacion')
   fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
     .then(res => res.json())
     .then(data => {
