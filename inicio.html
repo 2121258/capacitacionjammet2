@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inicio Cargas Generales – Jammet Consultora</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #75025c;
+      color: white;
+      padding: 1em 2em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header img {
+      height: 40px;
+    }
+    header nav a {
+      color: white;
+      margin-left: 1em;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2em auto;
+      background: white;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 0.5em;
+      color: #75025c;
+    }
+    label {
+      display: block;
+      margin-top: 1.2em;
+      margin-bottom: 0.5em;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="file"] {
+      width: 100%;
+      padding: 0.6em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    button {
+      margin-top: 1.5em;
+      padding: 0.8em 1.5em;
+      background-color: #b05fa7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #9e4e93;
+    }
+    footer {
+      margin-top: 2em;
+      text-align: center;
+      font-size: 0.85em;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <img src="logo.jpg" alt="Jammet Logo">
+    <strong style="margin-left: 0.5em;">Jammet Consultora SRL</strong>
+  </div>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="#">Quiénes somos?</a>
+    <a href="#">Contacto</a>
+  </nav>
+</header>
+
+<main class="container">
+  <h1>Inicio Cargas Generales</h1>
+  <p><strong>Datos del asistente</strong></p>
+
+  <form action="#" method="post" enctype="multipart/form-data">
+    <label for="apellido">Apellido</label>
+    <input type="text" id="apellido" name="apellido" required>
+
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="dni">DNI</label>
+    <input type="text" id="dni" name="dni" required>
+
+    <label for="dni-frente">DNI Frente</label>
+    <input type="file" id="dni-frente" name="dni-frente" required>
+
+    <label for="dni-dorso">DNI Dorso</label>
+    <input type="file" id="dni-dorso" name="dni-dorso" required>
+
+    <label for="licencia-frente">Licencia Frente</label>
+    <input type="file" id="licencia-frente" name="licencia-frente" required>
+
+    <label for="licencia-dorso">Licencia Dorso</label>
+    <input type="file" id="licencia-dorso" name="licencia-dorso" required>
+
+    <label for="comprobante">Comprobante</label>
+    <input type="file" id="comprobante" name="comprobante" required>
+
+    <button type="submit">Enviar</button>
+  </form>
+</main>
+
+<footer>
+  © 2025 Jammet Consultora SRL
+</footer>
+
+</body>
+</html>
