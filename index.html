@@ -5,67 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Capacitaciones Jammet</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    function mostrarFormulario(id) {
+      document.getElementById("formulario-inicio").style.display = "none";
+      document.getElementById("formulario-renovacion").style.display = "none";
+      document.getElementById("formulario-pasajeros").style.display = "none";
+
+      document.getElementById(id).style.display = "block";
+      window.scrollTo({ top: document.getElementById(id).offsetTop - 20, behavior: 'smooth' });
     }
-    body {
-      margin: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background-color: #731963;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-    }
-    header img {
-      height: 40px;
-    }
-    nav a {
-      color: white;
-      margin-left: 20px;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .container {
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .card {
-      background: white;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      padding: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      border: 1px solid #ddd;
-      transition: background 0.3s ease;
-    }
-    .card:hover {
-      background: #f0e5f3;
-    }
-    .card img {
-      height: 40px;
-      margin-right: 10px;
-    }
-    .calendar {
-      margin-top: 40px;
-    }
-    iframe {
-      border: none;
-      width: 100%;
-      height: 600px;
-      border-radius: 10px;
-    }
-  </style>
+  </script>
 </head>
 <body>
   <header>
@@ -75,37 +25,45 @@
     </div>
     <nav>
       <a href="#">Inicio</a>
-      <a href="#">Quienes somos?</a>
+      <a href="#">Quiénes somos</a>
       <a href="#">Contacto</a>
     </nav>
   </header>
 
-  <div class="container">
-    <h2>Inicio</h2>
+  <main>
+    <section>
+      <h2>Capacitaciones disponibles</h2>
+      <div class="botones">
+        <button onclick="mostrarFormulario('formulario-inicio')">Inicio Cargas Generales</button>
+        <button onclick="mostrarFormulario('formulario-renovacion')">Renovación Cargas Generales</button>
+        <button onclick="mostrarFormulario('formulario-pasajeros')">Transporte de Pasajeros</button>
+      </div>
+    </section>
 
-    <div class="card" onclick="location.href='#formulario'">
-      <span>RENOVACIÓN CARGAS GENERALES</span>
-    </div>
+    <section class="calendar">
+      <h2>Calendario de cursos</h2>
+      <!-- Sustituí el ID de tu calendario en src="" cuando lo tengas -->
+      <iframe class="calendar" src="https://calendar.google.com/calendar/embed?src=TU_ID_CALENDARIO&ctz=America%2FArgentina_Buenos_Aires"></iframe>
+    </section>
 
-    <div class="card" onclick="location.href='#formulario'">
-      <img src="logo.jpg" alt="Logo" />
-      <span>INICIO CARGAS GENERALES</span>
-    </div>
+    <section id="formulario-inicio" style="display: none;">
+      <h2>Formulario - Inicio Cargas Generales</h2>
+      <iframe class="formulario" src="https://docs.google.com/forms/d/e/1FAIpQLSd_6x6cD8FwScveTOpcYLmDC87s9kbQqU0IlFsCj880AYttMA/viewform?embedded=true"></iframe>
+    </section>
 
-    <div class="card" onclick="location.href='#formulario'">
-      <img src="logo.jpg" alt="Logo" />
-      <span>TRANSPORTE DE PASAJEROS</span>
-    </div>
+    <section id="formulario-renovacion" style="display: none;">
+      <h2>Formulario - Renovación Cargas Generales</h2>
+      <iframe class="formulario" src="https://docs.google.com/forms/d/e/1FAIpQLScQc20zOQ4D-k6PvpXoatTH46IXctqYWCiNyIMIPsyMfloKaA/viewform?embedded=true"></iframe>
+    </section>
 
-    <div class="calendar">
-      <h3>Calendario de cursos</h3>
-      <iframe src="https://calendar.google.com/calendar/embed?src=TU_CORREO_CALENDAR&ctz=America%2FArgentina_Buenos_Aires"></iframe>
-    </div>
+    <section id="formulario-pasajeros" style="display: none;">
+      <h2>Formulario - Transporte de Pasajeros</h2>
+      <iframe class="formulario" src="https://docs.google.com/forms/d/e/1FAIpQLSeoMQrM6-Pb8bOPXdpQ3VTZ_vv2iXMRMYIiY--0hmQTZeZeCw/viewform?embedded=true"></iframe>
+    </section>
+  </main>
 
-    <div id="formulario" style="margin-top: 40px;">
-      <h3>Formulario de inscripción</h3>
-      <iframe src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true">Cargando…</iframe>
-    </div>
-  </div>
+  <footer>
+    <p>&copy; 2025 Jammet Consultora SRL</p>
+  </footer>
 </body>
 </html>
