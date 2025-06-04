@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -108,10 +108,11 @@
 <script>
 let valoresCursos = {};
 
-// Leer valores desde planilla
-fetch("https://script.google.com/macros/s/AKfycbyZQuvxu6t4x7zzx5bCDY0T2nO_lHMoh5XDCMOO6DWQpsLuzUWz9Wz8DzdkgdvWxZkrLg/exec")
+fetch("https://script.google.com/macros/s/AKfycbw-yspxJEZOj1U4yewWa2_300CFpFRhDL3OyUKTrztbHlqDGfSK_Qbn9wRWNRFhJn_EKA/exec")
   .then(res => res.json())
-  .then(data => valoresCursos = data)
+  .then(data => {
+    valoresCursos = data;
+  })
   .catch(err => alert("Error al cargar los valores de curso."));
 
 function actualizarMonto() {
