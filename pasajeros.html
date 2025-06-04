@@ -173,17 +173,26 @@
     .then(data => {
       const select = document.getElementById("fechaCurso");
       (data.pasajeros || []).forEach(f => {
-        const fecha = new Date(f);
-        const dia = String(fecha.getDate()).padStart(2, '0');
-        const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-        const anio = fecha.getFullYear();
-        const texto = `${dia}/${mes}/${anio}`;
+        try {
+          const fecha = new Date(f);
+          if (!isNaN(fecha.getTime())) {
+            const dia = String(fecha.getUTCDate()).padStart(2, '0');
+            const mes = String(fecha.getUTCMonth() + 1).padStart(2, '0');
+            const anio = fecha.getUTCFullYear();
+            const texto = `${dia}/${mes}/${anio}`;
 
-        const option = document.createElement("option");
-        option.value = texto;
-        option.textContent = texto;
-        select.appendChild(option);
+            const option = document.createElement("option");
+            option.value = texto;
+            option.textContent = texto;
+            select.appendChild(option);
+          }
+        } catch (e) {
+          console.warn("Fecha inválida:", f);
+        }
       });
+    })
+    .catch(err => {
+      console.error("Error al cargar fechas:", err);
     });
 
   document.getElementById("formulario").addEventListener("submit", function(e) {
