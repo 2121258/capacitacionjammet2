@@ -127,13 +127,13 @@
       }
 
       try {
-        const response = await fetch(`https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec?dni=${dni}`);
+        const response = await fetch(`https://script.google.com/macros/s/AKfycbyD8-VUmyGVXzMYZCN9aQqgvM6G7uVx3-W5zaPqtANoidimVDKKujiDhkjKIACAo7C3GA/exec?dni=${dni}`);
         const data = await response.json();
 
         if (data.estado === "ok") {
           window.open(data.link, "_blank");
         } else {
-          mensaje.textContent = "DNI no encontrado";
+          mensaje.textContent = data.mensaje || "DNI no encontrado";
         }
       } catch (error) {
         mensaje.textContent = "Error al buscar el certificado";
