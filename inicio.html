@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Inicio Cargas Generales - Jammet Consultora</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body {
       margin: 0;
@@ -18,11 +19,7 @@
       padding: 1em 2em;
       display: flex;
       align-items: center;
-    }
-
-    header img {
-      height: 40px;
-      margin-right: 10px;
+      justify-content: space-between;
     }
 
     header a {
@@ -34,8 +31,13 @@
       align-items: center;
     }
 
+    header img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
     main {
-      max-width: 700px;
+      max-width: 600px;
       margin: 2em auto;
       background: white;
       padding: 2em;
@@ -53,9 +55,7 @@
       font-weight: bold;
     }
 
-    input[type="text"],
-    input[type="file"],
-    select {
+    input, select {
       width: 100%;
       padding: 0.6em;
       margin-top: 0.3em;
@@ -63,7 +63,7 @@
       border-radius: 4px;
     }
 
-    button.enviar {
+    button {
       margin-top: 1.5em;
       padding: 0.8em 1.5em;
       background-color: #b05fa7;
@@ -93,37 +93,35 @@
 
 <main>
   <h2>Inicio Cargas Generales</h2>
-  <form>
+  <form id="formulario" enctype="multipart/form-data">
     <label>Apellido</label>
-    <input type="text" required>
+    <input type="text" name="apellido" required>
 
     <label>Nombre</label>
-    <input type="text" required>
+    <input type="text" name="nombre" required>
 
     <label>DNI</label>
-    <input type="text" required>
+    <input type="text" name="dni" required>
 
     <label>Fecha del curso</label>
-    <select id="fechaCurso" required>
-      <option value="">Cargando fechas...</option>
-    </select>
+    <select name="fecha" required></select>
 
     <label>DNI Frente</label>
-    <input type="file" accept=".jpg,.jpeg,.pdf" required>
+    <input type="file" name="dni_frente" accept=".jpg,.jpeg,.pdf" required>
 
     <label>DNI Dorso</label>
-    <input type="file" accept=".jpg,.jpeg,.pdf" required>
+    <input type="file" name="dni_dorso" accept=".jpg,.jpeg,.pdf" required>
 
     <label>Licencia Frente</label>
-    <input type="file" accept=".jpg,.jpeg,.pdf" required>
+    <input type="file" name="licencia_frente" accept=".jpg,.jpeg,.pdf" required>
 
     <label>Licencia Dorso</label>
-    <input type="file" accept=".jpg,.jpeg,.pdf" required>
+    <input type="file" name="licencia_dorso" accept=".jpg,.jpeg,.pdf" required>
 
     <label>Comprobante de pago</label>
-    <input type="file" accept=".jpg,.jpeg,.pdf" required>
+    <input type="file" name="comprobante" accept=".jpg,.jpeg,.pdf" required>
 
-    <button type="submit" class="enviar">Enviar</button>
+    <button type="submit">Enviar</button>
   </form>
 </main>
 
@@ -132,29 +130,41 @@
 </footer>
 
 <script>
-  // Cargar fechas dinámicamente desde el endpoint
-  fetch('https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec')
-    .then(response => response.json())
+  // Cargar fechas desde el endpoint de Apps Script
+  fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
+    .then(res => res.json())
     .then(data => {
-      const select = document.getElementById("fechaCurso");
-      select.innerHTML = ""; // Limpiar opciones
-
-      if (data.inicio.length === 0) {
-        select.innerHTML = "<option value=''>No hay fechas disponibles</option>";
-        return;
-      }
-
+      const select = document.querySelector('select[name="fecha"]');
       data.inicio.forEach(fecha => {
-        const opt = document.createElement("option");
-        opt.value = fecha;
-        opt.textContent = fecha;
-        select.appendChild(opt);
+        const option = document.createElement("option");
+        option.value = fecha;
+        option.textContent = fecha;
+        select.appendChild(option);
       });
-    })
-    .catch(error => {
-      console.error("Error al cargar fechas:", error);
-      document.getElementById("fechaCurso").innerHTML = "<option value=''>Error al cargar fechas</option>";
     });
+
+  // Enviar formulario al endpoint que guarda en Drive, Sheets y envía correo
+  document.getElementById("formulario").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("Inscripción enviada correctamente.");
+        form.reset();
+      } else {
+        alert("Hubo un error al enviar la inscripción.");
+      }
+    })
+    .catch(() => {
+      alert("Error de red al enviar el formulario.");
+    });
+  });
 </script>
 
 </body>
