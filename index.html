@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jammet Consultora</title>
+  <title>Jammet Consultora SRL</title>
   <style>
     body {
       margin: 0;
@@ -17,70 +17,49 @@
       padding: 1em 2em;
       display: flex;
       align-items: center;
-      justify-content: space-between;
     }
     header img {
       height: 40px;
+      margin-right: 10px;
     }
-    header nav a {
+    header a {
       color: white;
-      margin-left: 1em;
       text-decoration: none;
       font-weight: bold;
-      cursor: pointer;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
     }
-    .seccion {
-      display: none;
-      max-width: 800px;
+    main {
+      max-width: 900px;
       margin: 2em auto;
       background: white;
       padding: 2em;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      text-align: center;
     }
-    .visible {
-      display: block;
-    }
-    .botones-inicio {
+    .botones {
       display: flex;
       justify-content: center;
-      margin-top: 3em;
-      gap: 1em;
       flex-wrap: wrap;
+      gap: 1em;
+      margin-bottom: 2em;
     }
-    .botones-inicio button {
-      padding: 1em 1.5em;
+    .botones a {
       background-color: #b05fa7;
       color: white;
-      border: none;
+      padding: 1em 1.5em;
+      text-decoration: none;
       border-radius: 6px;
       font-size: 1em;
-      cursor: pointer;
-    }
-    label {
-      display: block;
-      margin-top: 1.2em;
-      margin-bottom: 0.5em;
       font-weight: bold;
     }
-    input[type="text"],
-    input[type="file"],
-    input[type="date"] {
+    iframe {
       width: 100%;
-      padding: 0.6em;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1em;
-    }
-    button.enviar {
-      margin-top: 1.5em;
-      padding: 0.8em 1.5em;
-      background-color: #b05fa7;
-      color: white;
+      height: 600px;
       border: none;
-      border-radius: 4px;
-      font-size: 1em;
-      cursor: pointer;
+      border-radius: 8px;
     }
     footer {
       text-align: center;
@@ -93,91 +72,27 @@
 <body>
 
 <header>
-  <div>
+  <a href="index.html">
     <img src="logo.jpg" alt="Jammet Logo">
-    <strong style="margin-left: 0.5em;">Jammet Consultora SRL</strong>
-  </div>
-  <nav>
-    <a onclick="mostrarSeccion('pantalla-inicial')">Inicio</a>
-    <a onclick="mostrarSeccion('quienes')">Quiénes somos</a>
-  </nav>
+    Jammet Consultora SRL
+  </a>
 </header>
 
-<div id="pantalla-inicial" class="visible">
-  <div class="botones-inicio">
-    <button onclick="mostrarSeccion('formulario-inicio')">Inicio Cargas Generales</button>
-    <button onclick="mostrarSeccion('formulario-renovacion')">Renovación Cargas Generales</button>
-    <button onclick="mostrarSeccion('formulario-pasajeros')">Transporte de Pasajeros</button>
+<main>
+  <h2>Capacitaciones disponibles</h2>
+  <div class="botones">
+    <a href="inicio.html">Inicio Cargas Generales</a>
+    <a href="renovacion.html">Renovación Cargas Generales</a>
+    <a href="pasajeros.html">Transporte de Pasajeros</a>
   </div>
-</div>
 
-<!-- FORMULARIOS -->
-
-<div id="formulario-inicio" class="seccion">
-  <h2>Inicio Cargas Generales</h2>
-  <form>
-    <label>Apellido</label><input type="text" required>
-    <label>Nombre</label><input type="text" required>
-    <label>DNI</label><input type="text" required>
-    <label>Fecha del curso</label><input type="date" required>
-    <label>DNI Frente</label><input type="file" required>
-    <label>DNI Dorso</label><input type="file" required>
-    <label>Licencia Frente</label><input type="file" required>
-    <label>Licencia Dorso</label><input type="file" required>
-    <label>Comprobante</label><input type="file" required>
-    <button type="submit" class="enviar">Enviar</button>
-  </form>
-</div>
-
-<div id="formulario-renovacion" class="seccion">
-  <h2>Renovación Cargas Generales</h2>
-  <form>
-    <label>Apellido</label><input type="text" required>
-    <label>Nombre</label><input type="text" required>
-    <label>DNI</label><input type="text" required>
-    <label>Fecha del curso</label><input type="date" required>
-    <label>DNI Frente</label><input type="file" required>
-    <label>DNI Dorso</label><input type="file" required>
-    <label>Licencia Frente</label><input type="file" required>
-    <label>Licencia Dorso</label><input type="file" required>
-    <label>Comprobante</label><input type="file" required>
-    <button type="submit" class="enviar">Enviar</button>
-  </form>
-</div>
-
-<div id="formulario-pasajeros" class="seccion">
-  <h2>Transporte de Pasajeros</h2>
-  <form>
-    <label>Apellido</label><input type="text" required>
-    <label>Nombre</label><input type="text" required>
-    <label>DNI</label><input type="text" required>
-    <label>Fecha del curso</label><input type="date" required>
-    <label>DNI Frente</label><input type="file" required>
-    <label>DNI Dorso</label><input type="file" required>
-    <label>Licencia Frente</label><input type="file" required>
-    <label>Licencia Dorso</label><input type="file" required>
-    <label>Comprobante</label><input type="file" required>
-    <button type="submit" class="enviar">Enviar</button>
-  </form>
-</div>
-
-<!-- QUIÉNES SOMOS -->
-<div id="quienes" class="seccion">
-  <h2>Quiénes somos</h2>
-  <p>Jammet Consultora es una empresa dedicada a la capacitación profesional...</p>
-</div>
+  <h3>Calendario de cursos</h3>
+  <iframe src="https://calendar.google.com/calendar/embed?src=tucorreo%40gmail.com&ctz=America%2FArgentina_Buenos_Aires" style="border: 0" frameborder="0" scrolling="no"></iframe>
+</main>
 
 <footer>
   © 2025 Jammet Consultora SRL
 </footer>
-
-<script>
-  function mostrarSeccion(id) {
-    const secciones = document.querySelectorAll('.seccion, #pantalla-inicial');
-    secciones.forEach(s => s.classList.remove('visible'));
-    document.getElementById(id).classList.add('visible');
-  }
-</script>
 
 </body>
 </html>
