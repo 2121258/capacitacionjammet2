@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Inicio Cargas Generales – Jammet Consultora</title>
+  <title>Inicio Cargas Generales - Jammet Consultora</title>
   <style>
     body {
       margin: 0;
@@ -17,18 +17,20 @@
       padding: 1em 2em;
       display: flex;
       align-items: center;
-      justify-content: space-between;
     }
     header img {
       height: 40px;
+      margin-right: 10px;
     }
-    header nav a {
+    header a {
       color: white;
-      margin-left: 1em;
       text-decoration: none;
       font-weight: bold;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
     }
-    .container {
+    main {
       max-width: 800px;
       margin: 2em auto;
       background: white;
@@ -36,26 +38,24 @@
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-    h1 {
-      font-size: 1.5em;
-      margin-bottom: 0.5em;
+    h2 {
       color: #75025c;
     }
     label {
       display: block;
-      margin-top: 1.2em;
-      margin-bottom: 0.5em;
+      margin-top: 1em;
       font-weight: bold;
     }
     input[type="text"],
-    input[type="file"] {
+    input[type="file"],
+    input[type="date"] {
       width: 100%;
       padding: 0.6em;
+      margin-top: 0.3em;
       border: 1px solid #ccc;
       border-radius: 4px;
-      font-size: 1em;
     }
-    button {
+    button.enviar {
       margin-top: 1.5em;
       padding: 0.8em 1.5em;
       background-color: #b05fa7;
@@ -65,61 +65,54 @@
       font-size: 1em;
       cursor: pointer;
     }
-    button:hover {
-      background-color: #9e4e93;
-    }
     footer {
-      margin-top: 2em;
       text-align: center;
-      font-size: 0.85em;
+      margin: 3em 0 1em 0;
       color: #aaa;
+      font-size: 0.85em;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <div>
+  <a href="index.html">
     <img src="logo.jpg" alt="Jammet Logo">
-    <strong style="margin-left: 0.5em;">Jammet Consultora SRL</strong>
-  </div>
-  <nav>
-    <a href="index.html">Inicio</a>
-    <a href="#">Quiénes somos?</a>
-    <a href="#">Contacto</a>
-  </nav>
+    Jammet Consultora SRL
+  </a>
 </header>
 
-<main class="container">
-  <h1>Inicio Cargas Generales</h1>
-  <p><strong>Datos del asistente</strong></p>
+<main>
+  <h2>Inicio Cargas Generales</h2>
+  <form>
+    <label>Apellido</label>
+    <input type="text" required>
+    
+    <label>Nombre</label>
+    <input type="text" required>
 
-  <form action="#" method="post" enctype="multipart/form-data">
-    <label for="apellido">Apellido</label>
-    <input type="text" id="apellido" name="apellido" required>
+    <label>DNI</label>
+    <input type="text" required>
 
-    <label for="nombre">Nombre</label>
-    <input type="text" id="nombre" name="nombre" required>
+    <label>Fecha del curso</label>
+    <input type="date" required>
 
-    <label for="dni">DNI</label>
-    <input type="text" id="dni" name="dni" required>
+    <label>DNI Frente</label>
+    <input type="file" accept=".jpg,.jpeg,.pdf" required>
 
-    <label for="dni-frente">DNI Frente</label>
-    <input type="file" id="dni-frente" name="dni-frente" required>
+    <label>DNI Dorso</label>
+    <input type="file" accept=".jpg,.jpeg,.pdf" required>
 
-    <label for="dni-dorso">DNI Dorso</label>
-    <input type="file" id="dni-dorso" name="dni-dorso" required>
+    <label>Licencia Frente</label>
+    <input type="file" accept=".jpg,.jpeg,.pdf" required>
 
-    <label for="licencia-frente">Licencia Frente</label>
-    <input type="file" id="licencia-frente" name="licencia-frente" required>
+    <label>Licencia Dorso</label>
+    <input type="file" accept=".jpg,.jpeg,.pdf" required>
 
-    <label for="licencia-dorso">Licencia Dorso</label>
-    <input type="file" id="licencia-dorso" name="licencia-dorso" required>
+    <label>Comprobante de pago</label>
+    <input type="file" accept=".jpg,.jpeg,.pdf" required>
 
-    <label for="comprobante">Comprobante</label>
-    <input type="file" id="comprobante" name="comprobante" required>
-
-    <button type="submit">Enviar</button>
+    <button type="submit" class="enviar">Enviar</button>
   </form>
 </main>
 
