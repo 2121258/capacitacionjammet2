@@ -2,182 +2,143 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Descarga tu certificado - Jammet Consultora</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Descargá tu certificado - Jammet Consultora SRL</title>
+  <link rel="stylesheet" href="estilos.css" />
   <style>
     body {
-      font-family: "Segoe UI", sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
       background-color: #f9f9f9;
     }
-
     header {
-      background-color: #75025c;
+      background-color: #800061;
       color: white;
-      padding: 1em 2em;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
+      padding: 10px 20px;
     }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo-container img {
+    header img {
       height: 40px;
-      margin-right: 10px;
     }
-
-    .logo-container a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1em;
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
       display: flex;
       align-items: center;
     }
-
+    nav li {
+      margin-left: 20px;
+    }
     nav a {
       color: white;
       text-decoration: none;
-      margin-left: 1.5em;
       font-weight: bold;
     }
+    nav a.button {
+      background-color: #b85caf;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
 
-    main {
-      max-width: 600px;
-      margin: 3em auto;
+    .contenedor {
+      max-width: 500px;
+      margin: 60px auto;
       background: white;
-      padding: 2em;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      padding: 40px;
+      border-radius: 10px;
       text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    h2 {
-      color: #75025c;
+    .contenedor h2 {
+      color: #800061;
+      margin-bottom: 10px;
     }
 
-    input[type="text"] {
-      padding: 0.7em;
+    .contenedor input {
+      padding: 10px;
       width: 100%;
-      margin-top: 1em;
+      margin-bottom: 20px;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 6px;
+      font-size: 16px;
     }
 
-    button {
-      margin-top: 1.5em;
-      padding: 0.7em 2em;
-      background-color: #b05fa7;
+    .contenedor button {
+      background-color: #b85caf;
       color: white;
       border: none;
-      border-radius: 5px;
-      font-size: 1em;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 6px;
       cursor: pointer;
     }
 
-    iframe {
-      margin-top: 2em;
-      width: 100%;
-      height: 600px;
-      border: none;
-    }
-
-    .mensaje-error {
+    .contenedor .error {
       color: red;
-      margin-top: 1em;
-      font-weight: bold;
-    }
-
-    #descarga a {
-      display: inline-block;
-      background-color: #b05fa7;
-      color: white;
-      padding: 0.7em 1.5em;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      margin-top: 1em;
+      margin-top: 15px;
     }
 
     footer {
       text-align: center;
-      margin: 3em 0 1em 0;
-      color: #aaa;
-      font-size: 0.85em;
+      margin-top: 60px;
+      color: #777;
     }
   </style>
 </head>
 <body>
+  <header>
+    <img src="logo-jammet.png" alt="Jammet Consultora SRL" />
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="quienes.html">¿Quiénes somos?</a></li>
+        <li><a href="certificado.html" class="button">Descargá tu certificado</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<header>
-  <div class="logo-container">
-    <a href="index.html">
-      <img src="logo.jpg" alt="Logo">
-      Jammet Consultora SRL
-    </a>
-  </div>
-  <nav>
-    <a href="index.html">Inicio</a>
-    <a href="quienes.html">¿Quiénes somos?</a>
-  </nav>
-</header>
+  <main>
+    <div class="contenedor">
+      <h2>Descargá tu certificado</h2>
+      <p>Ingresá tu DNI para verificar y acceder al certificado, si está validado.</p>
+      <input type="text" id="dni" placeholder="Ejemplo: 12345678" />
+      <button onclick="buscarCertificado()">Buscar certificado</button>
+      <p class="error" id="mensajeError"></p>
+    </div>
+  </main>
 
-<main>
-  <h2>Descargá tu certificado</h2>
-  <p>Ingresá tu DNI para verificar y acceder al certificado, si está validado.</p>
-  <input type="text" id="dni" placeholder="Ej: 12345678">
-  <button onclick="buscarCertificado()">Buscar certificado</button>
-  <div id="resultado"></div>
-  <div id="descarga" style="display:none;">
-    <a id="btn-descargar" href="#" target="_blank" download>Descargar certificado</a>
-  </div>
-</main>
+  <footer>
+    © 2025 Jammet Consultora SRL
+  </footer>
 
-<footer>
-  © 2025 Jammet Consultora SRL
-</footer>
+  <script>
+    async function buscarCertificado() {
+      const dni = document.getElementById("dni").value.trim();
+      const mensaje = document.getElementById("mensajeError");
+      mensaje.textContent = "";
 
-<script>
-  function buscarCertificado() {
-    const dni = document.getElementById("dni").value.trim();
-    const resultado = document.getElementById("resultado");
-    const descarga = document.getElementById("descarga");
-    const boton = document.getElementById("btn-descargar");
+      if (dni === "") {
+        mensaje.textContent = "Por favor ingresá un DNI.";
+        return;
+      }
 
-    resultado.innerHTML = "";
-    descarga.style.display = "none";
+      try {
+        const response = await fetch(`https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec?dni=${dni}`);
+        const data = await response.json();
 
-    if (!dni) {
-      resultado.innerHTML = '<p class="mensaje-error">Por favor, ingresá un número de DNI.</p>';
-      return;
-    }
-
-    fetch(`https://script.google.com/macros/s/AKfycbwrSL_z2vguGWQqm2X9Ox3y0iN_QPH6p84CGY99VOylxfmEkAbQnX2EuAyRqUEHLe_4Rg/exec?dni=${dni}`)
-      .then(response => response.text())
-      .then(url => {
-        if (url.includes("http")) {
-          const directURL = url
-            .replace("/view?usp=drive_link", "")
-            .replace("file/d/", "uc?export=download&id=")
-            .replace("/preview", "");
-
-          resultado.innerHTML = `<iframe src="${url}"></iframe>`;
-          boton.href = directURL;
-          descarga.style.display = "block";
+        if (data.estado === "ok") {
+          window.open(data.link, "_blank");
         } else {
-          resultado.innerHTML = `<p class="mensaje-error">${url}</p>`;
+          mensaje.textContent = "DNI no encontrado";
         }
-      })
-      .catch(() => {
-        resultado.innerHTML = `<p class="mensaje-error">Error de red. Intentá nuevamente más tarde.</p>`;
-      });
-  }
-</script>
-
+      } catch (error) {
+        mensaje.textContent = "Error al buscar el certificado";
+      }
+    }
+  </script>
 </body>
 </html>
