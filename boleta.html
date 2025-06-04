@@ -125,4 +125,66 @@ function generarBoleta() {
   const apellido = document.getElementById("apellido").value;
   const dni = document.getElementById("dni").value;
   const email = document.getElementById("email").value;
-  const curso = document.getElementB
+  const curso = document.getElementById("curso").value;
+  const monto = document.getElementById("monto").value;
+
+  const hoy = new Date();
+  const fechaEmision = hoy.toLocaleDateString();
+  const vencimiento = new Date(hoy.setDate(hoy.getDate() + 30)).toLocaleDateString();
+
+  const contenido = `
+    <div id="boletaVisual">
+      <img id="logo" src="logo.jpg" alt="Logo Jammet Consultora">
+      <h2>Jammet Consultora</h2>
+      <h3>Boleta de Pago</h3>
+
+      <p><strong>Nombre y Apellido:</strong> ${nombre} ${apellido}</p>
+      <p><strong>DNI:</strong> ${dni}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Curso:</strong> ${document.getElementById("curso").selectedOptions[0].text}</p>
+      <p><strong>Fecha de emisión:</strong> ${fechaEmision}</p>
+      <p><strong>Vencimiento:</strong> ${vencimiento}</p>
+
+      <hr>
+      <p><strong>Importe total:</strong> ${monto}</p>
+      <hr>
+
+      <p><em>Este comprobante es válido para abonar el curso indicado en cualquier sucursal habilitada.</em></p>
+      <p><strong>Tu pago se acreditará dentro de las próximas 72hs hábiles.</strong></p>
+    </div>
+  `;
+
+  document.getElementById("boletaResultado").innerHTML = contenido;
+
+  setTimeout(() => {
+    html2canvas(document.getElementById("boletaVisual")).then(canvas => {
+      const enlace = document.createElement("a");
+      enlace.download = `boleta_${dni}.jpg`;
+      enlace.href = canvas.toDataURL("image/jpeg");
+      enlace.click();
+
+      // Guardar en Drive
+      fetch('https://script.google.com/macros/s/AKfycbyyT2K2H1vxSisz7QiCnHA_93XEIWhRMi_-6srC_1JD4qfk68FFXbd1_UCJRwLa0ACIww/exec', {
+        method: 'POST',
+        body: JSON.stringify({
+          image: canvas.toDataURL("image/jpeg"),
+          nombre,
+          apellido,
+          dni,
+          email,
+          curso,
+          monto
+        }),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(res => res.json())
+      .then(data => console.log("Boleta guardada en Drive"))
+      .catch(err => console.error("Error al guardar boleta en Drive", err));
+    });
+  }, 500);
+
+  return false;
+}
+</script>
+</body>
+</html>
