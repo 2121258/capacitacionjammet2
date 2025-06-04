@@ -6,37 +6,34 @@
   <title>Inicio Cargas Generales</title>
   <style>
     body {
-      margin: 0;
       font-family: "Segoe UI", sans-serif;
       background-color: #f9f9f9;
-      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
     header {
       background-color: #75025c;
       color: white;
-      padding: 1em 2em;
-      display: flex;
-      align-items: center;
-    }
-    header img {
-      height: 40px;
-      margin-right: 10px;
-    }
-    header a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1em;
-      display: flex;
-      align-items: center;
+      padding: 1em;
+      text-align: center;
     }
     main {
-      max-width: 600px;
-      margin: 2em auto;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2em;
+    }
+    form {
       background: white;
       padding: 2em;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
     }
     h2 {
       color: #75025c;
@@ -45,48 +42,43 @@
     label {
       display: block;
       margin-top: 1em;
-      font-weight: bold;
     }
-    input[type="text"],
-    input[type="file"],
-    select {
+    input, select {
       width: 100%;
-      padding: 0.6em;
+      padding: 0.7em;
       margin-top: 0.3em;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-    button.enviar {
-      margin: 2em auto 0;
+    button {
       display: block;
-      padding: 0.8em 2em;
+      margin: 2em auto 0;
+      padding: 0.7em 2em;
       background-color: #b05fa7;
       color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
       font-size: 1em;
       cursor: pointer;
     }
     footer {
       text-align: center;
-      margin: 3em 0 1em 0;
+      padding: 1em;
+      font-size: 0.9em;
       color: #aaa;
-      font-size: 0.85em;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <a href="index.html">
-    <img src="logo.jpg" alt="Jammet Logo">
-    Jammet Consultora SRL
-  </a>
+  <h1>Jammet Consultora SRL</h1>
 </header>
 
 <main>
-  <h2>Inicio Cargas Generales</h2>
   <form id="formulario" enctype="multipart/form-data">
+    <h2>Inicio Cargas Generales</h2>
+    
     <label>Apellido</label>
     <input type="text" name="apellido" placeholder="Obligatorio" required>
 
@@ -96,27 +88,28 @@
     <label>DNI</label>
     <input type="text" name="dni" placeholder="Obligatorio" required>
 
+    <label>Email</label>
+    <input type="email" name="email" placeholder="Obligatorio" required pattern="[^@\\s]+@[^@\\s]+\\.[^@\\s]+">
+
     <label>Fecha del curso</label>
-    <select name="fechaCurso" id="fechaCurso" required>
-      <option disabled selected>Seleccioná una fecha</option>
-    </select>
+    <select name="fechaCurso" id="fechaCurso" required></select>
 
     <label>DNI Frente</label>
-    <input type="file" name="dniFrente" placeholder="Obligatorio" required>
+    <input type="file" name="dniFrente" accept=".jpg,.jpeg,.pdf" required>
 
     <label>DNI Dorso</label>
-    <input type="file" name="dniDorso" placeholder="Obligatorio" required>
+    <input type="file" name="dniDorso" accept=".jpg,.jpeg,.pdf" required>
 
     <label>Licencia Frente</label>
-    <input type="file" name="licenciaFrente" placeholder="Obligatorio" required>
+    <input type="file" name="licenciaFrente" accept=".jpg,.jpeg,.pdf" required>
 
     <label>Licencia Dorso</label>
-    <input type="file" name="licenciaDorso" placeholder="Obligatorio" required>
+    <input type="file" name="licenciaDorso" accept=".jpg,.jpeg,.pdf" required>
 
     <label>Comprobante de pago (opcional)</label>
-    <input type="file" name="comprobante">
+    <input type="file" name="comprobante" accept=".jpg,.jpeg,.pdf">
 
-    <button type="submit" class="enviar">Enviar</button>
+    <button type="submit">Enviar</button>
   </form>
 </main>
 
@@ -125,20 +118,39 @@
 </footer>
 
 <script>
-  // Cargar fechas desde Google Sheets
+  // Cargar fechas disponibles dinámicamente
   fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
     .then(res => res.json())
     .then(data => {
-      const fechas = data.inicio || [];
       const select = document.getElementById("fechaCurso");
-      fechas.forEach(fecha => {
+      data.inicio.forEach(fecha => {
         const option = document.createElement("option");
         option.value = fecha;
         option.textContent = fecha;
         select.appendChild(option);
       });
+    });
+
+  document.getElementById("formulario").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+
+    fetch("https://script.google.com/macros/s/AKfycbxHOClWD59mRE3PzILqwHoFzOIfIkV2e9df50niOtN2sC_6Swb9je1lnQtTL8wMN7TG/exec", {
+      method: "POST",
+      body: data,
     })
-    .catch(err => console.error("Error cargando fechas:", err));
+    .then(response => {
+      if (response.ok) {
+        window.location.href = "reserva_exitosa.html";
+      } else {
+        alert("Error al enviar el formulario.");
+      }
+    })
+    .catch(error => {
+      alert("Error de red al enviar el formulario.");
+    });
+  });
 </script>
 
 </body>
