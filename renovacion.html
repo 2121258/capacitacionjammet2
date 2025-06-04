@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Renovación Cargas Generales - Jammet Consultora</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #75025c;
+      color: white;
+      padding: 1em 2em;
+      display: flex;
+      align-items: center;
+    }
+    header img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2em auto;
+      background: white;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: #75025c;
+    }
+    label {
+      display: block;
+      margin-top: 1em;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="file"],
+    input[type="date"] {
+      width: 100%;
+      padding: 0.6em;
+      margin-top: 0.3em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button.enviar {
+      margin-top: 1.5em;
+      padding: 0.8em 1.5em;
+      background-color: #b05fa7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      margin: 3em 0 1em 0;
+      color: #aaa;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">
+    <img src="logo.jpg" alt="Jammet Logo">
+    Jammet Consultora SRL
+  </a>
+</header>
+
+<main>
+  <h2>Renovación Cargas Generales</h2>
+  <form>
+    <label>Apellido</label>
+    <input type="text" required>
+    
+    <label>Nombre</label>
+    <input type="text" required>
+
+    <label>DNI</label>
+    <input type="text" required>
+
+    <label>Fecha del curso</label>
+    <input type="date" required>
+
+    <label>DNI Frente</label>
+    <input type="file" accept=".jpg,.jpeg,.pdf" required>
+
+    <label>DNI Dorso</label>
+    <input type="file" accept=".jpg,.jpeg,.pdf" required>
+
+    <label>Licencia Frente</label>
+    <input type="file" accept=".jpg,.jpeg,.pdf" required>
+
+    <label>Licencia Dorso</label>
+    <input type="file" accept=".jpg,.jpeg,.pdf" required>
+
+    <label>Comprobante de pago</label>
+    <input type="file" accept=".jpg,.jpeg,.pdf" required>
+
+    <button type="submit" class="enviar">Enviar</button>
+  </form>
+</main>
+
+<footer>
+  © 2025 Jammet Consultora SRL
+</footer>
+
+</body>
+</html>
