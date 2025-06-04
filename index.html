@@ -3,67 +3,181 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Capacitaciones Jammet</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <script>
-    function mostrarFormulario(id) {
-      document.getElementById("formulario-inicio").style.display = "none";
-      document.getElementById("formulario-renovacion").style.display = "none";
-      document.getElementById("formulario-pasajeros").style.display = "none";
-
-      document.getElementById(id).style.display = "block";
-      window.scrollTo({ top: document.getElementById(id).offsetTop - 20, behavior: 'smooth' });
+  <title>Jammet Consultora</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
     }
-  </script>
+    header {
+      background-color: #75025c;
+      color: white;
+      padding: 1em 2em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header img {
+      height: 40px;
+    }
+    header nav a {
+      color: white;
+      margin-left: 1em;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .seccion {
+      display: none;
+      max-width: 800px;
+      margin: 2em auto;
+      background: white;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .visible {
+      display: block;
+    }
+    .botones-inicio {
+      display: flex;
+      justify-content: center;
+      margin-top: 3em;
+      gap: 1em;
+      flex-wrap: wrap;
+    }
+    .botones-inicio button {
+      padding: 1em 1.5em;
+      background-color: #b05fa7;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    label {
+      display: block;
+      margin-top: 1.2em;
+      margin-bottom: 0.5em;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="file"],
+    input[type="date"] {
+      width: 100%;
+      padding: 0.6em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    button.enviar {
+      margin-top: 1.5em;
+      padding: 0.8em 1.5em;
+      background-color: #b05fa7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      margin: 3em 0 1em 0;
+      color: #aaa;
+      font-size: 0.85em;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div style="display: flex; align-items: center;">
-      <img src="logo.jpg" alt="Jammet Logo" />
-      <h3 style="margin-left: 10px;">Jammet Consultora SRL</h3>
-    </div>
-    <nav>
-      <a href="#">Inicio</a>
-      <a href="#">Quiénes somos</a>
-      <a href="#">Contacto</a>
-    </nav>
-  </header>
 
-  <main>
-    <section>
-      <h2>Capacitaciones disponibles</h2>
-      <div class="botones">
-        <button onclick="mostrarFormulario('formulario-inicio')">Inicio Cargas Generales</button>
-        <button onclick="mostrarFormulario('formulario-renovacion')">Renovación Cargas Generales</button>
-        <button onclick="mostrarFormulario('formulario-pasajeros')">Transporte de Pasajeros</button>
-      </div>
-    </section>
+<header>
+  <div>
+    <img src="logo.jpg" alt="Jammet Logo">
+    <strong style="margin-left: 0.5em;">Jammet Consultora SRL</strong>
+  </div>
+  <nav>
+    <a onclick="mostrarSeccion('pantalla-inicial')">Inicio</a>
+    <a onclick="mostrarSeccion('quienes')">Quiénes somos</a>
+  </nav>
+</header>
 
-    <section class="calendar">
-      <h2>Calendario de cursos</h2>
-      <!-- Sustituí el ID de tu calendario en src="" cuando lo tengas -->
-      <iframe class="calendar" src="https://calendar.google.com/calendar/embed?src=TU_ID_CALENDARIO&ctz=America%2FArgentina_Buenos_Aires"></iframe>
-    </section>
+<div id="pantalla-inicial" class="visible">
+  <div class="botones-inicio">
+    <button onclick="mostrarSeccion('formulario-inicio')">Inicio Cargas Generales</button>
+    <button onclick="mostrarSeccion('formulario-renovacion')">Renovación Cargas Generales</button>
+    <button onclick="mostrarSeccion('formulario-pasajeros')">Transporte de Pasajeros</button>
+  </div>
+</div>
 
-    <section id="formulario-inicio" style="display: none;">
-      <h2>Formulario - Inicio Cargas Generales</h2>
-      <iframe class="formulario" src="https://docs.google.com/forms/d/e/1FAIpQLSd_6x6cD8FwScveTOpcYLmDC87s9kbQqU0IlFsCj880AYttMA/viewform?embedded=true"></iframe>
-    </section>
+<!-- FORMULARIOS -->
 
-    <section id="formulario-renovacion" style="display: none;">
-      <h2>Formulario - Renovación Cargas Generales</h2>
-      <iframe class="formulario" src="https://docs.google.com/forms/d/e/1FAIpQLScQc20zOQ4D-k6PvpXoatTH46IXctqYWCiNyIMIPsyMfloKaA/viewform?embedded=true"></iframe>
-    </section>
+<div id="formulario-inicio" class="seccion">
+  <h2>Inicio Cargas Generales</h2>
+  <form>
+    <label>Apellido</label><input type="text" required>
+    <label>Nombre</label><input type="text" required>
+    <label>DNI</label><input type="text" required>
+    <label>Fecha del curso</label><input type="date" required>
+    <label>DNI Frente</label><input type="file" required>
+    <label>DNI Dorso</label><input type="file" required>
+    <label>Licencia Frente</label><input type="file" required>
+    <label>Licencia Dorso</label><input type="file" required>
+    <label>Comprobante</label><input type="file" required>
+    <button type="submit" class="enviar">Enviar</button>
+  </form>
+</div>
 
-    <section id="formulario-pasajeros" style="display: none;">
-      <h2>Formulario - Transporte de Pasajeros</h2>
-      <iframe class="formulario" src="https://docs.google.com/forms/d/e/1FAIpQLSeoMQrM6-Pb8bOPXdpQ3VTZ_vv2iXMRMYIiY--0hmQTZeZeCw/viewform?embedded=true"></iframe>
-    </section>
-  </main>
+<div id="formulario-renovacion" class="seccion">
+  <h2>Renovación Cargas Generales</h2>
+  <form>
+    <label>Apellido</label><input type="text" required>
+    <label>Nombre</label><input type="text" required>
+    <label>DNI</label><input type="text" required>
+    <label>Fecha del curso</label><input type="date" required>
+    <label>DNI Frente</label><input type="file" required>
+    <label>DNI Dorso</label><input type="file" required>
+    <label>Licencia Frente</label><input type="file" required>
+    <label>Licencia Dorso</label><input type="file" required>
+    <label>Comprobante</label><input type="file" required>
+    <button type="submit" class="enviar">Enviar</button>
+  </form>
+</div>
 
-  <footer>
-    <p>&copy; 2025 Jammet Consultora SRL</p>
-  </footer>
+<div id="formulario-pasajeros" class="seccion">
+  <h2>Transporte de Pasajeros</h2>
+  <form>
+    <label>Apellido</label><input type="text" required>
+    <label>Nombre</label><input type="text" required>
+    <label>DNI</label><input type="text" required>
+    <label>Fecha del curso</label><input type="date" required>
+    <label>DNI Frente</label><input type="file" required>
+    <label>DNI Dorso</label><input type="file" required>
+    <label>Licencia Frente</label><input type="file" required>
+    <label>Licencia Dorso</label><input type="file" required>
+    <label>Comprobante</label><input type="file" required>
+    <button type="submit" class="enviar">Enviar</button>
+  </form>
+</div>
+
+<!-- QUIÉNES SOMOS -->
+<div id="quienes" class="seccion">
+  <h2>Quiénes somos</h2>
+  <p>Jammet Consultora es una empresa dedicada a la capacitación profesional...</p>
+</div>
+
+<footer>
+  © 2025 Jammet Consultora SRL
+</footer>
+
+<script>
+  function mostrarSeccion(id) {
+    const secciones = document.querySelectorAll('.seccion, #pantalla-inicial');
+    secciones.forEach(s => s.classList.remove('visible'));
+    document.getElementById(id).classList.add('visible');
+  }
+</script>
+
 </body>
 </html>
