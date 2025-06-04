@@ -89,7 +89,7 @@
     <input type="text" name="dni" placeholder="Obligatorio" required>
 
     <label>Email</label>
-    <input type="email" name="email" placeholder="Obligatorio" required pattern="[^@\\s]+@[^@\\s]+\\.[^@\\s]+">
+    <input type="email" name="email" placeholder="Obligatorio" required pattern=".*@.*">
 
     <label>Fecha del curso</label>
     <select name="fechaCurso" id="fechaCurso" required></select>
@@ -101,57 +101,4 @@
     <input type="file" name="dniDorso" accept=".jpg,.jpeg,.pdf" required>
 
     <label>Licencia Frente</label>
-    <input type="file" name="licenciaFrente" accept=".jpg,.jpeg,.pdf" required>
-
-    <label>Licencia Dorso</label>
-    <input type="file" name="licenciaDorso" accept=".jpg,.jpeg,.pdf" required>
-
-    <label>Comprobante de pago (opcional)</label>
-    <input type="file" name="comprobante" accept=".jpg,.jpeg,.pdf">
-
-    <button type="submit">Enviar</button>
-  </form>
-</main>
-
-<footer>
-  © 2025 Jammet Consultora SRL
-</footer>
-
-<script>
-  // Cargar fechas disponibles desde la hoja de Google Sheets (columna 'renovacion')
-  fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
-    .then(res => res.json())
-    .then(data => {
-      const select = document.getElementById("fechaCurso");
-      data.renovacion.forEach(fecha => {
-        const option = document.createElement("option");
-        option.value = fecha;
-        option.textContent = fecha;
-        select.appendChild(option);
-      });
-    });
-
-  document.getElementById("formulario").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-
-    fetch("https://script.google.com/macros/s/AKfycbxHOClWD59mRE3PzILqwHoFzOIfIkV2e9df50niOtN2sC_6Swb9je1lnQtTL8wMN7TG/exec", {
-      method: "POST",
-      body: data,
-    })
-    .then(response => {
-      if (response.ok) {
-        window.location.href = "reserva_renovacion.html";
-      } else {
-        alert("Error al enviar el formulario.");
-      }
-    })
-    .catch(error => {
-      alert("Error de red al enviar el formulario.");
-    });
-  });
-</script>
-
-</body>
-</html>
+    <input type="file" name="licenciaFrente" accept=".jpg,.jp
