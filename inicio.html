@@ -11,6 +11,7 @@
       background-color: #f9f9f9;
       color: #333;
     }
+
     header {
       background-color: #75025c;
       color: white;
@@ -18,10 +19,12 @@
       display: flex;
       align-items: center;
     }
+
     header img {
       height: 40px;
       margin-right: 10px;
     }
+
     header a {
       color: white;
       text-decoration: none;
@@ -30,6 +33,7 @@
       display: flex;
       align-items: center;
     }
+
     main {
       max-width: 800px;
       margin: 2em auto;
@@ -38,25 +42,38 @@
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
+
     h2 {
       color: #75025c;
+      text-align: center;
     }
+
     label {
       display: block;
       margin-top: 1em;
       font-weight: bold;
     }
+
     input[type="text"],
     input[type="file"],
-    select {
+    input[type="date"] {
       width: 100%;
       padding: 0.6em;
       margin-top: 0.3em;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+
+    .form-group {
+      margin-bottom: 1.5em;
+    }
+
+    .center-button {
+      display: flex;
+      justify-content: center;
+    }
+
     button.enviar {
-      margin: 1.5em auto 0 auto;
       padding: 0.8em 1.5em;
       background-color: #b05fa7;
       color: white;
@@ -64,8 +81,8 @@
       border-radius: 4px;
       font-size: 1em;
       cursor: pointer;
-      display: block;
     }
+
     footer {
       text-align: center;
       margin: 3em 0 1em 0;
@@ -85,7 +102,7 @@
 
 <main>
   <h2>Inicio Cargas Generales</h2>
-  <form id="formulario-inicio">
+  <form id="formulario" enctype="multipart/form-data">
     <label>Apellido</label>
     <input type="text" name="apellido" placeholder="Obligatorio" required>
 
@@ -96,26 +113,26 @@
     <input type="text" name="dni" placeholder="Obligatorio" required>
 
     <label>Fecha del curso</label>
-    <select name="fecha" required id="fecha-inicio">
-      <option value="">Seleccione una fecha</option>
-    </select>
+    <input type="date" name="fecha" placeholder="Obligatorio" required>
 
     <label>DNI Frente</label>
-    <input type="file" name="dni_frente" placeholder="Obligatorio" required>
+    <input type="file" name="dni_frente" accept=".jpg,.jpeg,.pdf" placeholder="Obligatorio" required>
 
     <label>DNI Dorso</label>
-    <input type="file" name="dni_dorso" placeholder="Obligatorio" required>
+    <input type="file" name="dni_dorso" accept=".jpg,.jpeg,.pdf" placeholder="Obligatorio" required>
 
     <label>Licencia Frente</label>
-    <input type="file" name="licencia_frente" placeholder="Obligatorio" required>
+    <input type="file" name="licencia_frente" accept=".jpg,.jpeg,.pdf" placeholder="Obligatorio" required>
 
     <label>Licencia Dorso</label>
-    <input type="file" name="licencia_dorso" placeholder="Obligatorio" required>
+    <input type="file" name="licencia_dorso" accept=".jpg,.jpeg,.pdf" placeholder="Obligatorio" required>
 
-    <label>Comprobante de pago</label>
-    <input type="file" name="comprobante">
+    <label>Comprobante de pago (opcional)</label>
+    <input type="file" name="comprobante" accept=".jpg,.jpeg,.pdf">
 
-    <button type="submit" class="enviar">Enviar</button>
+    <div class="center-button">
+      <button type="submit" class="enviar">Enviar</button>
+    </div>
   </form>
 </main>
 
@@ -124,19 +141,31 @@
 </footer>
 
 <script>
-  // Cargar fechas disponibles desde el endpoint
-  fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
-    .then(res => res.json())
-    .then(data => {
-      const fechas = data.inicio || [];
-      const select = document.getElementById("fecha-inicio");
-      fechas.forEach(f => {
-        const opt = document.createElement("option");
-        opt.value = f;
-        opt.textContent = f;
-        select.appendChild(opt);
-      });
+  const scriptURL = "https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec";
+  const form = document.getElementById("formulario");
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("Formulario enviado correctamente.");
+        form.reset();
+      } else {
+        alert("Hubo un error al enviar el formulario.");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      alert("No se pudo enviar el formulario.");
     });
+  });
 </script>
 
 </body>
