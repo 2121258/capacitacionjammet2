@@ -48,7 +48,7 @@
     }
     input[type="text"],
     input[type="file"],
-    input[type="date"] {
+    select {
       width: 100%;
       padding: 0.6em;
       margin-top: 0.3em;
@@ -95,7 +95,9 @@
     <input type="text" required>
 
     <label>Fecha del curso</label>
-    <input type="date" required>
+    <select id="fechaCurso" required>
+      <option value="">Cargando fechas disponibles...</option>
+    </select>
 
     <label>DNI Frente</label>
     <input type="file" accept=".jpg,.jpeg,.pdf" required>
@@ -119,6 +121,35 @@
 <footer>
   © 2025 Jammet Consultora SRL
 </footer>
+
+<script>
+  // Cargar fechas desde Google Sheets para Transporte de Pasajeros
+  fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
+    .then(res => res.json())
+    .then(data => {
+      const select = document.getElementById("fechaCurso");
+      select.innerHTML = ""; // Limpiar opciones
+
+      if (data["Transporte de Pasajeros"] && data["Transporte de Pasajeros"].length > 0) {
+        data["Transporte de Pasajeros"].forEach(fecha => {
+          const option = document.createElement("option");
+          option.value = fecha;
+          option.textContent = fecha;
+          select.appendChild(option);
+        });
+      } else {
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "No hay fechas disponibles";
+        select.appendChild(option);
+      }
+    })
+    .catch(err => {
+      const select = document.getElementById("fechaCurso");
+      select.innerHTML = "<option>Error al cargar fechas</option>";
+      console.error("Error al cargar fechas:", err);
+    });
+</script>
 
 </body>
 </html>
