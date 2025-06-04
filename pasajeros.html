@@ -118,15 +118,19 @@
 </footer>
 
 <script>
-  // Cargar fechas disponibles desde la hoja de Google Sheets (columna 'pasajeros')
   fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
     .then(res => res.json())
     .then(data => {
       const select = document.getElementById("fechaCurso");
-      data.pasajeros.forEach(fecha => {
+      data.pasajeros.forEach(rawFecha => {
+        const fecha = new Date(rawFecha);
+        const dia = String(fecha.getDate()).padStart(2, '0');
+        const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+        const anio = fecha.getFullYear();
+        const formateada = `${dia}/${mes}/${anio}`;
         const option = document.createElement("option");
-        option.value = fecha;
-        option.textContent = fecha;
+        option.value = formateada;
+        option.textContent = formateada;
         select.appendChild(option);
       });
     });
