@@ -19,10 +19,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
 
-    header a {
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .logo-container a {
       color: white;
       text-decoration: none;
       font-weight: bold;
@@ -31,13 +41,15 @@
       align-items: center;
     }
 
-    header img {
-      height: 40px;
-      margin-right: 10px;
+    nav {
+      display: flex;
+      gap: 20px;
     }
 
-    header nav a {
-      margin-left: 20px;
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
       font-size: 0.95em;
     }
 
@@ -87,10 +99,12 @@
 <body>
 
 <header>
-  <a href="index.html" style="flex: 1; display: flex; align-items: center;">
-    <img src="logo.jpg" alt="Jammet Logo">
-    Jammet Consultora SRL
-  </a>
+  <div class="logo-container">
+    <a href="index.html">
+      <img src="logo.jpg" alt="Jammet Logo">
+      Jammet Consultora SRL
+    </a>
+  </div>
   <nav>
     <a href="quienes.html">¿Quiénes somos?</a>
     <a href="ubicacion.html">Ubicación</a>
