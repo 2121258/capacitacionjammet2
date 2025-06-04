@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Generar Boleta - Jammet Consultora</title>
+  <title>Boleta - Jammet Consultora</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body { font-family: Arial, sans-serif; padding: 30px; background-color: #f9f9f9; }
@@ -15,9 +15,15 @@
     button { background-color: #4b0082; color: white; border: none; cursor: pointer; }
     button:hover { background-color: #36005c; }
     #boletaVisual {
-      padding: 20px; border: 2px solid #000; background: #fff;
-      width: 400px; margin-top: 30px;
+      font-size: 14px;
+      padding: 20px; border: 2px solid #4b0082; background: #fff;
+      width: 600px; margin-top: 30px; color: #333;
     }
+    #boletaVisual h2 { color: #4b0082; margin-bottom: 5px; }
+    #boletaVisual h3 { margin-top: 0; margin-bottom: 20px; }
+    #boletaVisual .datos, .boletaVisual .detalle { margin-bottom: 20px; }
+    #boletaVisual .label { font-weight: bold; }
+    #logo { width: 150px; margin-bottom: 10px; }
   </style>
 </head>
 <body>
@@ -61,19 +67,13 @@
 <script>
 let valoresCursos = {};
 
+// Leer valores desde la planilla
 function mostrarFormulario() {
   document.getElementById("formularioBoleta").style.display = "block";
-
-  // Obtener valores actualizados desde la planilla
   fetch("https://script.google.com/macros/s/AKfycbyZQuvxu6t4x7zzx5bCDY0T2nO_lHMoh5XDCMOO6DWQpsLuzUWz9Wz8DzdkgdvWxZkrLg/exec")
     .then(res => res.json())
-    .then(data => {
-      valoresCursos = data;
-    })
-    .catch(err => {
-      alert("Error al cargar los valores desde la planilla.");
-      console.error(err);
-    });
+    .then(data => valoresCursos = data)
+    .catch(err => alert("Error al cargar los valores de curso"));
 }
 
 function actualizarMonto() {
@@ -90,16 +90,30 @@ function generarBoleta() {
   const curso = document.getElementById("curso").value;
   const monto = document.getElementById("monto").value;
 
+  // Fecha emisión y vencimiento
+  const hoy = new Date();
+  const fechaEmision = hoy.toLocaleDateString();
+  const vencimiento = new Date(hoy.setDate(hoy.getDate() + 30)).toLocaleDateString();
+
   const contenido = `
     <div id="boletaVisual">
+      <img id="logo" src="logo.jpg" alt="Logo Jammet Consultora">
       <h2>Jammet Consultora</h2>
       <h3>Boleta de Pago</h3>
-      <p><strong>Curso:</strong> ${document.getElementById("curso").selectedOptions[0].text}</p>
-      <p><strong>Nombre:</strong> ${nombre} ${apellido}</p>
-      <p><strong>DNI:</strong> ${dni}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Monto:</strong> ${monto}</p>
-      <p><strong>Medio de pago:</strong> Rapipago</p>
+
+      <p><span class="label">Nombre y Apellido:</span> ${nombre} ${apellido}</p>
+      <p><span class="label">DNI:</span> ${dni}</p>
+      <p><span class="label">Email:</span> ${email}</p>
+      <p><span class="label">Curso:</span> ${document.getElementById("curso").selectedOptions[0].text}</p>
+      <p><span class="label">Fecha de emisión:</span> ${fechaEmision}</p>
+      <p><span class="label">Vencimiento:</span> ${vencimiento}</p>
+
+      <hr>
+      <p><span class="label">Importe total:</span> ${monto}</p>
+      <hr>
+
+      <p><em>Este comprobante es válido para abonar el curso indicado en cualquier sucursal habilitada.</em></p>
+      <p><strong>Tu pago se acreditará dentro de las próximas 72hs hábiles.</strong></p>
     </div>
   `;
 
@@ -107,13 +121,12 @@ function generarBoleta() {
 
   setTimeout(() => {
     html2canvas(document.getElementById("boletaVisual")).then(canvas => {
-      // Descargar imagen local
       const enlace = document.createElement("a");
       enlace.download = `boleta_${dni}.jpg`;
       enlace.href = canvas.toDataURL("image/jpeg");
       enlace.click();
 
-      // (Opcional) Enviar al Drive - si seguís usando el otro Apps Script
+      // Guardar en Drive
       fetch('https://script.google.com/macros/s/AKfycbyyT2K2H1vxSisz7QiCnHA_93XEIWhRMi_-6srC_1JD4qfk68FFXbd1_UCJRwLa0ACIww/exec', {
         method: 'POST',
         body: JSON.stringify({
@@ -125,12 +138,11 @@ function generarBoleta() {
           curso,
           monto
         }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(res => res.json())
-        .then(data => console.log("Boleta guardada en Drive:", data))
-        .catch(err => console.error("Error al guardar en Drive:", err));
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(res => res.json())
+      .then(data => console.log("Boleta guardada en Drive"))
+      .catch(err => console.error("Error al guardar boleta en Drive", err));
     });
   }, 500);
 
