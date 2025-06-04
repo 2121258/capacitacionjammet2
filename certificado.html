@@ -161,7 +161,6 @@
       .then(response => response.text())
       .then(url => {
         if (url.includes("http")) {
-          // Generar enlace de descarga directa
           const directURL = url
             .replace("/view?usp=drive_link", "")
             .replace("file/d/", "uc?export=download&id=")
