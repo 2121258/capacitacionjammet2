@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jammet Consultora SRL</title>
+  <!-- Font Awesome para íconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-dhnvfs7BoU9cSeEFxY2kC+kqJ7gXxyWSIo4mF0vAfYi4Q8j74gU28UilPLpDPv5fMjT8zLkDw9sFYGnCXPLyIA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     body {
       margin: 0;
@@ -51,6 +53,12 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 0.95em;
+      display: flex;
+      align-items: center;
+    }
+
+    nav a i {
+      margin-right: 6px;
     }
 
     main {
@@ -106,9 +114,9 @@
     </a>
   </div>
   <nav>
-    <a href="quienes.html">¿Quiénes somos?</a>
-    <a href="ubicacion.html">Ubicación</a>
-    <a href="contacto.html">Contacto</a>
+    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
   </nav>
 </header>
 
@@ -121,7 +129,7 @@
   </div>
 
   <h3>Calendario de cursos</h3>
-  <iframe src="https://calendar.google.com/calendar/embed?src=tucorreo%40gmail.com&ctz=America%2FArgentina_Buenos_Aires" frameborder="0" scrolling="no"></iframe>
+  <iframe src="https://calendar.google.com/calendar/embed?src=tucorreo%40gmail.com&ctz=America%2FArgentina_Buenos_Aires" style="border: 0" frameborder="0" scrolling="no"></iframe>
 </main>
 
 <footer>
