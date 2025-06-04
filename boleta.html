@@ -2,87 +2,104 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Boleta - Jammet Consultora</title>
+  <title>Generar Boleta - Jammet Consultora</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: Arial, sans-serif; padding: 30px; background-color: #f9f9f9; }
-    h1 { color: #4b0082; }
-    label { font-weight: bold; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f9f9f9;
+    }
+
+    h1 {
+      color: #4b0082;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
     input, select, button {
-      width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px;
-      border: 1px solid #ccc; border-radius: 6px;
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
-    button { background-color: #4b0082; color: white; border: none; cursor: pointer; }
-    button:hover { background-color: #36005c; }
-    #boletaVisual {
-      font-size: 14px;
-      padding: 20px; border: 2px solid #4b0082; background: #fff;
-      width: 600px; margin-top: 30px; color: #333;
+
+    input[readonly] {
+      background-color: #eee;
+      cursor: not-allowed;
     }
-    #boletaVisual h2 { color: #4b0082; margin-bottom: 5px; }
-    #boletaVisual h3 { margin-top: 0; margin-bottom: 20px; }
-    #logo { width: 150px; margin-bottom: 10px; }
-    #botonSuperior {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 999;
-    }
-    #botonSuperior button {
+
+    button {
       background-color: #4b0082;
       color: white;
       border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-size: 14px;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
       cursor: pointer;
     }
-    #botonSuperior button:hover {
+
+    button:hover {
       background-color: #36005c;
+    }
+
+    #boletaVisual {
+      font-size: 14px;
+      padding: 20px;
+      border: 2px solid #4b0082;
+      background: #fff;
+      width: 600px;
+      margin-top: 30px;
+      color: #333;
+    }
+
+    #boletaVisual h2 {
+      color: #4b0082;
+      margin-bottom: 5px;
+    }
+
+    #boletaVisual h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    #logo {
+      width: 150px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
 
-<!-- Botón superior derecho -->
-<div id="botonSuperior">
-  <a href="#formularioBoleta">
-    <button>🧾 Genera tu boleta de pago</button>
-  </a>
-</div>
-
 <h1>Generar Boleta de Pago</h1>
-<button onclick="mostrarFormulario()">Iniciar</button>
 
-<div id="formularioBoleta" style="display:none;">
-  <form id="boletaForm" onsubmit="return generarBoleta();">
-    <label>Tipo de curso:</label>
-    <select id="curso" required onchange="actualizarMonto()">
-      <option value="">Seleccione un curso</option>
-      <option value="inicio">Inicio Cargas Generales</option>
-      <option value="renovacion">Renovación Cargas Generales</option>
-      <option value="pasajeros">Transporte de Pasajeros</option>
-    </select>
+<form id="boletaForm" onsubmit="return generarBoleta();">
+  <label>Nombre:</label>
+  <input type="text" id="nombre" required>
 
-    <label>Nombre:</label>
-    <input type="text" id="nombre" required>
+  <label>Apellido:</label>
+  <input type="text" id="apellido" required>
 
-    <label>Apellido:</label>
-    <input type="text" id="apellido" required>
+  <label>DNI:</label>
+  <input type="text" id="dni" required pattern="[0-9]{7,8}">
 
-    <label>DNI:</label>
-    <input type="text" id="dni" required pattern="[0-9]{7,8}">
+  <label>Email:</label>
+  <input type="email" id="email" required>
 
-    <label>Email:</label>
-    <input type="email" id="email" required>
+  <label>Tipo de curso:</label>
+  <select id="curso" required onchange="actualizarMonto()">
+    <option value="">Seleccione un curso</option>
+    <option value="inicio">Inicio Cargas Generales</option>
+    <option value="renovacion">Renovación Cargas Generales</option>
+    <option value="pasajeros">Transporte de Pasajeros</option>
+  </select>
 
-    <label>Monto:</label>
-    <input type="text" id="monto" readonly>
+  <label>Monto:</label>
+  <input type="text" id="monto" readonly>
 
-    <button type="submit">Generar</button>
-  </form>
-</div>
+  <button type="submit">Generar boleta</button>
+</form>
 
 <div id="boletaResultado"></div>
 
@@ -91,14 +108,11 @@
 <script>
 let valoresCursos = {};
 
-function mostrarFormulario() {
-  document.getElementById("formularioBoleta").style.display = "block";
-
-  fetch("https://script.google.com/macros/s/AKfycbyZQuvxu6t4x7zzx5bCDY0T2nO_lHMoh5XDCMOO6DWQpsLuzUWz9Wz8DzdkgdvWxZkrLg/exec")
-    .then(res => res.json())
-    .then(data => valoresCursos = data)
-    .catch(err => alert("Error al cargar los valores de curso"));
-}
+// Leer valores desde planilla
+fetch("https://script.google.com/macros/s/AKfycbyZQuvxu6t4x7zzx5bCDY0T2nO_lHMoh5XDCMOO6DWQpsLuzUWz9Wz8DzdkgdvWxZkrLg/exec")
+  .then(res => res.json())
+  .then(data => valoresCursos = data)
+  .catch(err => alert("Error al cargar los valores de curso."));
 
 function actualizarMonto() {
   const curso = document.getElementById("curso").value;
@@ -111,66 +125,4 @@ function generarBoleta() {
   const apellido = document.getElementById("apellido").value;
   const dni = document.getElementById("dni").value;
   const email = document.getElementById("email").value;
-  const curso = document.getElementById("curso").value;
-  const monto = document.getElementById("monto").value;
-
-  const hoy = new Date();
-  const fechaEmision = hoy.toLocaleDateString();
-  const vencimiento = new Date(hoy.setDate(hoy.getDate() + 30)).toLocaleDateString();
-
-  const contenido = `
-    <div id="boletaVisual">
-      <img id="logo" src="logo.jpg" alt="Logo Jammet Consultora">
-      <h2>Jammet Consultora</h2>
-      <h3>Boleta de Pago</h3>
-
-      <p><strong>Nombre y Apellido:</strong> ${nombre} ${apellido}</p>
-      <p><strong>DNI:</strong> ${dni}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Curso:</strong> ${document.getElementById("curso").selectedOptions[0].text}</p>
-      <p><strong>Fecha de emisión:</strong> ${fechaEmision}</p>
-      <p><strong>Vencimiento:</strong> ${vencimiento}</p>
-
-      <hr>
-      <p><strong>Importe total:</strong> ${monto}</p>
-      <hr>
-
-      <p><em>Este comprobante es válido para abonar el curso indicado en cualquier sucursal habilitada.</em></p>
-      <p><strong>Tu pago se acreditará dentro de las próximas 72hs hábiles.</strong></p>
-    </div>
-  `;
-
-  document.getElementById("boletaResultado").innerHTML = contenido;
-
-  setTimeout(() => {
-    html2canvas(document.getElementById("boletaVisual")).then(canvas => {
-      const enlace = document.createElement("a");
-      enlace.download = `boleta_${dni}.jpg`;
-      enlace.href = canvas.toDataURL("image/jpeg");
-      enlace.click();
-
-      // Guardar en Drive
-      fetch('https://script.google.com/macros/s/AKfycbyyT2K2H1vxSisz7QiCnHA_93XEIWhRMi_-6srC_1JD4qfk68FFXbd1_UCJRwLa0ACIww/exec', {
-        method: 'POST',
-        body: JSON.stringify({
-          image: canvas.toDataURL("image/jpeg"),
-          nombre,
-          apellido,
-          dni,
-          email,
-          curso,
-          monto
-        }),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(res => res.json())
-      .then(data => console.log("Boleta guardada en Drive"))
-      .catch(err => console.error("Error al guardar boleta en Drive", err));
-    });
-  }, 500);
-
-  return false;
-}
-</script>
-</body>
-</html>
+  const curso = document.getElementB
