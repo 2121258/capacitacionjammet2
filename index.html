@@ -11,17 +11,17 @@
       background-color: #f9f9f9;
       color: #333;
     }
+
     header {
       background-color: #75025c;
       color: white;
       padding: 1em 2em;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
-    header img {
-      height: 40px;
-      margin-right: 10px;
-    }
+
     header a {
       color: white;
       text-decoration: none;
@@ -30,6 +30,17 @@
       display: flex;
       align-items: center;
     }
+
+    header img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    header nav a {
+      margin-left: 20px;
+      font-size: 0.95em;
+    }
+
     main {
       max-width: 900px;
       margin: 2em auto;
@@ -39,6 +50,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       text-align: center;
     }
+
     .botones {
       display: flex;
       justify-content: center;
@@ -46,6 +58,7 @@
       gap: 1em;
       margin-bottom: 2em;
     }
+
     .botones a {
       background-color: #b05fa7;
       color: white;
@@ -55,12 +68,14 @@
       font-size: 1em;
       font-weight: bold;
     }
+
     iframe {
       width: 100%;
       height: 600px;
       border: none;
       border-radius: 8px;
     }
+
     footer {
       text-align: center;
       margin: 3em 0 1em 0;
@@ -72,10 +87,15 @@
 <body>
 
 <header>
-  <a href="index.html">
+  <a href="index.html" style="flex: 1; display: flex; align-items: center;">
     <img src="logo.jpg" alt="Jammet Logo">
     Jammet Consultora SRL
   </a>
+  <nav>
+    <a href="quienes.html">¿Quiénes somos?</a>
+    <a href="ubicacion.html">Ubicación</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
 </header>
 
 <main>
@@ -87,7 +107,7 @@
   </div>
 
   <h3>Calendario de cursos</h3>
-  <iframe src="https://calendar.google.com/calendar/embed?src=tucorreo%40gmail.com&ctz=America%2FArgentina_Buenos_Aires" style="border: 0" frameborder="0" scrolling="no"></iframe>
+  <iframe src="https://calendar.google.com/calendar/embed?src=tucorreo%40gmail.com&ctz=America%2FArgentina_Buenos_Aires" frameborder="0" scrolling="no"></iframe>
 </main>
 
 <footer>
