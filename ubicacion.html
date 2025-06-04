@@ -11,17 +11,25 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: #f9f9f9;
     }
+
     header {
       background-color: #800061;
       color: white;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 20px;
+      padding: 10px 30px;
     }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+
     header img {
-      height: 40px;
+      height: 50px;
     }
+
     nav ul {
       list-style: none;
       margin: 0;
@@ -29,14 +37,17 @@
       display: flex;
       align-items: center;
     }
+
     nav li {
       margin-left: 20px;
     }
+
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
     }
+
     nav a.button {
       background-color: #b85caf;
       padding: 6px 12px;
@@ -70,21 +81,27 @@
 </head>
 <body>
   <header>
-    <img src="logo-jammet.png" alt="Jammet Consultora SRL" />
+    <div class="logo">
+      <img src="logo-jammet.png" alt="Jammet Consultora SRL" />
+    </div>
     <nav>
       <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="quienes.html">¿Quiénes somos?</a></li>
-        <li><a href="ubicacion.html">Ubicación</a></li>
         <li><a href="certificado.html" class="button">Descargá tu certificado</a></li>
+        <li><a href="quienes.html">¿Quiénes somos?</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
     <h1>Ubicación</h1>
-    <p>Nos encontramos en la ciudad de General Roca, Río Negro.</p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <p>Nos encontramos en la ciudad de Comodoro Rivadavia, Chubut.</p>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13395.10846029647!2d-67.49070454119816!3d-45.860018925915085!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDUxJzM2LjAiUyA2N8KwMjknMjcuMiJX!5e0!3m2!1ses-419!2sar!4v1717527000000!5m2!1ses-419!2sar"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
   </main>
 
   <footer>
