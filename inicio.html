@@ -11,6 +11,7 @@
       background-color: #f9f9f9;
       color: #333;
     }
+
     header {
       background-color: #75025c;
       color: white;
@@ -18,10 +19,12 @@
       display: flex;
       align-items: center;
     }
+
     header img {
       height: 40px;
       margin-right: 10px;
     }
+
     header a {
       color: white;
       text-decoration: none;
@@ -30,31 +33,36 @@
       display: flex;
       align-items: center;
     }
+
     main {
-      max-width: 800px;
+      max-width: 700px;
       margin: 2em auto;
       background: white;
       padding: 2em;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
+
     h2 {
       color: #75025c;
     }
+
     label {
       display: block;
       margin-top: 1em;
       font-weight: bold;
     }
+
     input[type="text"],
     input[type="file"],
-    input[type="date"] {
+    select {
       width: 100%;
       padding: 0.6em;
       margin-top: 0.3em;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+
     button.enviar {
       margin-top: 1.5em;
       padding: 0.8em 1.5em;
@@ -65,6 +73,7 @@
       font-size: 1em;
       cursor: pointer;
     }
+
     footer {
       text-align: center;
       margin: 3em 0 1em 0;
@@ -87,7 +96,7 @@
   <form>
     <label>Apellido</label>
     <input type="text" required>
-    
+
     <label>Nombre</label>
     <input type="text" required>
 
@@ -95,7 +104,9 @@
     <input type="text" required>
 
     <label>Fecha del curso</label>
-    <input type="date" required>
+    <select id="fechaCurso" required>
+      <option value="">Cargando fechas...</option>
+    </select>
 
     <label>DNI Frente</label>
     <input type="file" accept=".jpg,.jpeg,.pdf" required>
@@ -119,6 +130,32 @@
 <footer>
   © 2025 Jammet Consultora SRL
 </footer>
+
+<script>
+  // Cargar fechas dinámicamente desde el endpoint
+  fetch('https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec')
+    .then(response => response.json())
+    .then(data => {
+      const select = document.getElementById("fechaCurso");
+      select.innerHTML = ""; // Limpiar opciones
+
+      if (data.inicio.length === 0) {
+        select.innerHTML = "<option value=''>No hay fechas disponibles</option>";
+        return;
+      }
+
+      data.inicio.forEach(fecha => {
+        const opt = document.createElement("option");
+        opt.value = fecha;
+        opt.textContent = fecha;
+        select.appendChild(opt);
+      });
+    })
+    .catch(error => {
+      console.error("Error al cargar fechas:", error);
+      document.getElementById("fechaCurso").innerHTML = "<option value=''>Error al cargar fechas</option>";
+    });
+</script>
 
 </body>
 </html>
