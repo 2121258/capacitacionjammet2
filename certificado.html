@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Descargá tu certificado - Jammet Consultora SRL</title>
   <link rel="stylesheet" href="estilos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <style>
     body {
       margin: 0;
@@ -20,30 +21,39 @@
       padding: 10px 20px;
     }
 
-    header img {
-      height: 45px;
-    }
-
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    .logo-container {
       display: flex;
       align-items: center;
     }
 
-    nav li {
-      margin-left: 20px;
+    .logo-container img {
+      height: 45px;
+      margin-right: 10px;
+    }
+
+    .logo-container a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1em;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
     }
 
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      font-size: 0.95em;
     }
 
-    nav li:first-child {
-      display: none; /* Oculta el botón de certificado ya que estamos en esta página */
+    nav a i {
+      margin-right: 6px;
     }
 
     .contenedor {
@@ -93,15 +103,20 @@
   </style>
 </head>
 <body>
+
   <header>
-    <img src="logo.jpg" alt="Jammet Consultora SRL" />
+    <div class="logo-container">
+      <a href="index.html">
+        <img src="logo.jpg" alt="Logo Jammet Consultora" />
+        Jammet Consultora SRL
+      </a>
+    </div>
     <nav>
-      <ul>
-        <li><a href="certificado.html">Descargá tu certificado</a></li>
-        <li><a href="quienes.html">¿Quiénes somos?</a></li>
-        <li><a href="ubicacion.html">Ubicación</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
+      <a href="boleta.html"><i class="fas fa-receipt"></i> Generá tu boleta de pago</a>
+      <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+      <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+      <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+      <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
     </nav>
   </header>
 
@@ -146,5 +161,6 @@
       }
     }
   </script>
+
 </body>
 </html>
