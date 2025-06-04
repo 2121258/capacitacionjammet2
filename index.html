@@ -2,59 +2,40 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jammet Consultora</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <div class="container">
-      <img src="logo.jpg" alt="Jammet Logo" class="logo" />
-      <h1>Capacitaciones Jammet</h1>
-      <p>Especialistas en Capital Humano</p>
+
+  <!-- ENCABEZADO -->
+  <header class="main-header">
+    <div class="logo-container">
+      <img src="logo.jpg" alt="Jammet Consultora" class="logo" />
+      <span class="empresa">Jammet Consultora SRL</span>
     </div>
+    <nav class="nav-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#quienes">¿Quiénes somos?</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
   </header>
 
-  <main class="container">
-    <section class="intro">
-      <h2>Inscripción a Cursos</h2>
-      <p>Completá el siguiente formulario para registrar tu inscripción.</p>
-    </section>
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="contenido">
+    <h2 id="inicio">Capacitaciones disponibles</h2>
 
-    <form id="inscripcion-form">
-      <label for="nombre">Nombre</label>
-      <input type="text" id="nombre" name="nombre" required />
+    <div class="cards-container">
+      <div class="card">RENOVACION CARGAS GENERALES</div>
+      <div class="card">INICIO CARGAS GENERALES</div>
+      <div class="card">TRANSPORTE DE PASAJEROS</div>
+    </div>
 
-      <label for="apellido">Apellido</label>
-      <input type="text" id="apellido" name="apellido" required />
-
-      <label for="dni">D.N.I</label>
-      <input type="text" id="dni" name="dni" required />
-
-      <label for="fecha">Fecha del curso</label>
-      <input type="date" id="fecha" name="fecha" required />
-
-      <label for="dni-frente">DNI Frente (JPG o PDF)</label>
-      <input type="file" id="dni-frente" name="dni-frente" accept=".jpg,.jpeg,.pdf" required />
-
-      <label for="dni-dorso">DNI Dorso (JPG o PDF)</label>
-      <input type="file" id="dni-dorso" name="dni-dorso" accept=".jpg,.jpeg,.pdf" required />
-
-      <label for="licencia-frente">Licencia Frente (JPG o PDF)</label>
-      <input type="file" id="licencia-frente" name="licencia-frente" accept=".jpg,.jpeg,.pdf" required />
-
-      <label for="licencia-dorso">Licencia Dorso (JPG o PDF)</label>
-      <input type="file" id="licencia-dorso" name="licencia-dorso" accept=".jpg,.jpeg,.pdf" required />
-
-      <label for="pago">Comprobante de Pago (JPG o PDF)</label>
-      <input type="file" id="pago" name="pago" accept=".jpg,.jpeg,.pdf" required />
-
-      <button type="submit">Enviar inscripción</button>
-    </form>
+    <h2 class="calendario-titulo">junio 2025</h2>
+    <div class="calendario-placeholder">
+      [Aquí se insertará el calendario interactivo en próximos pasos]
+    </div>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Jammet Consultora SRL</p>
-  </footer>
 </body>
 </html>
