@@ -172,23 +172,22 @@
 
 <script>
   const select = document.getElementById("fechaCurso");
-  fetch("https://script.google.com/macros/s/AKfycbzPL_So_xFqh2SIeU8UZGNTvfgXMp3pJL0pBYVbjiQAEuDiOCr7s5xh9qb8GLOv_xE7pg/exec")
+  fetch("https://script.google.com/macros/s/AKfycbyMB6MxxFHF4eTE8gYEhl2XA4VZa_NXNbGZkQgcdHrF_DWeysSYP1xXQJqyqJHWANvK/exec")
     .then(res => res.json())
     .then(data => {
-      const fechas = data.pasajeros || [];
-      select.innerHTML = ""; // Limpiar opciones previas
-      if (fechas.length === 0) {
-        const option = document.createElement("option");
-        option.textContent = "No hay fechas disponibles";
-        option.disabled = true;
-        select.appendChild(option);
-      } else {
-        fechas.forEach(fecha => {
+      select.innerHTML = "";
+      if (data.pasajeros && data.pasajeros.length > 0) {
+        data.pasajeros.forEach(fecha => {
           const option = document.createElement("option");
           option.value = fecha;
           option.textContent = fecha;
           select.appendChild(option);
         });
+      } else {
+        const option = document.createElement("option");
+        option.textContent = "No hay fechas disponibles";
+        option.disabled = true;
+        select.appendChild(option);
       }
     })
     .catch(err => {
