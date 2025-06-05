@@ -113,7 +113,7 @@
 
   <script>
     const URL_FECHAS = "https://script.google.com/macros/s/AKfycbzPL_So_xFqh2SIeU8UZGNTvfgXMp3pJL0pBYVbjiQAEuDiOCr7s5xh9qb8GLOv_xE7pg/exec";
-    const curso = "Transporte de Pasajeros";
+    const curso = "Transporte de pasajeros";
 
     fetch(URL_FECHAS)
       .then(res => res.json())
@@ -142,4 +142,15 @@
 
         const result = await response.json();
         if (result.success) {
-          alert("Inscri
+          alert("Inscripción enviada correctamente. En breve nos comunicaremos.");
+          form.reset();
+        } else {
+          alert("Hubo un error al enviar. Intentá nuevamente.");
+        }
+      } catch (error) {
+        alert("Error de conexión. Verificá tu red.");
+      }
+    });
+  </script>
+</body>
+</html>
