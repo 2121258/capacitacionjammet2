@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Renovación Cargas Generales</title>
+  <title>Transporte de Pasajeros</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-dhnvfs7BoU9cSeEFxY2kC+kqJ7gXxyWSIo4mF0vAfYi4Q8j74gU28UilPLpDPv5fMjT8zLkDw9sFYGnCXPLyIA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     body {
@@ -87,9 +87,9 @@
   </header>
 
   <main>
-    <h1>Renovación Cargas Generales</h1>
+    <h1>Transporte de Pasajeros</h1>
     <p>El curso dura dos días hábiles.</p>
-    <form id="formulario-renovacion">
+    <form id="formulario-pasajeros">
       <label for="nombre">Nombre completo:</label>
       <input type="text" id="nombre" name="nombre" required>
 
@@ -112,8 +112,8 @@
   </main>
 
   <script>
-    const URL_FECHAS = "https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec";
-    const curso = "Renovación Cargas Generales";
+    const URL_FECHAS = "https://script.google.com/macros/s/AKfycbzPL_So_xFqh2SIeU8UZGNTvfgXMp3pJL0pBYVbjiQAEuDiOCr7s5xh9qb8GLOv_xE7pg/exec";
+    const curso = "Transporte de Pasajeros";
 
     fetch(URL_FECHAS)
       .then(res => res.json())
@@ -128,7 +128,7 @@
         document.getElementById("fecha").innerHTML = '<option value="">Error al cargar fechas</option>';
       });
 
-    document.getElementById("formulario-renovacion").addEventListener("submit", async function(e) {
+    document.getElementById("formulario-pasajeros").addEventListener("submit", async function(e) {
       e.preventDefault();
       const form = e.target;
       const formData = new FormData(form);
@@ -142,15 +142,4 @@
 
         const result = await response.json();
         if (result.success) {
-          alert("Inscripción enviada correctamente. En breve nos comunicaremos.");
-          form.reset();
-        } else {
-          alert("Hubo un error al enviar. Intentá nuevamente.");
-        }
-      } catch (error) {
-        alert("Error de conexión. Verificá tu red.");
-      }
-    });
-  </script>
-</body>
-</html>
+          alert("Inscri
