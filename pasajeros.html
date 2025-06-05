@@ -86,6 +86,7 @@
       margin-top: 0.3em;
       border: 1px solid #ccc;
       border-radius: 4px;
+      font-size: 1em;
     }
     button {
       display: block;
@@ -139,10 +140,12 @@
     <input type="text" name="dni" placeholder="Obligatorio" required>
 
     <label>Email</label>
-    <input type="text" name="email" placeholder="Obligatorio" required>
+    <input type="email" name="email" placeholder="Obligatorio" required>
 
     <label>Fecha del curso</label>
-    <select name="fechaCurso" id="fechaCurso" required></select>
+    <select name="fechaCurso" id="fechaCurso" required>
+      <option value="">Cargando fechas disponibles...</option>
+    </select>
 
     <label>DNI Frente</label>
     <input type="file" name="dniFrente" accept=".jpg,.jpeg,.pdf" required>
@@ -168,16 +171,33 @@
 </footer>
 
 <script>
+  const select = document.getElementById("fechaCurso");
   fetch("https://script.google.com/macros/s/AKfycbzPL_So_xFqh2SIeU8UZGNTvfgXMp3pJL0pBYVbjiQAEuDiOCr7s5xh9qb8GLOv_xE7pg/exec")
     .then(res => res.json())
     .then(data => {
-      const select = document.getElementById("fechaCurso");
-      data.pasajeros.forEach(fecha => {
+      const fechas = data.pasajeros || [];
+      select.innerHTML = ""; // Limpiar opciones previas
+      if (fechas.length === 0) {
         const option = document.createElement("option");
-        option.value = fecha;
-        option.textContent = fecha;
+        option.textContent = "No hay fechas disponibles";
+        option.disabled = true;
         select.appendChild(option);
-      });
+      } else {
+        fechas.forEach(fecha => {
+          const option = document.createElement("option");
+          option.value = fecha;
+          option.textContent = fecha;
+          select.appendChild(option);
+        });
+      }
+    })
+    .catch(err => {
+      console.error("Error cargando fechas:", err);
+      select.innerHTML = "";
+      const option = document.createElement("option");
+      option.textContent = "Error al cargar fechas";
+      option.disabled = true;
+      select.appendChild(option);
     });
 </script>
 
