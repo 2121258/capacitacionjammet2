@@ -116,7 +116,7 @@
     </a>
   </div>
   <nav>
-    <a href="boleta.html"><i class="fas fa-receipt"></i> Generá tu boleta de pago</a>
+    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
     <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
     <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
     <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
@@ -127,7 +127,7 @@
 <main>
   <form id="formulario" enctype="multipart/form-data">
     <h2>Transporte de Pasajeros</h2>
-    <p class="subtitulo">El curso dura un día hábil</p>
+    <p class="subtitulo">El curso dura un día</p>
 
     <label>Apellido</label>
     <input type="text" name="apellido" placeholder="Obligatorio" required>
@@ -168,38 +168,16 @@
 </footer>
 
 <script>
-  fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
+  fetch("https://script.google.com/macros/s/AKfycbzPL_So_xFqh2SIeU8UZGNTvfgXMp3pJL0pBYVbjiQAEuDiOCr7s5xh9qb8GLOv_xE7pg/exec")
     .then(res => res.json())
     .then(data => {
       const select = document.getElementById("fechaCurso");
-      if (data.pasajeros && data.pasajeros.length > 0) {
-        data.pasajeros.forEach(fecha => {
-          const option = document.createElement("option");
-          option.value = fecha;
-          option.textContent = fecha;
-          select.appendChild(option);
-        });
-      }
-    });
-
-  document.getElementById("formulario").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-
-    fetch("https://script.google.com/macros/s/AKfycbxHOClWD59mRE3PzILqwHoFzOIfIkV2e9df50niOtN2sC_6Swb9je1lnQtTL8wMN7TG/exec", {
-      method: "POST",
-      body: data,
-    })
-    .then(response => {
-      if (response.ok) {
-        window.location.href = "reserva_pasajeros.html";
-      } else {
-        alert("Error al enviar el formulario.");
-      }
-    })
-    .catch(error => {
-      alert("Error de red al enviar el formulario.");
+      data.pasajeros.forEach(fecha => {
+        const option = document.createElement("option");
+        option.value = fecha;
+        option.textContent = fecha;
+        select.appendChild(option);
+      });
     });
 </script>
 
