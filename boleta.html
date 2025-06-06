@@ -1,191 +1,202 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Generar Boleta de Pago - Jammet Consultora</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Generá tu boleta de pago - Jammet Consultora SRL</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 30px;
+      font-family: "Segoe UI", sans-serif;
       background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
     }
 
-    h1 {
-      color: #4b0082;
+    header {
+      background-color: #75025c;
+      color: white;
+      padding: 1em 2em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .logo-container a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+      position: relative;
+      top: -2px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+    }
+
+    nav a i {
+      margin-right: 6px;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 2em auto;
+      background: white;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #75025c;
+      text-align: center;
+      margin-bottom: 1em;
     }
 
     label {
+      display: block;
+      margin-top: 1em;
       font-weight: bold;
+      color: #333;
     }
 
-    input, select, button {
+    input, select {
       width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      margin-bottom: 15px;
+      padding: 0.8em;
+      margin-top: 0.3em;
       border: 1px solid #ccc;
-      border-radius: 6px;
+      border-radius: 5px;
+      font-size: 1em;
     }
 
     input[readonly] {
       background-color: #eee;
-      cursor: not-allowed;
     }
 
     button {
-      background-color: #4b0082;
+      margin-top: 2em;
+      width: 100%;
+      padding: 1em;
+      background-color: #75025c;
       color: white;
       border: none;
+      border-radius: 5px;
+      font-size: 1em;
       cursor: pointer;
     }
 
-    button:hover {
-      background-color: #36005c;
-    }
-
-    #boletaVisual {
-      font-size: 14px;
-      padding: 20px;
-      border: 2px solid #4b0082;
-      background: #fff;
-      width: 600px;
-      margin-top: 30px;
-      color: #333;
-    }
-
-    #boletaVisual h2 {
-      color: #4b0082;
-      margin-bottom: 5px;
-    }
-
-    #boletaVisual h3 {
-      margin-top: 0;
-      margin-bottom: 20px;
-    }
-
-    #logo {
-      width: 150px;
-      margin-bottom: 10px;
+    footer {
+      text-align: center;
+      margin-top: 3em;
+      color: #aaa;
+      font-size: 0.9em;
     }
   </style>
 </head>
 <body>
 
-<h1>Generar Boleta de Pago</h1>
+<header>
+  <div class="logo-container">
+    <a href="index.html">
+      <img src="logo.jpg" alt="Jammet Logo">
+      Jammet Consultora SRL
+    </a>
+  </div>
+  <nav>
+    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
+    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
+  </nav>
+</header>
 
-<form id="boletaForm" onsubmit="return generarBoleta();">
-  <label>Nombre:</label>
-  <input type="text" id="nombre" required>
+<main>
+  <h2>Generar Boleta de Pago</h2>
 
-  <label>Apellido:</label>
-  <input type="text" id="apellido" required>
+  <form id="formulario">
+    <label>Nombre:</label>
+    <input type="text" name="nombre" required>
 
-  <label>DNI:</label>
-  <input type="text" id="dni" required pattern="[0-9]{7,8}">
+    <label>Apellido:</label>
+    <input type="text" name="apellido" required>
 
-  <label>Email:</label>
-  <input type="email" id="email" required>
+    <label>DNI:</label>
+    <input type="text" name="dni" required>
 
-  <label>Tipo de curso:</label>
-  <select id="curso" required onchange="actualizarMonto()">
-    <option value="">Seleccione un curso</option>
-    <option value="inicio">Inicio Cargas Generales</option>
-    <option value="renovacion">Renovación Cargas Generales</option>
-    <option value="pasajeros">Transporte de Pasajeros</option>
-  </select>
+    <label>Email:</label>
+    <input type="email" name="email" required>
 
-  <label>Monto:</label>
-  <input type="text" id="monto" readonly>
+    <label>Tipo de curso:</label>
+    <select name="curso" id="curso" required>
+      <option value="">Seleccione un curso</option>
+    </select>
 
-  <button type="submit">Generar boleta</button>
-</form>
+    <label>Monto:</label>
+    <input type="text" name="monto" id="monto" readonly>
 
-<div id="boletaResultado"></div>
+    <button type="submit">Generar boleta</button>
+  </form>
+</main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<footer>
+  © 2025 Jammet Consultora SRL
+</footer>
 
 <script>
-let valoresCursos = {};
+  const apiUrl = "https://script.google.com/macros/s/AKfycbzRBs-78TsqbaM6rRo6PI36owp50rfqm9o7Wk4dwT3Tclef_8Ta6NSvPORBPlNUY_89nQ/exec";
 
-fetch("https://script.google.com/macros/s/AKfycbw-yspxJEZOj1U4yewWa2_300CFpFRhDL3OyUKTrztbHlqDGfSK_Qbn9wRWNRFhJn_EKA/exec")
-  .then(res => res.json())
-  .then(data => {
-    valoresCursos = data;
-  })
-  .catch(err => alert("Error al cargar los valores de curso."));
+  let valoresCursos = {};
 
-function actualizarMonto() {
-  const curso = document.getElementById("curso").value;
-  const monto = valoresCursos[curso];
-  document.getElementById("monto").value = monto ? `$${monto}` : "";
-}
+  async function cargarCursos() {
+    try {
+      const res = await fetch(apiUrl);
+      const data = await res.json();
+      valoresCursos = data.cursos || {};
 
-function generarBoleta() {
-  const nombre = document.getElementById("nombre").value;
-  const apellido = document.getElementById("apellido").value;
-  const dni = document.getElementById("dni").value;
-  const email = document.getElementById("email").value;
-  const curso = document.getElementById("curso").value;
-  const monto = document.getElementById("monto").value;
+      const select = document.getElementById("curso");
+      Object.keys(valoresCursos).forEach(curso => {
+        const opt = document.createElement("option");
+        opt.value = curso;
+        opt.textContent = curso;
+        select.appendChild(opt);
+      });
+    } catch (e) {
+      alert("Error al cargar los valores de curso.");
+    }
+  }
 
-  const hoy = new Date();
-  const fechaEmision = hoy.toLocaleDateString();
-  const vencimiento = new Date(hoy.setDate(hoy.getDate() + 30)).toLocaleDateString();
+  document.getElementById("curso").addEventListener("change", function () {
+    const seleccion = this.value;
+    document.getElementById("monto").value = seleccion && valoresCursos[seleccion]
+      ? `$${valoresCursos[seleccion].toFixed(2)}`
+      : "";
+  });
 
-  const contenido = `
-    <div id="boletaVisual">
-      <img id="logo" src="logo.jpg" alt="Logo Jammet Consultora">
-      <h2>Jammet Consultora</h2>
-      <h3>Boleta de Pago</h3>
-
-      <p><strong>Nombre y Apellido:</strong> ${nombre} ${apellido}</p>
-      <p><strong>DNI:</strong> ${dni}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Curso:</strong> ${document.getElementById("curso").selectedOptions[0].text}</p>
-      <p><strong>Fecha de emisión:</strong> ${fechaEmision}</p>
-      <p><strong>Vencimiento:</strong> ${vencimiento}</p>
-
-      <hr>
-      <p><strong>Importe total:</strong> ${monto}</p>
-      <hr>
-
-      <p><em>Este comprobante es válido para abonar el curso indicado en cualquier sucursal habilitada.</em></p>
-      <p><strong>Tu pago se acreditará dentro de las próximas 72hs hábiles.</strong></p>
-    </div>
-  `;
-
-  document.getElementById("boletaResultado").innerHTML = contenido;
-
-  setTimeout(() => {
-    html2canvas(document.getElementById("boletaVisual")).then(canvas => {
-      const enlace = document.createElement("a");
-      enlace.download = `boleta_${dni}.jpg`;
-      enlace.href = canvas.toDataURL("image/jpeg");
-      enlace.click();
-
-      // Guardar en Drive
-      fetch('https://script.google.com/macros/s/AKfycbyyT2K2H1vxSisz7QiCnHA_93XEIWhRMi_-6srC_1JD4qfk68FFXbd1_UCJRwLa0ACIww/exec', {
-        method: 'POST',
-        body: JSON.stringify({
-          image: canvas.toDataURL("image/jpeg"),
-          nombre,
-          apellido,
-          dni,
-          email,
-          curso,
-          monto
-        }),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      .then(res => res.json())
-      .then(data => console.log("Boleta guardada en Drive"))
-      .catch(err => console.error("Error al guardar boleta en Drive", err));
-    });
-  }, 500);
-
-  return false;
-}
+  window.onload = cargarCursos;
 </script>
 
 </body>
