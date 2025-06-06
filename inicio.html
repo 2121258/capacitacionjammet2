@@ -14,6 +14,7 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     header {
@@ -145,6 +146,8 @@
         background-color: #75025c;
         color: white;
         padding: 0.7em 1em;
+        position: relative;
+        z-index: 10;
       }
 
       .menu-btn {
@@ -166,20 +169,27 @@
       }
 
       .mobile-menu {
-        display: none;
-        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 250px;
+        height: 100%;
         background-color: #75025c;
+        display: flex;
+        flex-direction: column;
+        transition: left 0.3s ease;
+        z-index: 9;
       }
 
       .mobile-menu.active {
-        display: flex;
+        left: 0;
       }
 
       .mobile-menu a {
         color: white;
         padding: 1em;
         text-decoration: none;
-        border-top: 1px solid #9e2a7b;
+        border-bottom: 1px solid #9e2a7b;
         font-weight: bold;
         font-size: 0.95em;
       }
@@ -235,6 +245,7 @@
   </div>
 </div>
 <div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
   <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
   <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
   <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
@@ -283,7 +294,6 @@
 </footer>
 
 <script>
-  // Activar botón hamburguesa con addEventListener
   document.addEventListener("DOMContentLoaded", function() {
     const toggle = document.getElementById("menuToggle");
     const menu = document.getElementById("mobileMenu");
@@ -292,7 +302,6 @@
       menu.classList.toggle("active");
     });
 
-    // Cargar fechas
     fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
       .then(res => res.json())
       .then(data => {
@@ -310,7 +319,6 @@
         alert("No se pudieron cargar las fechas del curso. Intente más tarde.");
       });
 
-    // Enviar formulario
     document.getElementById("formulario").addEventListener("submit", function(e) {
       e.preventDefault();
       const data = new FormData(this);
