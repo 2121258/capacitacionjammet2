@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ubicación</title>
+  <title>Ubicación - Jammet Consultora SRL</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <style>
     body {
@@ -15,6 +15,7 @@
       flex-direction: column;
       min-height: 100vh;
     }
+
     header {
       background-color: #75025c;
       color: white;
@@ -23,53 +24,64 @@
       align-items: center;
       justify-content: space-between;
     }
+
     .logo-container {
       display: flex;
       align-items: center;
     }
+
     .logo-container img {
       height: 40px;
       margin-right: 10px;
     }
+
     .logo-container a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       font-size: 1.1em;
+      position: relative;
+      top: -2px;
+      display: flex;
+      align-items: center;
     }
+
     nav {
       display: flex;
       gap: 20px;
     }
+
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       font-size: 0.95em;
+      display: flex;
+      align-items: center;
     }
+
     nav a i {
       margin-right: 6px;
     }
+
     main {
       flex: 1;
+      padding: 2em;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 3em 2em;
+      text-align: center;
     }
-    h2 {
-      color: #75025c;
-      margin-bottom: 1em;
-      font-size: 1.8em;
-    }
+
     iframe {
-      border: 0;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
       width: 100%;
-      height: 600px;
-      max-width: 1100px;
+      max-width: 850px;
+      height: 550px;
+      border: 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
+
     footer {
       text-align: center;
       padding: 1em;
@@ -98,12 +110,7 @@
 
 <main>
   <h2>¿Dónde podés encontrarnos?</h2>
-  <iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3084.736681095162!2d-67.49073468484463!3d-45.8599310433835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xbdebe12646d9d1df%3A0x875f38e4dcabeb1a!2sChacabuco%20%26%20Sarmiento%2C%20Comodoro%20Rivadavia%2C%20Chubut!5e0!3m2!1ses-419!2sar!4v1717695403951!5m2!1ses-419!2sar" 
-    allowfullscreen="" 
-    loading="lazy" 
-    referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
+  <iframe src="https://www.google.com/maps?q=-45.860034027361145,-67.49067472846887&z=17&output=embed"></iframe>
 </main>
 
 <footer>
