@@ -139,13 +139,13 @@
 
   <form id="formulario">
     <label>Nombre:</label>
-    <input type="text" name="nombre" placeholder="Ej: Juliana" required>
+    <input type="text" name="nombre" placeholder="Obligatorio" required>
 
     <label>Apellido:</label>
-    <input type="text" name="apellido" placeholder="Ej: Jammet" required>
+    <input type="text" name="apellido" placeholder="Obligatorio" required>
 
     <label>DNI:</label>
-    <input type="text" name="dni" placeholder="Ej: 12345678" required>
+    <input type="text" name="dni" placeholder="Obligatorio" required>
 
     <label>Tipo de curso:</label>
     <select name="curso" id="curso" required>
@@ -215,6 +215,7 @@
       });
 
       const resultado = await res.json();
+      console.log(resultado); // DEBUG: mostrar respuesta en consola
 
       if (resultado.url) {
         window.open(resultado.url, "_blank");
@@ -222,6 +223,7 @@
         alert("Error: no se pudo generar la boleta.");
       }
     } catch (error) {
+      console.error(error);
       alert("Ocurrió un error al generar la boleta.");
     }
   });
