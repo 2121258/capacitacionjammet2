@@ -4,8 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jammet Consultora SRL</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.css" />
+
+  <!-- FullCalendar CSS correcto -->
+  <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/main.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+
   <style>
     body {
       margin: 0;
@@ -13,6 +18,7 @@
       background-color: #f9f9f9;
       color: #333;
     }
+
     header {
       background-color: #75025c;
       color: white;
@@ -21,14 +27,17 @@
       align-items: center;
       justify-content: space-between;
     }
+
     .logo-container {
       display: flex;
       align-items: center;
     }
+
     .logo-container img {
       height: 40px;
       margin-right: 10px;
     }
+
     .logo-container a {
       color: white;
       text-decoration: none;
@@ -37,10 +46,12 @@
       display: flex;
       align-items: center;
     }
+
     nav {
       display: flex;
       gap: 20px;
     }
+
     nav a {
       color: white;
       text-decoration: none;
@@ -49,9 +60,11 @@
       display: flex;
       align-items: center;
     }
+
     nav a i {
       margin-right: 6px;
     }
+
     main {
       max-width: 900px;
       margin: 2em auto;
@@ -61,6 +74,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       text-align: center;
     }
+
     .botones {
       display: flex;
       justify-content: center;
@@ -68,6 +82,7 @@
       gap: 1em;
       margin-bottom: 2em;
     }
+
     .botones a {
       background-color: #b05fa7;
       color: white;
@@ -77,10 +92,12 @@
       font-size: 1em;
       font-weight: bold;
     }
+
     #calendar {
       max-width: 100%;
       margin: 0 auto;
     }
+
     footer {
       text-align: center;
       margin: 3em 0 1em 0;
@@ -123,7 +140,7 @@
   © 2025 Jammet Consultora SRL
 </footer>
 
-<!-- FullCalendar scripts correctos -->
+<!-- Scripts FullCalendar -->
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/locales-all.global.min.js"></script>
@@ -133,7 +150,7 @@
     const calendarEl = document.getElementById('calendar');
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: [ FullCalendar.dayGridPlugin ],
+      plugins: [dayGridPlugin],
       initialView: 'dayGridMonth',
       locale: 'es',
       height: 600,
@@ -158,11 +175,13 @@
               eventos.push({ start: r.start, end: r.end, display: 'background', backgroundColor: '#c26ba0' });
             });
           }
+
           if (data.renovacion) {
             data.renovacion.forEach(r => {
               eventos.push({ start: r.start, end: r.end, display: 'background', backgroundColor: '#7a52bd' });
             });
           }
+
           if (data.pasajeros) {
             data.pasajeros.forEach(r => {
               eventos.push({ start: r.start, end: r.end, display: 'background', backgroundColor: '#a2b2d6' });
