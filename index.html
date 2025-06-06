@@ -114,7 +114,8 @@
 
     /* MENÚ MÓVIL */
     .mobile-header,
-    .mobile-menu {
+    .mobile-menu,
+    .menu-overlay {
       display: none;
     }
 
@@ -162,7 +163,7 @@
         display: flex;
         flex-direction: column;
         transition: left 0.3s ease;
-        z-index: 9;
+        z-index: 20;
       }
 
       .mobile-menu.active {
@@ -176,6 +177,21 @@
         border-bottom: 1px solid #9e2a7b;
         font-weight: bold;
         font-size: 0.95em;
+      }
+
+      .menu-overlay {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 60px);
+        background-color: rgba(0,0,0,0);
+        z-index: 10;
+      }
+
+      .menu-overlay.active {
+        display: block;
       }
 
       main {
@@ -220,6 +236,7 @@
   <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
   <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
 </div>
+<div class="menu-overlay" id="menuOverlay"></div>
 
 <main>
   <h2>Capacitaciones disponibles</h2>
@@ -251,10 +268,20 @@
   document.addEventListener('DOMContentLoaded', function () {
     const toggle = document.getElementById("menuToggle");
     const menu = document.getElementById("mobileMenu");
+    const overlay = document.getElementById("menuOverlay");
 
-    toggle.addEventListener("click", function () {
-      menu.classList.toggle("active");
-    });
+    function toggleMenu(forceClose = false) {
+      if (forceClose || menu.classList.contains("active")) {
+        menu.classList.remove("active");
+        overlay.classList.remove("active");
+      } else {
+        menu.classList.add("active");
+        overlay.classList.add("active");
+      }
+    }
+
+    toggle.addEventListener("click", () => toggleMenu());
+    overlay.addEventListener("click", () => toggleMenu(true));
 
     const calendarEl = document.getElementById('calendar');
     const calendar = new FullCalendar.Calendar(calendarEl, {
