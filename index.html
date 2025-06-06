@@ -127,7 +127,7 @@
   © 2025 Jammet Consultora SRL
 </footer>
 
-<!-- FullCalendar v5.11.3 JS -->
+<!-- FullCalendar JS -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
 
 <script>
@@ -143,22 +143,37 @@
     const eventos = [];
 
     const parsearRango = (rangoTexto, color) => {
-      const [inicioTexto, finTexto] = rangoTexto.split(" - ");
+      // Limpia guiones largos y espacios
+      const texto = rangoTexto.replace(/[–—]/g, "-").replace(/\s+/g, " ").trim();
+
+      if (!texto.includes(" - ")) return null;
+
+      const [inicioTexto, finTexto] = texto.split(" - ");
       const [diaI, mesI, anioI] = inicioTexto.trim().split("/");
       const [diaF, mesF, anioF] = finTexto.trim().split("/");
 
-      const inicio = `${anioI}-${mesI.padStart(2, '0')}-${diaI.padStart(2, '0')}`;
-      const finOriginal = new Date(`${anioF}-${mesF}-${diaF}`);
-      const fin = new Date(finOriginal);
-      fin.setDate(fin.getDate() + 1);
-      const finISO = fin.toISOString().split("T")[0];
+      if (!diaI || !mesI || !anioI || !diaF || !mesF || !anioF) return null;
 
-      return {
-        start: inicio,
-        end: finISO,
-        display: "background",
-        color: color
-      };
+      const inicio = `${anioI}-${mesI.padStart(2, '0')}-${diaI.padStart(2, '0')}`;
+
+      try {
+        const finOriginal = new Date(`${anioF}-${mesF}-${diaF}`);
+        if (isNaN(finOriginal)) throw new Error("Fecha inválida");
+
+        const fin = new Date(finOriginal);
+        fin.setDate(fin.getDate() + 1);
+        const finISO = fin.toISOString().split("T")[0];
+
+        return {
+          start: inicio,
+          end: finISO,
+          display: "background",
+          color: color
+        };
+      } catch (e) {
+        console.warn("Rango mal formateado:", rangoTexto);
+        return null;
+      }
     };
 
     const cargarFechas = async () => {
@@ -174,19 +189,25 @@
 
           if (data.inicio) {
             data.inicio.forEach(rango => {
-              eventos.push(parsearRango(rango, '#4CAF50')); // verde
+              const evento = parsearRango(rango, '#4CAF50'); // verde
+              if (evento) eventos.push(evento);
             });
           }
+
           if (data.renovacion) {
             data.renovacion.forEach(rango => {
-              eventos.push(parsearRango(rango, '#ff4d4d')); // rojo
+              const evento = parsearRango(rango, '#ff4d4d'); // rojo
+              if (evento) eventos.push(evento);
             });
           }
+
           if (data.pasajeros) {
             data.pasajeros.forEach(dia => {
               const [dd, mm, yyyy] = dia.trim().split("/");
+              if (!dd || !mm || !yyyy) return;
               const inicio = `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
               const finDate = new Date(`${yyyy}-${mm}-${dd}`);
+              if (isNaN(finDate)) return;
               finDate.setDate(finDate.getDate() + 1);
               const fin = finDate.toISOString().split("T")[0];
 
