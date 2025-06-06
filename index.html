@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jammet Consultora SRL</title>
 
+  <!-- FullCalendar CSS -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
 
   <style>
@@ -136,4 +138,128 @@
   <h2>Capacitaciones disponibles</h2>
   <div class="botones">
     <a href="inicio.html">Inicio Cargas Generales</a>
-    <a href="renovacion.html">Renovación Cargas
+    <a href="renovacion.html">Renovación Cargas Generales</a>
+    <a href="pasajeros.html">Transporte de Pasajeros</a>
+  </div>
+
+  <h3>Calendario de cursos</h3>
+  <div id="calendar"></div>
+
+  <div class="leyenda">
+    <ul>
+      <li><span style="background-color: #4CAF50;"></span> Inicio Cargas Generales</li>
+      <li><span style="background-color: #ff4d4d;"></span> Renovación Cargas Generales</li>
+      <li><span style="background-color: #ffcc00;"></span> Transporte de Pasajeros</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  © 2025 Jammet Consultora SRL
+</footer>
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const calendarEl = document.getElementById('calendar');
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      locale: 'es',
+      height: 600,
+      events: []
+    });
+
+    const eventos = [];
+
+    const parsearRango = (rangoTexto, color) => {
+      const texto = rangoTexto.replace(/[–—]/g, "-").replace(/\s+/g, " ").trim();
+      if (!texto.includes(" - ")) return null;
+
+      const [inicioTexto, finTexto] = texto.split(" - ");
+      const [diaI, mesI, anioI] = inicioTexto.trim().split("/");
+      const [diaF, mesF, anioF] = finTexto.trim().split("/");
+
+      if (!diaI || !mesI || !anioI || !diaF || !mesF || !anioF) return null;
+
+      const inicio = `${anioI}-${mesI.padStart(2, '0')}-${diaI.padStart(2, '0')}`;
+
+      try {
+        const finOriginal = new Date(`${anioF}-${mesF}-${diaF}`);
+        if (isNaN(finOriginal)) throw new Error("Fecha inválida");
+        const fin = new Date(finOriginal);
+        fin.setDate(fin.getDate() + 1);
+        const finISO = fin.toISOString().split("T")[0];
+
+        return {
+          start: inicio,
+          end: finISO,
+          display: "background",
+          color: color
+        };
+      } catch (e) {
+        console.warn("Rango mal formateado:", rangoTexto);
+        return null;
+      }
+    };
+
+    const cargarFechas = async () => {
+      try {
+        const urls = [
+          'https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec',
+          'https://script.google.com/macros/s/AKfycbzPL_So_xFqh2SIeU8UZGNTvfgXMp3pJL0pBYVbjiQAEuDiOCr7s5xh9qb8GLOv_xE7pg/exec'
+        ];
+
+        for (const url of urls) {
+          const response = await fetch(url);
+          const data = await response.json();
+
+          if (data.inicio) {
+            data.inicio.forEach(rango => {
+              const evento = parsearRango(rango, '#4CAF50');
+              if (evento) eventos.push(evento);
+            });
+          }
+
+          if (data.renovacion) {
+            data.renovacion.forEach(rango => {
+              const evento = parsearRango(rango, '#ff4d4d');
+              if (evento) eventos.push(evento);
+            });
+          }
+
+          if (data.pasajeros) {
+            data.pasajeros.forEach(dia => {
+              const [dd, mm, yyyy] = dia.trim().split("/");
+              if (!dd || !mm || !yyyy) return;
+              const inicio = `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
+              const finDate = new Date(`${yyyy}-${mm}-${dd}`);
+              if (isNaN(finDate)) return;
+              finDate.setDate(finDate.getDate() + 1);
+              const fin = finDate.toISOString().split("T")[0];
+
+              eventos.push({
+                start: inicio,
+                end: fin,
+                display: 'background',
+                color: '#ffcc00'
+              });
+            });
+          }
+        }
+
+        calendar.addEventSource(eventos);
+        calendar.render();
+      } catch (error) {
+        console.error('Error al cargar eventos:', error);
+        calendar.render();
+      }
+    };
+
+    cargarFechas();
+  });
+</script>
+
+</body>
+</html>
