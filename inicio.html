@@ -147,8 +147,11 @@
         background-color: #75025c;
         color: white;
         padding: 0.7em 1em;
-        position: relative;
-        z-index: 10;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 20;
       }
 
       .menu-btn {
@@ -174,12 +177,12 @@
         top: 60px;
         left: -250px;
         width: 250px;
-        height: calc(100% - 60px);
+        height: 100%;
         background-color: #75025c;
         display: flex;
         flex-direction: column;
         transition: left 0.3s ease;
-        z-index: 20;
+        z-index: 19;
       }
 
       .mobile-menu.active {
@@ -201,7 +204,7 @@
         top: 60px;
         left: 0;
         width: 100%;
-        height: calc(100% - 60px);
+        height: 100%;
         background-color: rgba(0,0,0,0);
         z-index: 10;
       }
@@ -212,6 +215,7 @@
 
       main {
         padding: 1em;
+        margin-top: 60px;
       }
 
       form {
