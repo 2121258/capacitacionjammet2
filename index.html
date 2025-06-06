@@ -127,8 +127,9 @@
   © 2025 Jammet Consultora SRL
 </footer>
 
-<!-- FullCalendar v5.11.3 Scripts -->
+<!-- FullCalendar v5.11.3 JS -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
@@ -140,6 +141,25 @@
     });
 
     const eventos = [];
+
+    const parsearRango = (rangoTexto, color) => {
+      const [inicioTexto, finTexto] = rangoTexto.split(" - ");
+      const [diaI, mesI, anioI] = inicioTexto.trim().split("/");
+      const [diaF, mesF, anioF] = finTexto.trim().split("/");
+
+      const inicio = `${anioI}-${mesI.padStart(2, '0')}-${diaI.padStart(2, '0')}`;
+      const finOriginal = new Date(`${anioF}-${mesF}-${diaF}`);
+      const fin = new Date(finOriginal);
+      fin.setDate(fin.getDate() + 1);
+      const finISO = fin.toISOString().split("T")[0];
+
+      return {
+        start: inicio,
+        end: finISO,
+        display: "background",
+        color: color
+      };
+    };
 
     const cargarFechas = async () => {
       try {
@@ -153,18 +173,29 @@
           const data = await response.json();
 
           if (data.inicio) {
-            data.inicio.forEach(r => {
-              eventos.push({ start: r.start, end: r.end, display: 'background', color: '#c26ba0' });
+            data.inicio.forEach(rango => {
+              eventos.push(parsearRango(rango, '#4CAF50')); // verde
             });
           }
           if (data.renovacion) {
-            data.renovacion.forEach(r => {
-              eventos.push({ start: r.start, end: r.end, display: 'background', color: '#7a52bd' });
+            data.renovacion.forEach(rango => {
+              eventos.push(parsearRango(rango, '#ff4d4d')); // rojo
             });
           }
           if (data.pasajeros) {
-            data.pasajeros.forEach(r => {
-              eventos.push({ start: r.start, end: r.end, display: 'background', color: '#a2b2d6' });
+            data.pasajeros.forEach(dia => {
+              const [dd, mm, yyyy] = dia.trim().split("/");
+              const inicio = `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
+              const finDate = new Date(`${yyyy}-${mm}-${dd}`);
+              finDate.setDate(finDate.getDate() + 1);
+              const fin = finDate.toISOString().split("T")[0];
+
+              eventos.push({
+                start: inicio,
+                end: fin,
+                display: 'background',
+                color: '#ffcc00' // amarillo
+              });
             });
           }
         }
