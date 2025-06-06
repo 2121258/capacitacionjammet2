@@ -167,14 +167,14 @@
 </footer>
 
 <script>
-  const valoresApi = "https://script.google.com/macros/s/AKfycbzRBs-78TsqbaM6rRo6PI36owp50rfqm9o7Wk4dwT3Tclef_8Ta6NSvPORBPlNUY_89nQ/exec";
-  const generarBoletaApi = "https://script.google.com/macros/s/AKfycbwuo6hLm-_qvF060TXVIfimkhZvgmQTt7kBFX1ddSug-AnqIhEtfHgOt9w8uiEfECEoJw/exec";
+  const urlValores = "https://script.google.com/macros/s/AKfycbzRBs-78TsqbaM6rRo6PI36owp50rfqm9o7Wk4dwT3Tclef_8Ta6NSvPORBPlNUY_89nQ/exec";
+  const urlGenerarBoleta = "https://script.google.com/macros/s/AKfycbxPc_ofB2EoFgcbL_wxqRzfS5Yd-HP1GH1fhZF62J3sSO-iKdqu0zpXGtpzfGSFBdPK/exec";
 
   let valoresCursos = {};
 
   async function cargarCursos() {
     try {
-      const res = await fetch(valoresApi);
+      const res = await fetch(urlValores);
       const data = await res.json();
       valoresCursos = data.cursos || {};
 
@@ -199,30 +199,35 @@
 
   document.getElementById("formulario").addEventListener("submit", async function (e) {
     e.preventDefault();
+    const form = e.target;
+    const datos = {
+      nombre: form.nombre.value.trim(),
+      apellido: form.apellido.value.trim(),
+      dni: form.dni.value.trim(),
+      email: form.email.value.trim(),
+      curso: form.curso.value,
+      monto: valoresCursos[form.curso.value] || 0
+    };
 
-    const nombre = this.nombre.value.trim();
-    const apellido = this.apellido.value.trim();
-    const dni = this.dni.value.trim();
-    const email = this.email.value.trim();
-    const curso = this.curso.value;
-    const monto = valoresCursos[curso];
+    try {
+      const res = await fetch(urlGenerarBoleta, {
+        method: "POST",
+        body: JSON.stringify(datos),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
 
-    if (!nombre || !apellido || !dni || !email || !curso || !monto) {
-      alert("Por favor completá todos los campos.");
-      return;
+      const resultado = await res.json();
+
+      if (resultado.url) {
+        window.open(resultado.url, "_blank");
+      } else {
+        alert("Error: no se pudo generar la boleta.");
+      }
+    } catch (error) {
+      alert("Ocurrió un error al generar la boleta.");
     }
-
-    const params = new URLSearchParams({
-      nombre,
-      apellido,
-      dni,
-      email,
-      curso,
-      monto
-    });
-
-    const urlFinal = `${generarBoletaApi}?${params.toString()}`;
-    window.open(urlFinal, "_blank");
   });
 
   window.onload = cargarCursos;
