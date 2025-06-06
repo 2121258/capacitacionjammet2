@@ -215,10 +215,10 @@
       });
 
       const resultado = await res.json();
-      console.log(resultado); // DEBUG: mostrar respuesta en consola
+      console.log(resultado);
 
-      if (resultado.url) {
-        window.open(resultado.url, "_blank");
+      if (resultado.link) {
+        window.open(resultado.link, "_blank");
       } else {
         alert("Error: no se pudo generar la boleta.");
       }
