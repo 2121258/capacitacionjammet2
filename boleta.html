@@ -199,6 +199,29 @@
       cursor: not-allowed;
     }
 
+    .progress-bar {
+      margin-top: 1em;
+      height: 6px;
+      width: 100%;
+      background-color: #ddd;
+      border-radius: 3px;
+      overflow: hidden;
+      display: none;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background-color: #75025c;
+      animation: fill 2s infinite;
+    }
+
+    @keyframes fill {
+      0% { width: 0%; }
+      50% { width: 100%; }
+      100% { width: 0%; }
+    }
+
     footer {
       text-align: center;
       margin-top: 3em;
@@ -250,7 +273,7 @@
 <main>
   <h2>Generar Boleta de Pago</h2>
 
-  <form id="formulario" target="_blank">
+  <form id="formulario">
     <label>Nombre:</label>
     <input type="text" name="nombre" required placeholder="Obligatorio">
 
@@ -269,6 +292,7 @@
     <input type="hidden" name="monto" id="monto">
 
     <button type="submit" id="generarBtn">Generar boleta</button>
+    <div class="progress-bar" id="progressBar"><div class="progress-fill"></div></div>
   </form>
 </main>
 
@@ -314,8 +338,11 @@
     e.preventDefault();
     const form = e.target;
     const boton = document.getElementById("generarBtn");
+    const progressBar = document.getElementById("progressBar");
+
     boton.disabled = true;
     boton.textContent = "Generando boleta...";
+    progressBar.style.display = "block";
 
     const datos = new URLSearchParams();
     datos.append("nombre", form.nombre.value.trim());
@@ -349,11 +376,13 @@
     } finally {
       boton.disabled = false;
       boton.textContent = "Generar boleta";
+      progressBar.style.display = "none";
     }
   });
 
   window.onload = cargarCursos;
 
+  // Menú móvil
   const toggle = document.getElementById("menuToggle");
   const menu = document.getElementById("mobileMenu");
 
