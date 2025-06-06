@@ -150,51 +150,45 @@
       events: []
     });
 
-    fetch('https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec')
-      .then(response => response.json())
-      .then(data => {
-        const eventos = [];
+    const eventos = [];
 
-        if (data.inicio) {
-          data.inicio.forEach(r => {
-            eventos.push({
-              start: r.start,
-              end: r.end,
-              display: 'background',
-              backgroundColor: '#c26ba0'
-            });
-          });
-        }
+    const cargarFechas = async () => {
+      try {
+        const urls = [
+          'https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec',
+          'https://script.google.com/macros/s/AKfycbzPL_So_xFqh2SIeU8UZGNTvfgXMp3pJL0pBYVbjiQAEuDiOCr7s5xh9qb8GLOv_xE7pg/exec'
+        ];
 
-        if (data.renovacion) {
-          data.renovacion.forEach(r => {
-            eventos.push({
-              start: r.start,
-              end: r.end,
-              display: 'background',
-              backgroundColor: '#7a52bd'
-            });
-          });
-        }
+        for (const url of urls) {
+          const response = await fetch(url);
+          const data = await response.json();
 
-        if (data.pasajeros) {
-          data.pasajeros.forEach(r => {
-            eventos.push({
-              start: r.start,
-              end: r.end,
-              display: 'background',
-              backgroundColor: '#a2b2d6'
+          if (data.inicio) {
+            data.inicio.forEach(r => {
+              eventos.push({ start: r.start, end: r.end, display: 'background', backgroundColor: '#c26ba0' });
             });
-          });
+          }
+          if (data.renovacion) {
+            data.renovacion.forEach(r => {
+              eventos.push({ start: r.start, end: r.end, display: 'background', backgroundColor: '#7a52bd' });
+            });
+          }
+          if (data.pasajeros) {
+            data.pasajeros.forEach(r => {
+              eventos.push({ start: r.start, end: r.end, display: 'background', backgroundColor: '#a2b2d6' });
+            });
+          }
         }
 
         calendar.addEventSource(eventos);
         calendar.render();
-      })
-      .catch(error => {
-        console.error('Error al obtener eventos:', error);
+      } catch (error) {
+        console.error('Error al cargar eventos:', error);
         calendar.render();
-      });
+      }
+    };
+
+    cargarFechas();
   });
 </script>
 
