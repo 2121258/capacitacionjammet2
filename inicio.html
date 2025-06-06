@@ -74,8 +74,6 @@
     h2 {
       color: #75025c;
       text-align: center;
-      font-size: 2em;
-      margin-bottom: 0.5em;
     }
     p.subtitulo {
       text-align: center;
@@ -113,122 +111,94 @@
       color: #aaa;
     }
 
+    /* SOLO PARA MÓVIL */
     @media (max-width: 768px) {
       header {
-        display: none;
-      }
-      .mobile-header {
-        background-color: #75025c;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        flex-direction: column;
+        align-items: flex-start;
         padding: 1em;
         position: relative;
       }
-      .mobile-header .menu-toggle {
-        position: absolute;
-        left: 1em;
-        font-size: 1.5em;
-        cursor: pointer;
+
+      .logo-container {
+        justify-content: center;
+        width: 100%;
       }
-      .mobile-header .logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
+
+      .logo-container a {
+        justify-content: center;
+        width: 100%;
+        font-size: 1.3em;
       }
-      .mobile-header img {
-        height: 30px;
-      }
-      .mobile-menu {
+
+      nav {
         display: none;
         flex-direction: column;
+        gap: 10px;
         background-color: #75025c;
         position: absolute;
-        top: 60px;
+        top: 100%;
         left: 0;
         width: 100%;
-        z-index: 1000;
-      }
-      .mobile-menu a {
-        color: white;
         padding: 1em;
-        text-decoration: none;
-        border-bottom: 1px solid #fff3;
-        font-weight: bold;
       }
-      .mobile-menu.show {
-        display: flex;
-      }
-      form {
-        padding: 1em;
-        box-shadow: none;
-        border-radius: 0;
-      }
-      h2 {
-        font-size: 1.4em;
-        text-align: left;
-        margin-bottom: 0.5em;
-        padding-top: 1em;
-        color: #000;
-      }
-      label {
-        font-size: 0.75em;
-        font-weight: bold;
-        color: #000;
-        text-transform: uppercase;
-      }
-      .subtitulo {
-        text-align: left;
-        font-size: 0.85em;
-        margin-bottom: 1em;
-        color: #333;
-      }
-      input, select {
+
+      nav a {
         font-size: 1em;
-        margin-bottom: 1em;
+        color: white;
       }
-      footer {
-        display: none;
+
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        font-size: 1.5em;
+        cursor: pointer;
+        color: white;
+      }
+
+      nav.show {
+        display: flex;
       }
     }
   </style>
 </head>
 <body>
 
-<div class="mobile-header">
-  <div class="menu-toggle" onclick="document.getElementById('mobileMenu').classList.toggle('show')">
-    <i class="fas fa-bars"></i>
+<header>
+  <i class="fas fa-bars menu-toggle" onclick="document.querySelector('nav').classList.toggle('show')"></i>
+  <div class="logo-container">
+    <a href="index.html">
+      <img src="logo.jpg" alt="Jammet Logo">
+      Jammet Consultora SRL
+    </a>
   </div>
-  <div class="logo">
-    <img src="logo.jpg" alt="Logo" />
-    <span>Jammet Consultora SRL</span>
-  </div>
-</div>
-<div id="mobileMenu" class="mobile-menu">
-  <a href="boleta.html">Generá tu boleta de pago</a>
-  <a href="certificado.html">Descargá tu certificado</a>
-  <a href="quienes.html">¿Quiénes somos?</a>
-  <a href="ubicacion.html">Ubicación</a>
-  <a href="contacto.html">Contacto</a>
-</div>
+  <nav>
+    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
+    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
+  </nav>
+</header>
 
 <main>
   <form id="formulario" enctype="multipart/form-data">
-    <h2>INICIO CARGAS GENERALES</h2>
-    <p class="subtitulo">Datos del asistente</p>
+    <h2>Inicio Cargas Generales</h2>
+    <p class="subtitulo">El curso dura dos días hábiles</p>
 
     <label>Apellido</label>
-    <input type="text" name="apellido" required>
+    <input type="text" name="apellido" placeholder="Obligatorio" required>
 
     <label>Nombre</label>
-    <input type="text" name="nombre" required>
+    <input type="text" name="nombre" placeholder="Obligatorio" required>
 
     <label>DNI</label>
-    <input type="text" name="dni" required>
+    <input type="text" name="dni" placeholder="Obligatorio" required>
 
     <label>Email</label>
-    <input type="email" name="email" required>
+    <input type="email" name="email" placeholder="Obligatorio" required>
 
     <label>Fecha del curso</label>
     <select name="fechaCurso" id="fechaCurso" required></select>
