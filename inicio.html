@@ -170,10 +170,10 @@
 
       .mobile-menu {
         position: fixed;
-        top: 0;
+        top: 60px; /* ahora se baja */
         left: -250px;
         width: 250px;
-        height: 100%;
+        height: calc(100% - 60px);
         background-color: #75025c;
         display: flex;
         flex-direction: column;
@@ -228,6 +228,7 @@
     </a>
   </div>
   <nav>
+    <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
     <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
     <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
     <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
