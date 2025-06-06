@@ -167,13 +167,14 @@
 </footer>
 
 <script>
-  const apiUrl = "https://script.google.com/macros/s/AKfycbzRBs-78TsqbaM6rRo6PI36owp50rfqm9o7Wk4dwT3Tclef_8Ta6NSvPORBPlNUY_89nQ/exec";
+  const valoresApi = "https://script.google.com/macros/s/AKfycbzRBs-78TsqbaM6rRo6PI36owp50rfqm9o7Wk4dwT3Tclef_8Ta6NSvPORBPlNUY_89nQ/exec";
+  const generarBoletaApi = "https://script.google.com/macros/s/AKfycbwuo6hLm-_qvF060TXVIfimkhZvgmQTt7kBFX1ddSug-AnqIhEtfHgOt9w8uiEfECEoJw/exec";
 
   let valoresCursos = {};
 
   async function cargarCursos() {
     try {
-      const res = await fetch(apiUrl);
+      const res = await fetch(valoresApi);
       const data = await res.json();
       valoresCursos = data.cursos || {};
 
@@ -194,6 +195,34 @@
     document.getElementById("monto").value = seleccion && valoresCursos[seleccion]
       ? `$${valoresCursos[seleccion].toFixed(2)}`
       : "";
+  });
+
+  document.getElementById("formulario").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const nombre = this.nombre.value.trim();
+    const apellido = this.apellido.value.trim();
+    const dni = this.dni.value.trim();
+    const email = this.email.value.trim();
+    const curso = this.curso.value;
+    const monto = valoresCursos[curso];
+
+    if (!nombre || !apellido || !dni || !email || !curso || !monto) {
+      alert("Por favor completá todos los campos.");
+      return;
+    }
+
+    const params = new URLSearchParams({
+      nombre,
+      apellido,
+      dni,
+      email,
+      curso,
+      monto
+    });
+
+    const urlFinal = `${generarBoletaApi}?${params.toString()}`;
+    window.open(urlFinal, "_blank");
   });
 
   window.onload = cargarCursos;
