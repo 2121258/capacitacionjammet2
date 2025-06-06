@@ -15,6 +15,7 @@
       flex-direction: column;
       min-height: 100vh;
       color: #333;
+      overflow-x: hidden;
     }
 
     header {
@@ -24,7 +25,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: nowrap;
     }
 
     .logo-container {
@@ -82,14 +82,14 @@
     .card {
       background-color: white;
       border-radius: 12px;
-      padding: 2.5em; /* AUMENTADO */
+      padding: 2.5em;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       margin-bottom: 2.5em;
-      font-size: 1.1em; /* AUMENTADO */
+      font-size: 1.1em;
     }
 
     .persona h3 {
-      font-size: 1.7em; /* levemente mayor */
+      font-size: 1.7em;
       margin-bottom: 0.2em;
       color: #222;
     }
@@ -138,9 +138,110 @@
       font-size: 0.9em;
       color: #aaa;
     }
+
+    .mobile-header {
+      background-color: #75025c;
+      color: white;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1001;
+    }
+
+    .menu-btn {
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    .mobile-title {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .logo-wrapper {
+      text-align: center;
+    }
+
+    .logo-wrapper img {
+      height: 30px;
+      margin: 0 auto 4px auto;
+    }
+
+    .logo-wrapper div {
+      font-weight: bold;
+      font-size: 1em;
+    }
+
+    .mobile-menu {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 60px;
+      left: -250px;
+      width: 250px;
+      height: calc(100vh - 60px);
+      background-color: #75025c;
+      overflow-y: auto;
+      transition: left 0.3s ease;
+      z-index: 1000;
+    }
+
+    .mobile-menu.active {
+      left: 0;
+    }
+
+    .mobile-menu a {
+      color: white;
+      padding: 1em;
+      text-decoration: none;
+      border-bottom: 1px solid #9e2a7b;
+      font-weight: bold;
+      font-size: 0.95em;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        display: none;
+      }
+
+      .mobile-header {
+        display: flex;
+      }
+
+      main {
+        margin-top: 60px;
+        padding: 1em;
+      }
+    }
   </style>
 </head>
 <body>
+
+<!-- Encabezado móvil -->
+<div class="mobile-header">
+  <div class="menu-btn" id="menuToggle">☰</div>
+  <div class="mobile-title">
+    <div class="logo-wrapper">
+      <img src="logo.jpg" alt="Logo" />
+      <div>Jammet Consultora SRL</div>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+  <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
+  <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+  <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+  <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+  <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
+</div>
 
 <header>
   <div class="logo-container">
@@ -195,6 +296,21 @@
 <footer>
   © 2025 Jammet Consultora SRL
 </footer>
+
+<script>
+  const toggle = document.getElementById("menuToggle");
+  const menu = document.getElementById("mobileMenu");
+
+  toggle.addEventListener("click", () => {
+    menu.classList.toggle("active");
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+      menu.classList.remove("active");
+    }
+  });
+</script>
 
 </body>
 </html>
