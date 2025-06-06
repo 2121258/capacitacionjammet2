@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jammet Consultora SRL</title>
 
-  <!-- FullCalendar v5.11.3 CSS -->
+  <!-- FullCalendar CSS -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
@@ -85,6 +85,29 @@
       max-width: 100%;
       margin: 0 auto;
     }
+    .leyenda {
+      margin-top: 2em;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .leyenda ul {
+      list-style: none;
+      padding: 0;
+    }
+    .leyenda li {
+      margin-bottom: 0.5em;
+      display: flex;
+      align-items: center;
+    }
+    .leyenda span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      border-radius: 3px;
+    }
     footer {
       text-align: center;
       margin: 3em 0 1em 0;
@@ -120,7 +143,16 @@
   </div>
 
   <h3>Calendario de cursos</h3>
-  <div id='calendar'></div>
+  <div id="calendar"></div>
+
+  <div class="leyenda">
+    <h4>Leyenda de colores:</h4>
+    <ul>
+      <li><span style="background-color: #4CAF50;"></span> Inicio Cargas Generales</li>
+      <li><span style="background-color: #ff4d4d;"></span> Renovación Cargas Generales</li>
+      <li><span style="background-color: #ffcc00;"></span> Transporte de Pasajeros</li>
+    </ul>
+  </div>
 </main>
 
 <footer>
@@ -143,9 +175,7 @@
     const eventos = [];
 
     const parsearRango = (rangoTexto, color) => {
-      // Limpia guiones largos y espacios
       const texto = rangoTexto.replace(/[–—]/g, "-").replace(/\s+/g, " ").trim();
-
       if (!texto.includes(" - ")) return null;
 
       const [inicioTexto, finTexto] = texto.split(" - ");
@@ -159,7 +189,6 @@
       try {
         const finOriginal = new Date(`${anioF}-${mesF}-${diaF}`);
         if (isNaN(finOriginal)) throw new Error("Fecha inválida");
-
         const fin = new Date(finOriginal);
         fin.setDate(fin.getDate() + 1);
         const finISO = fin.toISOString().split("T")[0];
@@ -189,14 +218,14 @@
 
           if (data.inicio) {
             data.inicio.forEach(rango => {
-              const evento = parsearRango(rango, '#4CAF50'); // verde
+              const evento = parsearRango(rango, '#4CAF50');
               if (evento) eventos.push(evento);
             });
           }
 
           if (data.renovacion) {
             data.renovacion.forEach(rango => {
-              const evento = parsearRango(rango, '#ff4d4d'); // rojo
+              const evento = parsearRango(rango, '#ff4d4d');
               if (evento) eventos.push(evento);
             });
           }
@@ -215,7 +244,7 @@
                 start: inicio,
                 end: fin,
                 display: 'background',
-                color: '#ffcc00' // amarillo
+                color: '#ffcc00'
               });
             });
           }
