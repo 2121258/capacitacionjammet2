@@ -18,14 +18,16 @@
     header {
       background-color: #75025c;
       color: white;
-      padding: 1em 2em;
+      padding: 1em;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      position: relative;
     }
     .logo-container {
       display: flex;
       align-items: center;
+      justify-content: center;
     }
     .logo-container img {
       height: 40px;
@@ -38,8 +40,6 @@
       font-size: 1.1em;
       display: flex;
       align-items: center;
-      position: relative;
-      top: -2px;
     }
     nav {
       display: flex;
@@ -63,6 +63,9 @@
       background: none;
       border: none;
       color: white;
+      position: absolute;
+      left: 1em;
+      top: 1em;
     }
     .mobile-menu {
       display: none;
@@ -139,12 +142,20 @@
         display: block;
       }
       .logo-container {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
       }
       header {
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
+      }
+      .mobile-menu {
+        display: none;
+      }
+      .mobile-menu.active {
+        display: flex;
       }
     }
   </style>
@@ -152,20 +163,13 @@
 <body>
 
 <header>
+  <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
   <div class="logo-container">
     <a href="index.html">
       <img src="logo.jpg" alt="Jammet Logo">
       Jammet Consultora SRL
     </a>
   </div>
-  <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
-  <nav>
-    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
-    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
-    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
-    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
-    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
-  </nav>
 </header>
 <div class="mobile-menu" id="mobileMenu">
   <a href="boleta.html">🧾 Generá tu boleta de pago</a>
@@ -221,7 +225,7 @@
 <script>
   function toggleMenu() {
     const menu = document.getElementById("mobileMenu");
-    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    menu.classList.toggle("active");
   }
 
   fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
