@@ -15,6 +15,7 @@
       flex-direction: column;
       min-height: 100vh;
     }
+
     header {
       background-color: #75025c;
       color: white;
@@ -23,14 +24,17 @@
       align-items: center;
       justify-content: space-between;
     }
+
     .logo-container {
       display: flex;
       align-items: center;
     }
+
     .logo-container img {
       height: 40px;
       margin-right: 10px;
     }
+
     .logo-container a {
       color: white;
       text-decoration: none;
@@ -41,10 +45,12 @@
       position: relative;
       top: -2px;
     }
+
     nav {
       display: flex;
       gap: 20px;
     }
+
     nav a {
       color: white;
       text-decoration: none;
@@ -53,9 +59,11 @@
       display: flex;
       align-items: center;
     }
+
     nav a i {
       margin-right: 6px;
     }
+
     main {
       flex: 1;
       display: flex;
@@ -63,6 +71,7 @@
       align-items: center;
       padding: 2em;
     }
+
     form {
       background: white;
       padding: 2em;
@@ -71,10 +80,12 @@
       width: 100%;
       max-width: 500px;
     }
+
     h2 {
       color: #75025c;
       text-align: center;
     }
+
     p.subtitulo {
       text-align: center;
       font-size: 0.9em;
@@ -82,10 +93,14 @@
       margin-top: -10px;
       margin-bottom: 20px;
     }
+
     label {
       display: block;
       margin-top: 1em;
+      font-size: 0.9em;
+      font-weight: bold;
     }
+
     input, select {
       width: 100%;
       padding: 0.7em;
@@ -93,6 +108,7 @@
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+
     button {
       display: block;
       margin: 2em auto 0;
@@ -104,16 +120,98 @@
       font-size: 1em;
       cursor: pointer;
     }
+
     footer {
       text-align: center;
       padding: 1em;
       font-size: 0.9em;
       color: #aaa;
     }
+
+    /* ===== MOBILE ONLY ===== */
+
+    .mobile-header,
+    .mobile-menu {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        display: none;
+      }
+
+      .mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #75025c;
+        color: white;
+        padding: 0.7em 1em;
+      }
+
+      .menu-btn {
+        font-size: 1.6em;
+        cursor: pointer;
+      }
+
+      .mobile-title {
+        flex: 1;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1em;
+      }
+
+      .mobile-title img {
+        height: 30px;
+        display: block;
+        margin: 0 auto 4px auto;
+      }
+
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        background-color: #75025c;
+      }
+
+      .mobile-menu.active {
+        display: flex;
+      }
+
+      .mobile-menu a {
+        color: white;
+        padding: 1em;
+        text-decoration: none;
+        border-top: 1px solid #9e2a7b;
+        font-weight: bold;
+        font-size: 0.95em;
+      }
+
+      main {
+        padding: 1em;
+      }
+
+      form {
+        padding: 1.5em;
+        margin-top: 1em;
+      }
+
+      label {
+        font-size: 0.85em;
+      }
+
+      input, select {
+        font-size: 1em;
+      }
+
+      button {
+        font-size: 1em;
+      }
+    }
   </style>
 </head>
 <body>
 
+<!-- Encabezado PC -->
 <header>
   <div class="logo-container">
     <a href="index.html">
@@ -129,6 +227,22 @@
     <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
   </nav>
 </header>
+
+<!-- Encabezado móvil -->
+<div class="mobile-header">
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <div class="mobile-title">
+    <img src="logo.jpg" alt="Logo" />
+    Jammet Consultora SRL
+  </div>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
+  <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+  <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+  <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+  <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
+</div>
 
 <main>
   <form id="formulario" enctype="multipart/form-data">
@@ -171,6 +285,10 @@
 </footer>
 
 <script>
+  function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("active");
+  }
+
   fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
     .then(res => res.json())
     .then(data => {
@@ -207,7 +325,6 @@
     .catch(error => {
       alert("Error de red al enviar el formulario.");
     });
-  });
 </script>
 
 </body>
