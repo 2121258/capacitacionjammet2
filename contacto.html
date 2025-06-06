@@ -2,102 +2,124 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacto - Jammet Consultora SRL</title>
-  <link rel="stylesheet" href="estilos.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: "Segoe UI", sans-serif;
       background-color: #f9f9f9;
-    }
-
-    header {
-      background-color: #800061;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-    }
-
-    header img {
-      height: 45px;
-    }
-
-    nav ul {
-      list-style: none;
       margin: 0;
       padding: 0;
       display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #75025c;
+      color: white;
+      padding: 1em 2em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-container {
+      display: flex;
       align-items: center;
     }
-
-    nav li {
-      margin-left: 20px;
+    .logo-container img {
+      height: 40px;
+      margin-right: 10px;
     }
-
+    .logo-container a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+    }
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
+      font-size: 0.95em;
     }
-
+    nav a i {
+      margin-right: 6px;
+    }
     main {
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 0 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3em 2em;
     }
-
-    h1 {
-      color: #800061;
-      margin-bottom: 20px;
+    h2 {
+      color: #75025c;
+      margin-bottom: 1em;
+      font-size: 1.8em;
     }
-
-    .persona {
-      margin-bottom: 25px;
+    .contacto {
+      font-size: 1.2em;
+      line-height: 1.8;
+      text-align: left;
+      max-width: 500px;
     }
-
-    .persona strong {
-      display: block;
-      font-size: 18px;
-      color: #800061;
+    .contacto b {
+      color: #75025c;
     }
-
+    .contacto a {
+      color: #333;
+      text-decoration: none;
+    }
+    .contacto a:hover {
+      text-decoration: underline;
+    }
     footer {
       text-align: center;
-      margin-top: 60px;
-      color: #777;
+      padding: 1em;
+      font-size: 0.9em;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="logo-jammet.png" alt="Jammet Consultora SRL" />
-    <nav>
-      <ul>
-        <li><a href="certificado.html">Descargá tu certificado</a></li>
-        <li><a href="quienes.html">¿Quiénes somos?</a></li>
-        <li><a href="ubicacion.html">Ubicación</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <h1>Contacto</h1>
-    <div class="persona">
-      <strong>Juliana Jammet</strong>
-      <p>capacitacion@jammetconsultora.com.ar</p>
-      <p>Tel: 02974064006</p>
-    </div>
-    <div class="persona">
-      <strong>Brian Jammet</strong>
-      <p>habilitaciones@jammetconsultora.com.ar</p>
-      <p>Tel: 02974064006</p>
-    </div>
-  </main>
+<header>
+  <div class="logo-container">
+    <a href="index.html">
+      <img src="logo.jpg" alt="Jammet Logo">
+      Jammet Consultora SRL
+    </a>
+  </div>
+  <nav>
+    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
+    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
+  </nav>
+</header>
 
-  <footer>
-    © 2025 Jammet Consultora SRL
-  </footer>
+<main>
+  <h2>Contacto</h2>
+  <div class="contacto">
+    <p><b>Juliana Jammet</b><br>
+    📧 <a href="mailto:capacitacion@jammetconsultora.com.ar">capacitacion@jammetconsultora.com.ar</a><br>
+    📞 <a href="tel:02974064006">0297 406 4006</a></p>
+
+    <p><b>Brian Jammet</b><br>
+    📧 <a href="mailto:habilitaciones@jammetconsultora.com.ar">habilitaciones@jammetconsultora.com.ar</a><br>
+    📞 <a href="tel:02974064006">0297 406 4006</a></p>
+  </div>
+</main>
+
+<footer>
+  © 2025 Jammet Consultora SRL
+</footer>
+
 </body>
 </html>
