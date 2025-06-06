@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Inicio Cargas Generales</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />More actions
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
@@ -18,16 +18,14 @@
     header {
       background-color: #75025c;
       color: white;
-      padding: 1em;
+      padding: 1em 2em;
       display: flex;
       align-items: center;
-      justify-content: center;
-      position: relative;
+      justify-content: space-between;
     }
     .logo-container {
       display: flex;
       align-items: center;
-      justify-content: center;
     }
     .logo-container img {
       height: 40px;
@@ -40,6 +38,8 @@
       font-size: 1.1em;
       display: flex;
       align-items: center;
+      position: relative;
+      top: -2px;
     }
     nav {
       display: flex;
@@ -55,29 +55,6 @@
     }
     nav a i {
       margin-right: 6px;
-    }
-    .menu-toggle {
-      display: none;
-      font-size: 1.5em;
-      cursor: pointer;
-      background: none;
-      border: none;
-      color: white;
-      position: absolute;
-      left: 1em;
-      top: 1em;
-    }
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      background-color: #75025c;
-      padding: 1em;
-    }
-    .mobile-menu a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 0.5em 0;
     }
     main {
       flex: 1;
@@ -97,6 +74,8 @@
     h2 {
       color: #75025c;
       text-align: center;
+      font-size: 2em;
+      margin-bottom: 0.5em;
     }
     p.subtitulo {
       text-align: center;
@@ -134,67 +113,108 @@
       color: #aaa;
     }
 
+    /* Estilos móviles */
     @media (max-width: 768px) {
-      nav {
+      header {
         display: none;
       }
-      .menu-toggle {
-        display: block;
-      }
-      .logo-container {
-        flex-direction: row;
-        justify-content: center;
-        width: 100%;
-      }
-      header {
-        flex-direction: row;
-        justify-content: center;
+      main {
+      .mobile-header {
+        background-color: #75025c;
+        color: white;
+        display: flex;
         align-items: center;
+        justify-content: center;
+        padding: 1em;
+        position: relative;
+      }
+      .mobile-header .menu-toggle {
+        position: absolute;
+        left: 1em;
+        font-size: 1.5em;
+        cursor: pointer;
+      }
+      .mobile-header .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .mobile-header img {
+        height: 30px;
       }
       .mobile-menu {
         display: none;
+        flex-direction: column;
+        background-color: #75025c;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
       }
-      .mobile-menu.active {
+      .mobile-menu a {
+        color: white;
+        padding: 1em;
+        text-decoration: none;
+        border-bottom: 1px solid #fff3;
+        font-weight: bold;
+      }
+      .mobile-menu.show {
         display: flex;
       }
-    }
-  </style>
+      form {
+        padding: 1em;
+@@ -156,103 +197,104 @@
 </head>
 <body>
 
 <header>
-  <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
   <div class="logo-container">
     <a href="index.html">
       <img src="logo.jpg" alt="Jammet Logo">
       Jammet Consultora SRL
     </a>
+<div class="mobile-header">
+  <div class="menu-toggle" onclick="document.getElementById('mobileMenu').classList.toggle('show')">
+    <i class="fas fa-bars"></i>
   </div>
+  <div class="logo">
+    <img src="logo.jpg" alt="Logo" />
+    <span>Jammet Consultora SRL</span>
+  </div>
+  <nav>
+    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
+    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
+  </nav>
 </header>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="boleta.html">🧾 Generá tu boleta de pago</a>
-  <a href="certificado.html">📄 Descargá tu certificado</a>
-  <a href="quienes.html">ℹ️ ¿Quiénes somos?</a>
-  <a href="ubicacion.html">📍 Ubicación</a>
-  <a href="contacto.html">✉️ Contacto</a>
+</div>
+<div id="mobileMenu" class="mobile-menu">
+  <a href="boleta.html">Generá tu boleta de pago</a>
+  <a href="certificado.html">Descargá tu certificado</a>
+  <a href="quienes.html">¿Quiénes somos?</a>
+  <a href="ubicacion.html">Ubicación</a>
+  <a href="contacto.html">Contacto</a>
 </div>
 
 <main>
   <form id="formulario" enctype="multipart/form-data">
-    <h2>Inicio Cargas Generales</h2>
-    <p class="subtitulo">El curso dura dos días hábiles</p>
+    <h2>INICIO CARGAS GENERALES</h2>
+    <p class="subtitulo">Datos del asistente</p>
 
     <label>Apellido</label>
-    <input type="text" name="apellido" placeholder="Obligatorio" required>
+    <input type="text" name="apellido" required>
 
     <label>Nombre</label>
-    <input type="text" name="nombre" placeholder="Obligatorio" required>
+    <input type="text" name="nombre" required>
 
     <label>DNI</label>
-    <input type="text" name="dni" placeholder="Obligatorio" required>
+    <input type="text" name="dni" required>
 
     <label>Email</label>
-    <input type="email" name="email" placeholder="Obligatorio" required>
+    <input type="email" name="email" required>
 
     <label>Fecha del curso</label>
     <select name="fechaCurso" id="fechaCurso" required></select>
@@ -223,11 +243,6 @@
 </footer>
 
 <script>
-  function toggleMenu() {
-    const menu = document.getElementById("mobileMenu");
-    menu.classList.toggle("active");
-  }
-
   fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
     .then(res => res.json())
     .then(data => {
