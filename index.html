@@ -146,22 +146,27 @@
       .mobile-title {
         flex: 1;
         display: flex;
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
-      }
-
-      .logo-wrapper {
         text-align: center;
       }
 
+      .logo-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
       .logo-wrapper img {
-        height: 30px;
-        display: block;
-        margin: 0 auto 4px auto;
+        height: 35px;
+        margin-bottom: 4px;
       }
 
       .logo-wrapper div {
-        font-weight: bold;
         font-size: 1em;
+        font-weight: bold;
+        line-height: 1;
       }
 
       .mobile-menu {
