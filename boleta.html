@@ -139,13 +139,13 @@
 
   <form id="formulario">
     <label>Nombre:</label>
-    <input type="text" name="nombre" placeholder="Obligatorio" required>
+    <input type="text" name="nombre" required placeholder="Obligatorio">
 
     <label>Apellido:</label>
-    <input type="text" name="apellido" placeholder="Obligatorio" required>
+    <input type="text" name="apellido" required placeholder="Obligatorio">
 
     <label>DNI:</label>
-    <input type="text" name="dni" placeholder="Obligatorio" required>
+    <input type="text" name="dni" required placeholder="Obligatorio">
 
     <label>Tipo de curso:</label>
     <select name="curso" id="curso" required>
@@ -197,30 +197,34 @@
   document.getElementById("formulario").addEventListener("submit", async function (e) {
     e.preventDefault();
     const form = e.target;
-    const datos = new URLSearchParams();
-    datos.append("nombre", form.nombre.value.trim());
-    datos.append("apellido", form.apellido.value.trim());
-    datos.append("dni", form.dni.value.trim());
-    datos.append("curso", form.curso.value);
-    datos.append("monto", valoresCursos[form.curso.value] || 0);
+    const cursoSeleccionado = form.curso.value;
+    const montoFinal = `$${(valoresCursos[cursoSeleccionado] || 0).toFixed(2)}`;
+
+    const datos = {
+      nombre: form.nombre.value.trim(),
+      apellido: form.apellido.value.trim(),
+      dni: form.dni.value.trim(),
+      curso: cursoSeleccionado,
+      monto: montoFinal
+    };
 
     try {
       const res = await fetch(urlGenerarBoleta, {
         method: "POST",
-        body: datos
+        body: JSON.stringify(datos),
+        headers: {
+          "Content-Type": "application/json"
+        }
       });
 
-      const texto = await res.text();
-      const resultado = JSON.parse(texto);
-      console.log(resultado);
+      const resultado = await res.json();
 
       if (resultado.link) {
         window.open(resultado.link, "_blank");
       } else {
-        alert("Error: no se pudo generar la boleta.\n" + (resultado.mensaje || ""));
+        alert("Error: no se pudo generar la boleta.");
       }
     } catch (error) {
-      console.error(error);
       alert("Ocurrió un error al generar la boleta.");
     }
   });
