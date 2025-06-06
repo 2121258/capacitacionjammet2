@@ -128,7 +128,6 @@
       color: #aaa;
     }
 
-    /* ===== MOBILE ONLY ===== */
     .mobile-header,
     .mobile-menu {
       display: none;
@@ -229,7 +228,7 @@
 
 <!-- Encabezado móvil -->
 <div class="mobile-header">
-  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <div class="menu-btn" id="menuToggle">☰</div>
   <div class="mobile-title">
     <img src="logo.jpg" alt="Logo" />
     Jammet Consultora SRL
@@ -284,51 +283,51 @@
 </footer>
 
 <script>
-  function toggleMenu() {
+  // Activar botón hamburguesa con addEventListener
+  document.addEventListener("DOMContentLoaded", function() {
+    const toggle = document.getElementById("menuToggle");
     const menu = document.getElementById("mobileMenu");
-    if (menu.classList.contains("active")) {
-      menu.classList.remove("active");
-    } else {
-      menu.classList.add("active");
-    }
-  }
 
-  fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
-    .then(res => res.json())
-    .then(data => {
-      const select = document.getElementById("fechaCurso");
-      const fechas = data.inicio || [];
-      fechas.forEach(fecha => {
-        const option = document.createElement("option");
-        option.value = fecha;
-        option.textContent = fecha;
-        select.appendChild(option);
+    toggle.addEventListener("click", function() {
+      menu.classList.toggle("active");
+    });
+
+    // Cargar fechas
+    fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
+      .then(res => res.json())
+      .then(data => {
+        const select = document.getElementById("fechaCurso");
+        const fechas = data.inicio || [];
+        fechas.forEach(fecha => {
+          const option = document.createElement("option");
+          option.value = fecha;
+          option.textContent = fecha;
+          select.appendChild(option);
+        });
+      })
+      .catch(err => {
+        console.error("Error al cargar fechas:", err);
+        alert("No se pudieron cargar las fechas del curso. Intente más tarde.");
       });
-    })
-    .catch(err => {
-      console.error("Error al cargar fechas:", err);
-      alert("No se pudieron cargar las fechas del curso. Intente más tarde.");
-    });
 
-  document.getElementById("formulario").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-
-    fetch("https://script.google.com/macros/s/AKfycbw-yspxJEZ0j1U4yewWa2_300CFpFRhDL30yUKTrztbHlqDGfSK_Qbn9wRWNRFhJn_EKA/exec", {
-      method: "POST",
-      body: data,
-    })
-    .then(response => {
-      if (response.ok) {
-        window.location.href = "reserva_inicio.html";
-      } else {
-        alert("Error al enviar el formulario.");
-      }
-    })
-    .catch(error => {
-      alert("Error de red al enviar el formulario.");
+    // Enviar formulario
+    document.getElementById("formulario").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const data = new FormData(this);
+      fetch("https://script.google.com/macros/s/AKfycbw-yspxJEZ0j1U4yewWa2_300CFpFRhDL30yUKTrztbHlqDGfSK_Qbn9wRWNRFhJn_EKA/exec", {
+        method: "POST",
+        body: data,
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = "reserva_inicio.html";
+        } else {
+          alert("Error al enviar el formulario.");
+        }
+      })
+      .catch(() => alert("Error de red al enviar el formulario."));
     });
+  });
 </script>
 
 </body>
