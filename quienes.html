@@ -2,94 +2,127 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>¿Quiénes somos? - Jammet Consultora SRL</title>
-  <link rel="stylesheet" href="estilos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: "Segoe UI", sans-serif;
       background-color: #f9f9f9;
-    }
-
-    header {
-      background-color: #800061;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-    }
-
-    header img {
-      height: 45px;
-    }
-
-    nav ul {
-      list-style: none;
       margin: 0;
       padding: 0;
       display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #75025c;
+      color: white;
+      padding: 1em 2em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-container {
+      display: flex;
       align-items: center;
     }
 
-    nav li {
-      margin-left: 20px;
+    .logo-container img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .logo-container a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      position: relative;
+      top: -2px;
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
     }
 
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+    }
+
+    nav a i {
+      margin-right: 6px;
     }
 
     main {
+      flex: 1;
+      padding: 2em;
       max-width: 900px;
-      margin: 60px auto;
-      padding: 0 20px;
+      margin: auto;
     }
 
-    h1 {
-      color: #800061;
-      margin-bottom: 20px;
+    h2 {
+      text-align: center;
+      color: #75025c;
+      margin-bottom: 1em;
     }
 
     p {
       line-height: 1.6;
+      font-size: 1.05em;
+      color: #444;
+      text-align: justify;
     }
 
     footer {
       text-align: center;
-      margin-top: 60px;
-      color: #777;
+      padding: 1em;
+      font-size: 0.9em;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="logo-jammet.png" alt="Jammet Consultora SRL" />
-    <nav>
-      <ul>
-        <li><a href="certificado.html">Descargá tu certificado</a></li>
-        <li><a href="ubicacion.html">Ubicación</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <h1>¿Quiénes somos?</h1>
-    <p>
-      En Jammet Consultora SRL nos especializamos en brindar capacitaciones profesionales 
-      en transporte de cargas generales y peligrosas, así como también en seguridad vial y normativa vigente.
-    </p>
-    <p>
-      Nuestro equipo está conformado por instructores habilitados por organismos oficiales y con amplia experiencia 
-      en el rubro. Acompañamos a empresas y conductores en su proceso de formación y habilitación con seriedad y compromiso.
-    </p>
-  </main>
+<header>
+  <div class="logo-container">
+    <a href="index.html">
+      <img src="logo.jpg" alt="Jammet Logo">
+      Jammet Consultora SRL
+    </a>
+  </div>
+  <nav>
+    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
+    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
+  </nav>
+</header>
 
-  <footer>
-    © 2025 Jammet Consultora SRL
-  </footer>
+<main>
+  <h2>¿Quiénes somos?</h2>
+  <p>
+    En <strong>Jammet Consultora SRL</strong> nos especializamos en brindar capacitaciones profesionales para el transporte de cargas generales y de pasajeros. Nuestra misión es garantizar que cada conductor cuente con las herramientas necesarias para operar con responsabilidad y conocimiento actualizado, cumpliendo con las normativas vigentes.
+  </p>
+  <p>
+    Contamos con un equipo de instructores certificados y una amplia trayectoria en el sector, ofreciendo cursos presenciales y virtuales con el respaldo de las autoridades competentes.
+  </p>
+</main>
+
+<footer>
+  © 2025 Jammet Consultora SRL
+</footer>
+
 </body>
 </html>
