@@ -147,44 +147,28 @@
       initialView: 'dayGridMonth',
       locale: 'es',
       height: 600,
-      events: [],
+      events: [
+        {
+          start: '2025-06-10',
+          end: '2025-06-13',
+          display: 'background',
+          backgroundColor: '#c26ba0'
+        },
+        {
+          start: '2025-06-14',
+          end: '2025-06-15',
+          display: 'background',
+          backgroundColor: '#7a52bd'
+        },
+        {
+          start: '2025-06-18',
+          end: '2025-06-19',
+          display: 'background',
+          backgroundColor: '#a2b2d6'
+        }
+      ]
     });
-
-    fetch('https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec')
-      .then(response => response.json())
-      .then(data => {
-        const eventos = [];
-
-        data.inicio.forEach(fecha => {
-          eventos.push({
-            start: fecha.start,
-            end: fecha.end,
-            display: 'background',
-            backgroundColor: '#c26ba0'
-          });
-        });
-
-        data.renovacion.forEach(fecha => {
-          eventos.push({
-            start: fecha.start,
-            end: fecha.end,
-            display: 'background',
-            backgroundColor: '#7a52bd'
-          });
-        });
-
-        data.pasajeros.forEach(fecha => {
-          eventos.push({
-            start: fecha.start,
-            end: fecha.end,
-            display: 'background',
-            backgroundColor: '#a2b2d6'
-          });
-        });
-
-        calendar.addEventSource(eventos);
-        calendar.render();
-      });
+    calendar.render();
   });
 </script>
 
