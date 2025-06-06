@@ -113,12 +113,53 @@
       color: #aaa;
     }
 
+    /* Estilos móviles */
     @media (max-width: 768px) {
       header {
         display: none;
       }
-      main {
+      .mobile-header {
+        background-color: #75025c;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 1em;
+        position: relative;
+      }
+      .mobile-header .menu-toggle {
+        position: absolute;
+        left: 1em;
+        font-size: 1.5em;
+        cursor: pointer;
+      }
+      .mobile-header .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .mobile-header img {
+        height: 30px;
+      }
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        background-color: #75025c;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .mobile-menu a {
+        color: white;
+        padding: 1em;
+        text-decoration: none;
+        border-bottom: 1px solid #fff3;
+        font-weight: bold;
+      }
+      .mobile-menu.show {
+        display: flex;
       }
       form {
         padding: 1em;
@@ -156,21 +197,22 @@
 </head>
 <body>
 
-<header>
-  <div class="logo-container">
-    <a href="index.html">
-      <img src="logo.jpg" alt="Jammet Logo">
-      Jammet Consultora SRL
-    </a>
+<div class="mobile-header">
+  <div class="menu-toggle" onclick="document.getElementById('mobileMenu').classList.toggle('show')">
+    <i class="fas fa-bars"></i>
   </div>
-  <nav>
-    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
-    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
-    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
-    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
-    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
-  </nav>
-</header>
+  <div class="logo">
+    <img src="logo.jpg" alt="Logo" />
+    <span>Jammet Consultora SRL</span>
+  </div>
+</div>
+<div id="mobileMenu" class="mobile-menu">
+  <a href="boleta.html">Generá tu boleta de pago</a>
+  <a href="certificado.html">Descargá tu certificado</a>
+  <a href="quienes.html">¿Quiénes somos?</a>
+  <a href="ubicacion.html">Ubicación</a>
+  <a href="contacto.html">Contacto</a>
+</div>
 
 <main>
   <form id="formulario" enctype="multipart/form-data">
