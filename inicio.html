@@ -129,7 +129,6 @@
     }
 
     /* ===== MOBILE ONLY ===== */
-
     .mobile-header,
     .mobile-menu {
       display: none;
@@ -286,7 +285,8 @@
 
 <script>
   function toggleMenu() {
-    document.getElementById("mobileMenu").classList.toggle("active");
+    const menu = document.getElementById("mobileMenu");
+    menu.classList.toggle("active");
   }
 
   fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
@@ -329,3 +329,4 @@
 
 </body>
 </html>
+
