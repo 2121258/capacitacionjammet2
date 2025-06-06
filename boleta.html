@@ -250,7 +250,7 @@
 <main>
   <h2>Generar Boleta de Pago</h2>
 
-  <form id="formulario">
+  <form id="formulario" target="_blank">
     <label>Nombre:</label>
     <input type="text" name="nombre" required placeholder="Obligatorio">
 
@@ -334,7 +334,13 @@
       const resultado = JSON.parse(texto);
 
       if (resultado.link) {
-        window.open(resultado.link, "_blank");
+        const a = document.createElement("a");
+        a.href = resultado.link;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
       } else {
         alert("Error: no se pudo generar la boleta.");
       }
@@ -348,7 +354,6 @@
 
   window.onload = cargarCursos;
 
-  // Menú móvil
   const toggle = document.getElementById("menuToggle");
   const menu = document.getElementById("mobileMenu");
 
@@ -357,10 +362,7 @@
   });
 
   document.addEventListener("click", function (e) {
-    if (
-      !menu.contains(e.target) &&
-      !toggle.contains(e.target)
-    ) {
+    if (!menu.contains(e.target) && !toggle.contains(e.target)) {
       menu.classList.remove("active");
     }
   });
