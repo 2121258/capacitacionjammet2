@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ubicación - Jammet Consultora</title>
+  <title>Ubicación</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <style>
     body {
-      margin: 0;
       font-family: "Segoe UI", sans-serif;
       background-color: #f9f9f9;
-      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
-
     header {
       background-color: #75025c;
       color: white;
@@ -20,73 +22,55 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: nowrap;
     }
-
     .logo-container {
       display: flex;
       align-items: center;
     }
-
     .logo-container img {
       height: 40px;
       margin-right: 10px;
     }
-
     .logo-container a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       font-size: 1.1em;
-      display: flex;
-      align-items: center;
     }
-
     nav {
       display: flex;
       gap: 20px;
     }
-
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       font-size: 0.95em;
-      display: flex;
-      align-items: center;
     }
-
     nav a i {
       margin-right: 6px;
     }
-
     main {
-      max-width: 900px;
-      margin: 2em auto;
-      background: white;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 2em;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-
     h2 {
       color: #75025c;
-      text-align: center;
       margin-bottom: 1em;
     }
-
     iframe {
-      width: 100%;
-      height: 500px;
-      border: none;
-      border-radius: 8px;
+      border: 0;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-
     footer {
       text-align: center;
-      margin: 3em 0 1em 0;
+      padding: 1em;
+      font-size: 0.9em;
       color: #aaa;
-      font-size: 0.85em;
     }
   </style>
 </head>
@@ -109,8 +93,15 @@
 </header>
 
 <main>
-  <h2>¿Dónde estamos?</h2>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <h2>¿Dónde podés encontrarnos?</h2>
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3110.5744112265996!2d-63.00868552364877!3d-40.80968973115544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959d3201b26cd385%3A0xc60bacef6797bcf2!2sAv.%20Pres.%20Gral.%20Julio%20A.%20Roca%20121%2C%20Viedma%2C%20R%C3%ADo%20Negro!5e0!3m2!1ses-419!2sar!4v1717680017174!5m2!1ses-419!2sar"
+    width="600"
+    height="450"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
 </main>
 
 <footer>
