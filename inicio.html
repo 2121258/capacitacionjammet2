@@ -286,7 +286,11 @@
 <script>
   function toggleMenu() {
     const menu = document.getElementById("mobileMenu");
-    menu.classList.toggle("active");
+    if (menu.classList.contains("active")) {
+      menu.classList.remove("active");
+    } else {
+      menu.classList.add("active");
+    }
   }
 
   fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
@@ -329,4 +333,3 @@
 
 </body>
 </html>
-
