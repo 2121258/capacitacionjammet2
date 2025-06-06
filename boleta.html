@@ -165,7 +165,7 @@
 
 <script>
   const urlValores = "https://script.google.com/macros/s/AKfycbzRBs-78TsqbaM6rRo6PI36owp50rfqm9o7Wk4dwT3Tclef_8Ta6NSvPORBPlNUY_89nQ/exec";
-  const urlGenerarBoleta = "https://script.google.com/macros/s/AKfycbzqntaN1i_Vq0LEzLPF9zOluXutDT42tPN3SAx9SS-himloKDs654M0buPfpRFZPjQw/exec";
+  const urlGenerarBoleta = "https://script.google.com/macros/s/AKfycbwGpiZsAVYlPFzF5Ykqprm37UpUavjZ2Ecg_1ccj6LsV1KkCsJZwtWTQrBxTedR0WYu/exec";
 
   let valoresCursos = {};
 
@@ -220,7 +220,7 @@
       if (resultado.link) {
         window.open(resultado.link, "_blank");
       } else {
-        alert("Error: no se pudo generar la boleta.");
+        alert("Error: no se pudo generar la boleta.\n" + (resultado.mensaje || "Sin mensaje del servidor."));
       }
     } catch (error) {
       console.error(error);
