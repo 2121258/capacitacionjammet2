@@ -8,203 +8,207 @@
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
+      background-color: #f9f9f9;
       margin: 0;
       padding: 0;
-      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
-
     header {
       background-color: #75025c;
       color: white;
+      padding: 1em 2em;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 0.5em 1em;
+      justify-content: space-between;
     }
-
     .logo-container {
       display: flex;
       align-items: center;
     }
-
     .logo-container img {
       height: 40px;
       margin-right: 10px;
     }
-
-    .header-buttons {
-      display: flex;
-      gap: 10px;
-    }
-
-    .header-buttons a {
+    .logo-container a {
       color: white;
       text-decoration: none;
-      font-size: 0.9em;
-      background-color: #9e2a7b;
-      padding: 6px 12px;
-      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+      position: relative;
+      top: -2px;
     }
-
-    h1 {
-      text-align: center;
-      color: #75025c;
-      margin-top: 1em;
+    nav {
+      display: flex;
+      gap: 20px;
     }
-
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+    }
+    nav a i {
+      margin-right: 6px;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2em;
+    }
     form {
-      max-width: 500px;
-      margin: auto;
       background: white;
       padding: 2em;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
     }
-
+    h2 {
+      color: #75025c;
+      text-align: center;
+    }
+    p.subtitulo {
+      text-align: center;
+      font-size: 0.9em;
+      color: #555;
+      margin-top: -10px;
+      margin-bottom: 20px;
+    }
     label {
       display: block;
-      margin-bottom: 0.5em;
-      font-weight: bold;
       margin-top: 1em;
-      text-transform: uppercase;
-      font-size: 0.9em;
     }
-
     input, select {
       width: 100%;
-      padding: 10px;
-      border-radius: 5px;
+      padding: 0.7em;
+      margin-top: 0.3em;
       border: 1px solid #ccc;
+      border-radius: 4px;
     }
-
     button {
-      background-color: #75025c;
+      display: block;
+      margin: 2em auto 0;
+      padding: 0.7em 2em;
+      background-color: #b05fa7;
       color: white;
       border: none;
-      padding: 10px;
-      width: 100%;
       border-radius: 5px;
       font-size: 1em;
-      margin-top: 1.5em;
       cursor: pointer;
     }
-
-    .mobile-header {
-      display: none;
-      background-color: #75025c;
-      color: white;
-      padding: 1em;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .mobile-header img {
-      height: 30px;
-    }
-
-    .mobile-title {
-      font-weight: bold;
+    footer {
       text-align: center;
-      flex-grow: 1;
-    }
-
-    .hamburger {
-      font-size: 1.5em;
-      cursor: pointer;
-    }
-
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      background-color: #75025c;
-    }
-
-    .mobile-menu a {
-      color: white;
       padding: 1em;
-      text-decoration: none;
-      border-top: 1px solid #9e2a7b;
-    }
-
-    @media (max-width: 768px) {
-      header {
-        display: none;
-      }
-
-      .mobile-header {
-        display: flex;
-      }
-
-      .header-buttons {
-        display: none;
-      }
-
-      .mobile-menu.active {
-        display: flex;
-      }
+      font-size: 0.9em;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
 
-  <!-- Encabezado PC -->
-  <header>
-    <div class="logo-container">
-      <img src="logo.jpg" alt="Logo Jammet" />
-      <span>Jammet Consultora SRL</span>
-    </div>
-    <div class="header-buttons">
-      <a href="boleta.html">🧾 Generá tu boleta de pago</a>
-      <a href="certificado.html">📄 Descargá tu certificado</a>
-    </div>
-  </header>
-
-  <!-- Encabezado Móvil -->
-  <div class="mobile-header">
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
-    <div class="mobile-title">
-      <img src="logo.jpg" alt="Logo Jammet" /> Jammet Consultora SRL
-    </div>
+<header>
+  <div class="logo-container">
+    <a href="index.html">
+      <img src="logo.jpg" alt="Jammet Logo">
+      Jammet Consultora SRL
+    </a>
   </div>
-  <div id="mobileMenu" class="mobile-menu">
-    <a href="index.html">🏠 Inicio</a>
-    <a href="inicio.html">📋 Inscripción Inicio</a>
-    <a href="renovacion.html">♻️ Renovación</a>
-    <a href="pasajeros.html">🚌 Pasajeros</a>
-    <a href="boleta.html">🧾 Boleta de pago</a>
-    <a href="certificado.html">📄 Certificado</a>
-    <a href="ubicacion.html">📍 Ubicación</a>
-  </div>
+  <nav>
+    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
+    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
+  </nav>
+</header>
 
-  <h1>Inicio Cargas Generales</h1>
-  <p style="text-align:center;">El curso dura dos días hábiles</p>
+<main>
+  <form id="formulario" enctype="multipart/form-data">
+    <h2>Inicio Cargas Generales</h2>
+    <p class="subtitulo">El curso dura dos días hábiles</p>
 
-  <form id="formulario">
-    <label for="nombre">Nombre</label>
-    <input type="text" id="nombre" name="nombre" required placeholder="Ingresá tu nombre" />
+    <label>Apellido</label>
+    <input type="text" name="apellido" placeholder="Obligatorio" required>
 
-    <label for="apellido">Apellido</label>
-    <input type="text" id="apellido" name="apellido" required placeholder="Ingresá tu apellido" />
+    <label>Nombre</label>
+    <input type="text" name="nombre" placeholder="Obligatorio" required>
 
-    <label for="dni">DNI</label>
-    <input type="text" id="dni" name="dni" required placeholder="°Ingresa tu DNI°" />
+    <label>DNI</label>
+    <input type="text" name="dni" placeholder="°Ingresa tu DNI°" required>
 
-    <label for="fecha">Fecha del Curso</label>
-    <select id="fecha" name="fecha" required>
-      <option value="">Seleccioná una fecha</option>
-    </select>
+    <label>Fecha del curso</label>
+    <select name="fechaCurso" id="fechaCurso" required></select>
 
-    <label for="archivo">Subí tu documentación</label>
-    <input type="file" id="archivo" name="archivo" required />
+    <label>DNI Frente</label>
+    <input type="file" name="dniFrente" accept=".jpg,.jpeg,.pdf" required>
 
-    <button type="submit">Enviar inscripción</button>
+    <label>DNI Dorso</label>
+    <input type="file" name="dniDorso" accept=".jpg,.jpeg,.pdf" required>
+
+    <label>Licencia Frente</label>
+    <input type="file" name="licenciaFrente" accept=".jpg,.jpeg,.pdf" required>
+
+    <label>Licencia Dorso</label>
+    <input type="file" name="licenciaDorso" accept=".jpg,.jpeg,.pdf" required>
+
+    <label>Comprobante de pago (opcional)</label>
+    <input type="file" name="comprobante" accept=".jpg,.jpeg,.pdf">
+
+    <button type="submit">Enviar</button>
   </form>
+</main>
 
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('active');
-    }
+<footer>
+  © 2025 Jammet Consultora SRL
+</footer>
 
-    // Cargar fechas desde Apps Script
-    fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQ
+<script>
+  fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
+    .then(res => res.json())
+    .then(data => {
+      const select = document.getElementById("fechaCurso");
+      const fechas = data.inicio || [];
+      fechas.forEach(fecha => {
+        const option = document.createElement("option");
+        option.value = fecha;
+        option.textContent = fecha;
+        select.appendChild(option);
+      });
+    })
+    .catch(err => {
+      console.error("Error al cargar fechas:", err);
+      alert("No se pudieron cargar las fechas del curso. Intente más tarde.");
+    });
+
+  document.getElementById("formulario").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+
+    fetch("https://script.google.com/macros/s/AKfycbw-yspxJEZ0j1U4yewWa2_300CFpFRhDL30yUKTrztbHlqDGfSK_Qbn9wRWNRFhJn_EKA/exec", {
+      method: "POST",
+      body: data,
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = "reserva_inicio.html";
+      } else {
+        alert("Error al enviar el formulario.");
+      }
+    })
+    .catch(error => {
+      alert("Error de red al enviar el formulario.");
+    });
+  });
+</script>
+
+</body>
+</html>
