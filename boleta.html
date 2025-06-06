@@ -139,16 +139,13 @@
 
   <form id="formulario">
     <label>Nombre:</label>
-    <input type="text" name="nombre" required>
+    <input type="text" name="nombre" placeholder="Ej: Juliana" required>
 
     <label>Apellido:</label>
-    <input type="text" name="apellido" required>
+    <input type="text" name="apellido" placeholder="Ej: Jammet" required>
 
     <label>DNI:</label>
-    <input type="text" name="dni" required>
-
-    <label>Email:</label>
-    <input type="email" name="email" required>
+    <input type="text" name="dni" placeholder="Ej: 12345678" required>
 
     <label>Tipo de curso:</label>
     <select name="curso" id="curso" required>
@@ -204,7 +201,6 @@
       nombre: form.nombre.value.trim(),
       apellido: form.apellido.value.trim(),
       dni: form.dni.value.trim(),
-      email: form.email.value.trim(),
       curso: form.curso.value,
       monto: valoresCursos[form.curso.value] || 0
     };
