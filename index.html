@@ -145,15 +145,23 @@
 
       .mobile-title {
         flex: 1;
-        text-align: center;
-        font-weight: bold;
-        font-size: 1em;
+        display: flex;
+        justify-content: center;
       }
 
-      .mobile-title img {
+      .logo-wrapper {
+        text-align: center;
+      }
+
+      .logo-wrapper img {
         height: 30px;
         display: block;
         margin: 0 auto 4px auto;
+      }
+
+      .logo-wrapper div {
+        font-weight: bold;
+        font-size: 1em;
       }
 
       .mobile-menu {
@@ -228,8 +236,10 @@
 <div class="mobile-header">
   <div class="menu-btn" id="menuToggle">☰</div>
   <div class="mobile-title">
-    <img src="logo.jpg" alt="Logo" />
-    Jammet Consultora SRL
+    <div class="logo-wrapper">
+      <img src="logo.jpg" alt="Logo" />
+      <div>Jammet Consultora SRL</div>
+    </div>
   </div>
 </div>
 <div class="mobile-menu" id="mobileMenu">
@@ -267,7 +277,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const toggle = document.getElementById("menuToggle");
