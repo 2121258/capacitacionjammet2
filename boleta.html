@@ -114,6 +114,11 @@
       cursor: pointer;
     }
 
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     footer {
       text-align: center;
       margin-top: 3em;
@@ -161,7 +166,7 @@
     <div id="monto-visual" class="monto-visual"></div>
     <input type="hidden" name="monto" id="monto">
 
-    <button type="submit">Generar boleta</button>
+    <button type="submit" id="generarBtn">Generar boleta</button>
   </form>
 </main>
 
@@ -206,6 +211,10 @@
   document.getElementById("formulario").addEventListener("submit", async function (e) {
     e.preventDefault();
     const form = e.target;
+    const boton = document.getElementById("generarBtn");
+    boton.disabled = true;
+    boton.textContent = "Generando boleta...";
+
     const datos = new URLSearchParams();
     datos.append("nombre", form.nombre.value.trim());
     datos.append("apellido", form.apellido.value.trim());
@@ -229,6 +238,9 @@
       }
     } catch (error) {
       alert("Ocurrió un error al generar la boleta.");
+    } finally {
+      boton.disabled = false;
+      boton.textContent = "Generar boleta";
     }
   });
 
