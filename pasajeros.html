@@ -56,6 +56,89 @@
     nav a i {
       margin-right: 6px;
     }
+
+    .mobile-header {
+      display: none;
+      background-color: #75025c;
+      color: white;
+      padding: 1em;
+      align-items: center;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .menu-btn {
+      font-size: 1.5em;
+      cursor: pointer;
+      margin-right: 1em;
+    }
+
+    .mobile-title {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .logo-wrapper {
+      text-align: center;
+    }
+
+    .logo-wrapper img {
+      height: 30px;
+      margin: 0 auto 4px auto;
+    }
+
+    .logo-wrapper div {
+      font-weight: bold;
+      font-size: 0.95em;
+      color: white;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 70%;
+      height: 100vh;
+      background-color: #75025c;
+      padding: 2em 1em;
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    .mobile-menu a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 1em 0;
+    }
+
+    .mobile-menu a i {
+      margin-right: 6px;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        display: none;
+      }
+      .mobile-header {
+        display: flex;
+      }
+    }
+
     main {
       flex: 1;
       display: flex;
@@ -115,6 +198,26 @@
 </head>
 <body>
 
+<div class="mobile-header">
+  <div class="menu-btn" id="menuToggle">☰</div>
+  <div class="mobile-title">
+    <div class="logo-wrapper">
+      <img src="logo.jpg" alt="Logo" />
+      <div>Jammet Consultora SRL</div>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+  <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
+  <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+  <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+  <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+  <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
+</div>
+<div class="overlay" id="overlay"></div>
+
 <header>
   <div class="logo-container">
     <a href="index.html">
@@ -123,6 +226,7 @@
     </a>
   </div>
   <nav>
+    <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
     <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
     <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
     <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
@@ -204,6 +308,20 @@
       option.disabled = true;
       select.appendChild(option);
     });
+
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const overlay = document.getElementById("overlay");
+
+  menuToggle.addEventListener("click", () => {
+    mobileMenu.style.display = "block";
+    overlay.style.display = "block";
+  });
+
+  overlay.addEventListener("click", () => {
+    mobileMenu.style.display = "none";
+    overlay.style.display = "none";
+  });
 </script>
 
 </body>
