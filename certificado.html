@@ -2,14 +2,16 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Descargá tu certificado - Jammet Consultora SRL</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <style>
     body {
-      margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
 
     header {
@@ -37,8 +39,6 @@
       font-size: 1.1em;
       display: flex;
       align-items: center;
-      position: relative;
-      top: -2px;
     }
 
     nav {
@@ -50,9 +50,9 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
+      font-size: 0.95em;
       display: flex;
       align-items: center;
-      font-size: 0.95em;
     }
 
     nav a i {
@@ -61,140 +61,185 @@
 
     .contenedor {
       max-width: 500px;
-      margin: 60px auto;
+      margin: 80px auto;
       background: white;
-      padding: 40px;
+      padding: 2em;
       border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     .contenedor h2 {
       color: #800061;
-      margin-bottom: 10px;
+      margin-bottom: 0.5em;
     }
 
-    .contenedor input {
-      padding: 10px;
+    input {
       width: 100%;
-      margin-bottom: 20px;
+      padding: 0.8em;
+      margin-top: 1em;
       border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
+      border-radius: 5px;
+      font-size: 1em;
     }
 
-    .contenedor button {
+    button {
+      margin-top: 1.5em;
+      padding: 0.8em 1.5em;
       background-color: #b85caf;
       color: white;
       border: none;
-      padding: 10px 20px;
-      font-size: 16px;
       border-radius: 6px;
+      font-size: 1em;
       cursor: pointer;
-      margin-top: 10px;
     }
 
-    .contenedor button:disabled {
+    button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
 
-    .contenedor .error {
-      color: red;
-      margin-top: 15px;
-    }
-
     .certificado-btns {
-      margin-top: 20px;
+      margin-top: 1.5em;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
+    .error {
+      color: red;
+      margin-top: 1em;
+    }
+
     footer {
       text-align: center;
-      margin-top: 60px;
+      margin: 3em 0;
       color: #777;
+    }
+
+    .progress-bar {
+      height: 5px;
+      width: 100%;
+      background: #eee;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0;
+      background: #75025c;
+      animation: progressAnim 3s linear forwards;
+    }
+
+    @keyframes progressAnim {
+      to { width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo-container">
-      <a href="index.html">
-        <img src="logo.jpg" alt="Logo Jammet Consultora" />
-        Jammet Consultora SRL
-      </a>
+<header>
+  <div class="logo-container">
+    <a href="index.html">
+      <img src="logo.jpg" alt="Logo Jammet Consultora" />
+      Jammet Consultora SRL
+    </a>
+  </div>
+  <nav>
+    <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+    <a href="boleta.html"><i class="fas fa-receipt"></i> Generá tu boleta de pago</a>
+    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
+  </nav>
+</header>
+
+<main>
+  <div class="contenedor">
+    <h2>Descargá tu certificado</h2>
+    <p>Ingresá tu DNI, si tu curso está validado se habilitará debajo un botón para descargar el certificado correspondiente.</p>
+    <input type="text" id="dni" placeholder="°Ingresa tu DNI°" />
+    <button id="buscarBtn" onclick="buscarCertificados()">Buscar certificados</button>
+    <div class="progress-bar" id="progressContainer">
+      <div class="progress-bar-fill" id="progressFill"></div>
     </div>
-    <nav>
-      <a href="boleta.html"><i class="fas fa-receipt"></i> Generá tu boleta de pago</a>
-      <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
-      <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
-      <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
-      <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
-    </nav>
-  </header>
+    <div class="error" id="mensajeError"></div>
+    <div class="certificado-btns" id="resultado"></div>
+  </div>
+</main>
 
-  <main>
-    <div class="contenedor">
-      <h2>Descargá tu certificado</h2>
-      <p>
-        Ingresá tu DNI, si tu curso esta validado en unos segundos se habilitara debajo un boton para descargar el certificado correspondiente.
-      </p>
-      <input type="text" id="dni" placeholder="Ingresa tu DNI" />
-      <button id="buscarBtn" onclick="buscarCertificados()">Buscar certificados</button>
-      <div class="error" id="mensajeError"></div>
-      <div class="certificado-btns" id="resultado"></div>
-    </div>
-  </main>
+<footer>
+  © 2025 Jammet Consultora SRL
+</footer>
 
-  <footer>
-    © 2025 Jammet Consultora SRL
-  </footer>
+<script>
+  const endpoint = "https://script.google.com/macros/s/AKfycbzsP-Ob99BZoEsOnC3Dcz289ksXbydNrut5poydnBXAWKAERrI2uG01m1NQ6MW50Omevg/exec";
 
-  <script>
-    const endpoint = "https://script.google.com/macros/s/AKfycbzsP-Ob99BZoEsOnC3Dcz289ksXbydNrut5poydnBXAWKAERrI2uG01m1NQ6MW50Omevg/exec";
+  async function buscarCertificados() {
+    const dni = document.getElementById("dni").value.trim();
+    const mensaje = document.getElementById("mensajeError");
+    const resultado = document.getElementById("resultado");
+    const boton = document.getElementById("buscarBtn");
+    const progress = document.getElementById("progressContainer");
+    const progressFill = document.getElementById("progressFill");
 
-    async function buscarCertificados() {
-      const dni = document.getElementById("dni").value.trim();
-      const mensaje = document.getElementById("mensajeError");
-      const resultado = document.getElementById("resultado");
-      const boton = document.getElementById("buscarBtn");
+    mensaje.textContent = "";
+    resultado.innerHTML = "";
+    progress.style.display = "block";
+    progressFill.style.width = "0";
 
-      mensaje.textContent = "";
-      resultado.innerHTML = "";
-
-      if (!dni) {
-        mensaje.textContent = "Por favor ingresá un DNI.";
-        return;
-      }
-
-      boton.disabled = true;
-      boton.textContent = "Generando certificados...";
-
-      try {
-        const response = await fetch(`${endpoint}?dni=${dni}`);
-        const data = await response.json();
-
-        if (data.estado === "ok" && data.certificados?.length > 0) {
-          data.certificados.forEach(cert => {
-            const btn = document.createElement("button");
-            btn.innerHTML = `📄 Descargar Certificado de ${cert.curso} (${cert.fecha})`;
-            btn.onclick = () => window.open(cert.link, "_blank");
-            resultado.appendChild(btn);
-          });
-        } else {
-          mensaje.textContent = data.mensaje || "No se encontraron certificados.";
-        }
-      } catch (error) {
-        mensaje.textContent = "Error al buscar el certificado.";
-      } finally {
-        boton.disabled = false;
-        boton.textContent = "Buscar certificados";
-      }
+    if (!dni) {
+      mensaje.textContent = "Por favor ingresá un DNI.";
+      progress.style.display = "none";
+      return;
     }
-  </script>
+
+    boton.disabled = true;
+    boton.textContent = "Generando certificados...";
+
+    try {
+      progressFill.style.animation = "progressAnim 3s linear forwards";
+
+      const response = await fetch(`${endpoint}?dni=${dni}`);
+      const data = await response.json();
+
+      if (data.estado === "ok" && data.certificados?.length > 0) {
+        data.certificados.forEach(cert => {
+          const btn = document.createElement("button");
+          btn.innerHTML = `📄 Descargar Certificado de ${cert.curso} (${cert.fecha})`;
+          btn.onclick = () => window.open(cert.link, "_blank");
+          resultado.appendChild(btn);
+        });
+      } else {
+        mensaje.textContent = data.mensaje || "No se encontraron certificados.";
+      }
+    } catch (error) {
+      mensaje.textContent = "Error al buscar el certificado.";
+    } finally {
+      progress.style.display = "none";
+      boton.disabled = false;
+      boton.textContent = "Buscar certificados";
+    }
+  }
+</script>
 
 </body>
 </html>
