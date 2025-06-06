@@ -4,13 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jammet Consultora SRL</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <style>
     body {
-      font-family: "Segoe UI", sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: "Segoe UI", sans-serif;
       background-color: #f9f9f9;
+      color: #333;
     }
+
     header {
       background-color: #75025c;
       color: white;
@@ -18,77 +20,90 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: nowrap;
     }
+
     .logo-container {
       display: flex;
       align-items: center;
     }
+
     .logo-container img {
       height: 40px;
       margin-right: 10px;
     }
+
     .logo-container a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       font-size: 1.1em;
+      display: flex;
+      align-items: center;
       position: relative;
       top: -2px;
     }
+
     nav {
       display: flex;
       gap: 20px;
-      flex-wrap: wrap;
     }
+
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       font-size: 0.95em;
+      display: flex;
+      align-items: center;
     }
-    nav a span {
+
+    nav a i {
       margin-right: 6px;
     }
+
     main {
-      padding: 3em 1em;
+      max-width: 900px;
+      margin: 2em auto;
+      background: white;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       text-align: center;
     }
-    h1 {
-      color: #75025c;
-      font-size: 2em;
-      margin-bottom: 1em;
-    }
+
     .botones {
       display: flex;
       justify-content: center;
-      gap: 20px;
       flex-wrap: wrap;
+      gap: 1em;
       margin-bottom: 2em;
     }
+
     .botones a {
       background-color: #b05fa7;
       color: white;
+      padding: 1em 1.5em;
       text-decoration: none;
-      padding: 1em 2em;
-      border-radius: 8px;
-      font-weight: bold;
+      border-radius: 6px;
       font-size: 1em;
+      font-weight: bold;
     }
+
     iframe {
-      border: none;
       width: 100%;
-      max-width: 900px;
       height: 600px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      margin: 0 auto;
+      border: none;
+      border-radius: 8px;
       display: block;
+      margin: 0 auto;
     }
+
     footer {
       text-align: center;
-      padding: 2em;
-      font-size: 0.9em;
+      margin: 3em 0 1em 0;
       color: #aaa;
+      font-size: 0.85em;
     }
   </style>
 </head>
@@ -102,24 +117,24 @@
     </a>
   </div>
   <nav>
-    <a href="boleta.html"><span>🧾</span>Generá tu boleta de pago</a>
-    <a href="certificado.html"><span>📄</span>Descargá tu certificado</a>
-    <a href="quienes.html"><span>ℹ️</span>¿Quiénes somos?</a>
-    <a href="ubicacion.html"><span>📍</span>Ubicación</a>
-    <a href="contacto.html"><span>✉️</span>Contacto</a>
+    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
+    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
   </nav>
 </header>
 
 <main>
-  <h1>Capacitaciones disponibles</h1>
+  <h2>Capacitaciones disponibles</h2>
   <div class="botones">
     <a href="inicio.html">Inicio Cargas Generales</a>
     <a href="renovacion.html">Renovación Cargas Generales</a>
     <a href="pasajeros.html">Transporte de Pasajeros</a>
   </div>
 
-  <h2>Calendario de cursos</h2>
-  <iframe src="https://calendar.google.com/calendar/embed?src=jammetcertificados%40gmail.com&ctz=America%2FArgentina%2FComodoro_Rivadavia" style="border:0" allowfullscreen></iframe>
+  <h3>Calendario de cursos</h3>
+  <iframe src="https://calendar.google.com/calendar/embed?src=6f196a3395512d690b20b9e33e542030e9e6ffc777e4d9be6e0df44a5ef1466a%40group.calendar.google.com&ctz=America%2FArgentina%2FCatamarca" style="border:0" frameborder="0" scrolling="no"></iframe>
 </main>
 
 <footer>
