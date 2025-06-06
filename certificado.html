@@ -94,6 +94,11 @@
       margin-top: 10px;
     }
 
+    .contenedor button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     .contenedor .error {
       color: red;
       margin-top: 15px;
@@ -138,7 +143,7 @@
         Ingresá tu DNI para verificar y acceder a los certificados, si están validados.
       </p>
       <input type="text" id="dni" placeholder="°Ingresa tu DNI°" />
-      <button onclick="buscarCertificados()">Buscar certificados</button>
+      <button id="buscarBtn" onclick="buscarCertificados()">Buscar certificados</button>
       <div class="error" id="mensajeError"></div>
       <div class="certificado-btns" id="resultado"></div>
     </div>
@@ -151,10 +156,12 @@
   <script>
     const endpoint = "https://script.google.com/macros/s/AKfycbzsP-Ob99BZoEsOnC3Dcz289ksXbydNrut5poydnBXAWKAERrI2uG01m1NQ6MW50Omevg/exec";
 
-    function buscarCertificados() {
+    async function buscarCertificados() {
       const dni = document.getElementById("dni").value.trim();
       const mensaje = document.getElementById("mensajeError");
       const resultado = document.getElementById("resultado");
+      const boton = document.getElementById("buscarBtn");
+
       mensaje.textContent = "";
       resultado.innerHTML = "";
 
@@ -163,23 +170,29 @@
         return;
       }
 
-      fetch(`${endpoint}?dni=${dni}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.estado === "ok" && data.certificados && data.certificados.length > 0) {
-            data.certificados.forEach(cert => {
-              const btn = document.createElement("button");
-              btn.innerHTML = `📄 Descargar Certificado de ${cert.curso} (${cert.fecha})`;
-              btn.onclick = () => window.open(cert.link, "_blank");
-              resultado.appendChild(btn);
-            });
-          } else {
-            mensaje.textContent = data.mensaje || "No se encontraron certificados.";
-          }
-        })
-        .catch(() => {
-          mensaje.textContent = "Error al buscar el certificado.";
-        });
+      boton.disabled = true;
+      boton.textContent = "Generando certificados...";
+
+      try {
+        const response = await fetch(`${endpoint}?dni=${dni}`);
+        const data = await response.json();
+
+        if (data.estado === "ok" && data.certificados?.length > 0) {
+          data.certificados.forEach(cert => {
+            const btn = document.createElement("button");
+            btn.innerHTML = `📄 Descargar Certificado de ${cert.curso} (${cert.fecha})`;
+            btn.onclick = () => window.open(cert.link, "_blank");
+            resultado.appendChild(btn);
+          });
+        } else {
+          mensaje.textContent = data.mensaje || "No se encontraron certificados.";
+        }
+      } catch (error) {
+        mensaje.textContent = "Error al buscar el certificado.";
+      } finally {
+        boton.disabled = false;
+        boton.textContent = "Buscar certificados";
+      }
     }
   </script>
 
