@@ -210,6 +210,22 @@
       cursor: pointer;
     }
 
+    .progress-container {
+      margin-top: 1em;
+      height: 6px;
+      background: #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+      display: none;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #75025c;
+      transition: width 3s ease;
+    }
+
     footer {
       text-align: center;
       margin-top: 3em;
@@ -220,7 +236,6 @@
 </head>
 <body>
 
-<!-- Encabezado móvil -->
 <div class="mobile-header">
   <div class="menu-btn" id="menuToggle">☰</div>
   <div class="mobile-title">
@@ -240,7 +255,6 @@
   <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
 </div>
 
-<!-- Encabezado escritorio -->
 <header>
   <div class="logo-container">
     <a href="index.html">
@@ -264,22 +278,20 @@
   <form id="formulario">
     <label>Nombre:</label>
     <input type="text" name="nombre" required placeholder="Obligatorio">
-
     <label>Apellido:</label>
     <input type="text" name="apellido" required placeholder="Obligatorio">
-
     <label>DNI:</label>
     <input type="text" name="dni" required placeholder="Obligatorio">
-
     <label>Tipo de curso:</label>
     <select name="curso" id="curso" required>
       <option value="">Seleccione un curso</option>
     </select>
-
     <div id="monto-visual" class="monto-visual"></div>
     <input type="hidden" name="monto" id="monto">
-
     <button type="submit" id="generarBtn">Generar boleta</button>
+    <div class="progress-container" id="barraProgreso">
+      <div class="progress-bar" id="barraInterna"></div>
+    </div>
   </form>
 
   <div id="boton-ver"></div>
@@ -300,7 +312,6 @@
       const res = await fetch(urlValores);
       const data = await res.json();
       valoresCursos = data.cursos || {};
-
       const select = document.getElementById("curso");
       Object.keys(valoresCursos).forEach(curso => {
         const opt = document.createElement("option");
@@ -315,10 +326,7 @@
 
   document.getElementById("curso").addEventListener("change", function () {
     const seleccion = this.value;
-    const monto = seleccion && valoresCursos[seleccion]
-      ? `$${valoresCursos[seleccion].toFixed(2)}`
-      : "";
-
+    const monto = seleccion && valoresCursos[seleccion] ? `$${valoresCursos[seleccion].toFixed(2)}` : "";
     document.getElementById("monto").value = monto;
     document.getElementById("monto-visual").textContent = monto ? `Monto del curso: ${monto}` : "";
   });
@@ -327,6 +335,12 @@
     e.preventDefault();
     const form = e.target;
     const boton = document.getElementById("generarBtn");
+    const barra = document.getElementById("barraProgreso");
+    const barraInterna = document.getElementById("barraInterna");
+    barra.style.display = "block";
+    barraInterna.style.width = "0%";
+    setTimeout(() => { barraInterna.style.width = "100%"; }, 100);
+
     boton.disabled = true;
     boton.textContent = "Generando boleta...";
 
@@ -347,7 +361,6 @@
       const resultado = JSON.parse(texto);
 
       if (resultado.link) {
-        // iOS/Safari no permite window.open aquí automáticamente
         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
         if (isIOS) {
           const cont = document.getElementById("boton-ver");
@@ -368,19 +381,19 @@
     } finally {
       boton.disabled = false;
       boton.textContent = "Generar boleta";
+      setTimeout(() => {
+        barra.style.display = "none";
+        barraInterna.style.width = "0%";
+      }, 3500);
     }
   });
 
   window.onload = cargarCursos;
 
-  // Menú móvil
   const toggle = document.getElementById("menuToggle");
   const menu = document.getElementById("mobileMenu");
 
-  toggle.addEventListener("click", () => {
-    menu.classList.toggle("active");
-  });
-
+  toggle.addEventListener("click", () => menu.classList.toggle("active"));
   document.addEventListener("click", function (e) {
     if (!menu.contains(e.target) && !toggle.contains(e.target)) {
       menu.classList.remove("active");
