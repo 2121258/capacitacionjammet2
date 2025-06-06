@@ -197,21 +197,17 @@
   document.getElementById("formulario").addEventListener("submit", async function (e) {
     e.preventDefault();
     const form = e.target;
-    const datos = {
-      nombre: form.nombre.value.trim(),
-      apellido: form.apellido.value.trim(),
-      dni: form.dni.value.trim(),
-      curso: form.curso.value,
-      monto: valoresCursos[form.curso.value] || 0
-    };
+    const datos = new URLSearchParams();
+    datos.append("nombre", form.nombre.value.trim());
+    datos.append("apellido", form.apellido.value.trim());
+    datos.append("dni", form.dni.value.trim());
+    datos.append("curso", form.curso.value);
+    datos.append("monto", valoresCursos[form.curso.value] || 0);
 
     try {
       const res = await fetch(urlGenerarBoleta, {
         method: "POST",
-        body: JSON.stringify(datos),
-        headers: {
-          "Content-Type": "application/json"
-        }
+        body: datos
       });
 
       const resultado = await res.json();
@@ -220,7 +216,7 @@
       if (resultado.link) {
         window.open(resultado.link, "_blank");
       } else {
-        alert("Error: no se pudo generar la boleta.\n" + (resultado.mensaje || "Sin mensaje del servidor."));
+        alert("Error: no se pudo generar la boleta.\n" + (resultado.mensaje || ""));
       }
     } catch (error) {
       console.error(error);
