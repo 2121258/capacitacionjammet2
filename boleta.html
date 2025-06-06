@@ -92,8 +92,14 @@
       font-size: 1em;
     }
 
-    input[readonly] {
-      background-color: #eee;
+    input[type="hidden"] {
+      display: none;
+    }
+
+    .monto-visual {
+      margin-top: 0.5em;
+      font-weight: bold;
+      color: #75025c;
     }
 
     button {
@@ -152,8 +158,8 @@
       <option value="">Seleccione un curso</option>
     </select>
 
-    <label>Monto:</label>
-    <input type="text" name="monto" id="monto" readonly>
+    <div id="monto-visual" class="monto-visual"></div>
+    <input type="hidden" name="monto" id="monto">
 
     <button type="submit">Generar boleta</button>
   </form>
@@ -165,7 +171,7 @@
 
 <script>
   const urlValores = "https://script.google.com/macros/s/AKfycbzRBs-78TsqbaM6rRo6PI36owp50rfqm9o7Wk4dwT3Tclef_8Ta6NSvPORBPlNUY_89nQ/exec";
-  const urlGenerarBoleta = "https://script.google.com/macros/s/AKfycbxx9vHFap8_epfUoI9G_7TG0sqcA43q3HrU-a-itKAOXKxehY4jTNHs0NJKEthNT6Rx/exec";
+  const urlGenerarBoleta = "https://script.google.com/macros/s/AKfycbwLuIY30j1JBvivZEDs9sFTNqLjqWQP-AsXfPOSYEYJUfuxT3_tNKZzWX5odG76heQ9/exec";
 
   let valoresCursos = {};
 
@@ -189,35 +195,32 @@
 
   document.getElementById("curso").addEventListener("change", function () {
     const seleccion = this.value;
-    document.getElementById("monto").value = seleccion && valoresCursos[seleccion]
+    const monto = seleccion && valoresCursos[seleccion]
       ? `$${valoresCursos[seleccion].toFixed(2)}`
       : "";
+
+    document.getElementById("monto").value = monto;
+    document.getElementById("monto-visual").textContent = monto ? `Monto del curso: ${monto}` : "";
   });
 
   document.getElementById("formulario").addEventListener("submit", async function (e) {
     e.preventDefault();
     const form = e.target;
-    const cursoSeleccionado = form.curso.value;
-    const montoFinal = `$${(valoresCursos[cursoSeleccionado] || 0).toFixed(2)}`;
-
-    const datos = {
-      nombre: form.nombre.value.trim(),
-      apellido: form.apellido.value.trim(),
-      dni: form.dni.value.trim(),
-      curso: cursoSeleccionado,
-      monto: montoFinal
-    };
+    const datos = new URLSearchParams();
+    datos.append("nombre", form.nombre.value.trim());
+    datos.append("apellido", form.apellido.value.trim());
+    datos.append("dni", form.dni.value.trim());
+    datos.append("curso", form.curso.value);
+    datos.append("monto", form.monto.value);
 
     try {
       const res = await fetch(urlGenerarBoleta, {
         method: "POST",
-        body: JSON.stringify(datos),
-        headers: {
-          "Content-Type": "application/json"
-        }
+        body: datos
       });
 
-      const resultado = await res.json();
+      const texto = await res.text();
+      const resultado = JSON.parse(texto);
 
       if (resultado.link) {
         window.open(resultado.link, "_blank");
