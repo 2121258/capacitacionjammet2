@@ -91,11 +91,19 @@
       font-size: 16px;
       border-radius: 6px;
       cursor: pointer;
+      margin-top: 10px;
     }
 
     .contenedor .error {
       color: red;
       margin-top: 15px;
+    }
+
+    .certificado-btns {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     footer {
@@ -127,12 +135,12 @@
     <div class="contenedor">
       <h2>Descargá tu certificado</h2>
       <p>
-        Ingresá tu DNI para verificar y acceder al certificado, si está validado.
-        En unos segundos se generará el certificado en formato PDF en una ventana emergente.
+        Ingresá tu DNI para verificar y acceder a los certificados, si están validados.
       </p>
-      <input type="text" id="dni" placeholder="Ingresa tu DNI" />
-      <button onclick="buscarCertificado()">Buscar certificado</button>
-      <p class="error" id="mensajeError"></p>
+      <input type="text" id="dni" placeholder="°Ingresa tu DNI°" />
+      <button onclick="buscarCertificados()">Buscar certificados</button>
+      <div class="error" id="mensajeError"></div>
+      <div class="certificado-btns" id="resultado"></div>
     </div>
   </main>
 
@@ -141,28 +149,37 @@
   </footer>
 
   <script>
-    async function buscarCertificado() {
+    const endpoint = "https://script.google.com/macros/s/AKfycbzsP-Ob99BZoEsOnC3Dcz289ksXbydNrut5poydnBXAWKAERrI2uG01m1NQ6MW50Omevg/exec";
+
+    function buscarCertificados() {
       const dni = document.getElementById("dni").value.trim();
       const mensaje = document.getElementById("mensajeError");
+      const resultado = document.getElementById("resultado");
       mensaje.textContent = "";
+      resultado.innerHTML = "";
 
-      if (dni === "") {
+      if (!dni) {
         mensaje.textContent = "Por favor ingresá un DNI.";
         return;
       }
 
-      try {
-        const response = await fetch(`https://script.google.com/macros/s/AKfycbyHcGx-1pVrj4lcXPWpN_nRzPsE891g4sxFBLbNUIWBqaPaNnJ1SiAg8rsQMVwJaFAzbA/exec?dni=${dni}`);
-        const data = await response.json();
-
-        if (data.estado === "ok") {
-          window.open(data.link, "_blank");
-        } else {
-          mensaje.textContent = data.mensaje || "DNI no encontrado";
-        }
-      } catch (error) {
-        mensaje.textContent = "Error al buscar el certificado.";
-      }
+      fetch(`${endpoint}?dni=${dni}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.estado === "ok" && data.certificados && data.certificados.length > 0) {
+            data.certificados.forEach(cert => {
+              const btn = document.createElement("button");
+              btn.innerHTML = `📄 Descargar Certificado de ${cert.curso} (${cert.fecha})`;
+              btn.onclick = () => window.open(cert.link, "_blank");
+              resultado.appendChild(btn);
+            });
+          } else {
+            mensaje.textContent = data.mensaje || "No se encontraron certificados.";
+          }
+        })
+        .catch(() => {
+          mensaje.textContent = "Error al buscar el certificado.";
+        });
     }
   </script>
 
