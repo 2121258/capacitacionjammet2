@@ -182,6 +182,23 @@
       color: #75025c;
     }
 
+    .progress-bar {
+      margin-top: 1em;
+      height: 6px;
+      width: 100%;
+      background-color: #ddd;
+      border-radius: 3px;
+      overflow: hidden;
+      display: none;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background-color: #75025c;
+      transition: width 0.2s ease;
+    }
+
     button {
       margin-top: 2em;
       width: 100%;
@@ -199,29 +216,6 @@
       cursor: not-allowed;
     }
 
-    .progress-bar {
-      margin-top: 1em;
-      height: 6px;
-      width: 100%;
-      background-color: #ddd;
-      border-radius: 3px;
-      overflow: hidden;
-      display: none;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background-color: #75025c;
-      animation: fill 2s infinite;
-    }
-
-    @keyframes fill {
-      0% { width: 0%; }
-      50% { width: 100%; }
-      100% { width: 0%; }
-    }
-
     footer {
       text-align: center;
       margin-top: 3em;
@@ -232,7 +226,6 @@
 </head>
 <body>
 
-<!-- Encabezado móvil -->
 <div class="mobile-header">
   <div class="menu-btn" id="menuToggle">☰</div>
   <div class="mobile-title">
@@ -252,7 +245,6 @@
   <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
 </div>
 
-<!-- Encabezado escritorio -->
 <header>
   <div class="logo-container">
     <a href="index.html">
@@ -291,8 +283,9 @@
     <div id="monto-visual" class="monto-visual"></div>
     <input type="hidden" name="monto" id="monto">
 
+    <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+
     <button type="submit" id="generarBtn">Generar boleta</button>
-    <div class="progress-bar" id="progressBar"><div class="progress-fill"></div></div>
   </form>
 </main>
 
@@ -339,10 +332,20 @@
     const form = e.target;
     const boton = document.getElementById("generarBtn");
     const progressBar = document.getElementById("progressBar");
+    const progressFill = document.getElementById("progressFill");
 
     boton.disabled = true;
     boton.textContent = "Generando boleta...";
     progressBar.style.display = "block";
+    progressFill.style.width = "0%";
+
+    let progreso = 0;
+    const intervalo = setInterval(() => {
+      if (progreso < 98) {
+        progreso += 1;
+        progressFill.style.width = `${progreso}%`;
+      }
+    }, 60);
 
     const datos = new URLSearchParams();
     datos.append("nombre", form.nombre.value.trim());
@@ -360,6 +363,14 @@
       const texto = await res.text();
       const resultado = JSON.parse(texto);
 
+      clearInterval(intervalo);
+      progressFill.style.width = "100%";
+
+      setTimeout(() => {
+        progressBar.style.display = "none";
+        progressFill.style.width = "0%";
+      }, 1000);
+
       if (resultado.link) {
         const a = document.createElement("a");
         a.href = resultado.link;
@@ -372,17 +383,17 @@
         alert("Error: no se pudo generar la boleta.");
       }
     } catch (error) {
+      clearInterval(intervalo);
+      progressBar.style.display = "none";
       alert("Ocurrió un error al generar la boleta.");
     } finally {
       boton.disabled = false;
       boton.textContent = "Generar boleta";
-      progressBar.style.display = "none";
     }
   });
 
   window.onload = cargarCursos;
 
-  // Menú móvil
   const toggle = document.getElementById("menuToggle");
   const menu = document.getElementById("mobileMenu");
 
