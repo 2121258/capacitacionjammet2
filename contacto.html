@@ -123,12 +123,19 @@
       color: #333;
       display: flex;
       align-items: center;
+      flex-wrap: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .datos a {
       color: #75025c;
       text-decoration: none;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+      max-width: 100%;
     }
 
     .datos a:hover {
@@ -197,7 +204,7 @@
       overflow-y: auto;
       transition: left 0.3s ease;
       z-index: 1000;
-      font-size: 1em;
+      font-size: 1.1em;
       height: 100%;
       min-height: 100vh;
     }
@@ -208,7 +215,7 @@
 
     .mobile-menu a {
       color: white;
-      padding: 1.2em 1.5em;
+      padding: 1.4em 1.5em;
       text-decoration: none;
       border-bottom: 1px solid #9e2a7b;
       font-weight: bold;
