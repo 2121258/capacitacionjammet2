@@ -202,7 +202,7 @@
       z-index: 999;
       font-size: 1.1em;
       height: 100vh;
-      padding-top: 60px;
+      padding-top: 70px;
     }
 
     .mobile-menu.active {
@@ -211,11 +211,10 @@
 
     .mobile-menu a {
       color: white;
-      padding: 1em;
+      padding: 1.4em 1.5em;
       text-decoration: none;
       border-bottom: 1px solid #9e2a7b;
       font-weight: bold;
-      font-size: 0.95em;
     }
 
     input, select, textarea, button {
@@ -236,10 +235,66 @@
         padding: 1em;
       }
     }
+
+    @media (max-width: 480px) {
+      html, body {
+        width: 100vw;
+        overflow-x: hidden;
+        zoom: 1 !important;
+      }
+
+      body {
+        font-size: 16px !important;
+      }
+
+      .mobile-header {
+        padding: 12px 16px;
+      }
+
+      .logo-wrapper img {
+        height: 38px;
+      }
+
+      .logo-wrapper div {
+        font-size: 1.1em;
+      }
+
+      .menu-btn {
+        font-size: 1.8em;
+      }
+
+      .datos span {
+        flex-wrap: wrap;
+        white-space: normal;
+        gap: 6px;
+      }
+
+      .datos span a {
+        word-break: break-word;
+        white-space: normal;
+      }
+
+      .card {
+        padding: 1.2em 1.2em !important;
+      }
+    }
   </style>
 </head>
 <body>
 <!-- Encabezado móvil -->
+
+  <nav>
+    <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
+    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Contacto</h2>
 <div class="mobile-header">
   <div class="menu-btn" id="menuToggle">☰</div>
   <div class="mobile-title">
@@ -258,45 +313,34 @@
   <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
   <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
 </div>
-
-<!-- Encabezado escritorio -->
-<header>
-  <div class="logo-container">
-    <a href="index.html">
-      <img src="logo.jpg" alt="Jammet Logo">
-      Jammet Consultora SRL
-    </a>
-  </div>
-  <nav>
-    <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
-    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
-    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
-    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
-    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
-    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
-  </nav>
-</header>
-
-<main>
-  <h2>Contacto</h2>
   <div class="card persona">
     <h3>Juliana Jammet</h3>
-    <div class="cargo">Responsable de Capacitaciones</div>
+    <div class="cargo">Encargada Reservas</div>
+    <div class="subtitulo">Datos de contacto</div>
     <div class="datos">
-      <span><i class="fas fa-envelope"></i> <a href="mailto:capacitacion@jammetconsultora.com.ar">capacitacion@jammetconsultora.com.ar</a></span>
-      <span><i class="fas fa-phone"></i> 0297 406 4006</span>
+      <span>👤 Nombre: Lic. Juliana Jammet</span>
+      <span>📧 Email: <a href="mailto:capacitacion@jammetconsultora.com.ar">capacitacion@jammetconsultora.com.ar</a></span>
+      <span>📞 Teléfono: <a href="tel:02974064006">297 4373734</a></span>
+      <span style="display: flex; align-items: center; gap: 8px;">
+        <img src="whatsapp.png" alt="WhatsApp" style="height: 18px; width: 18px;">
+        <a href="https://wa.me/542974373734" target="_blank">Enviar mensaje</a>
+      </span>
     </div>
-    <div class="mensaje">Para consultas sobre cursos, inscripciones o documentación.</div>
+    <div class="subtitulo">Mensaje</div>
+    <div class="mensaje">Consultas sobre cursos y reservas</div>
   </div>
 
   <div class="card persona">
     <h3>Brian Jammet</h3>
-    <div class="cargo">Habilitaciones y Consultoría</div>
+    <div class="cargo">Encargado Reservas</div>
+    <div class="subtitulo">Datos de contacto</div>
     <div class="datos">
-      <span><i class="fas fa-envelope"></i> <a href="mailto:habilitaciones@jammetconsultora.com.ar">habilitaciones@jammetconsultora.com.ar</a></span>
-      <span><i class="fas fa-phone"></i> 0297 406 4006</span>
+      <span>👤 Nombre: Brian Jammet</span>
+      <span>📧 Email: <a href="mailto:habilitaciones@jammetconsultora.com.ar">habilitaciones@jammetconsultora.com.ar</a></span>
+      <span>📞 Teléfono: <a href="tel:02974064006">0297 406 4006</a></span>
     </div>
-    <div class="mensaje">Para temas vinculados a habilitaciones, asesoramiento o seguimiento de trámites.</div>
+    <div class="subtitulo">Mensaje</div>
+    <div class="mensaje">Consultas sobre cursos y reservas</div>
   </div>
 </main>
 
