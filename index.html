@@ -144,26 +144,21 @@
       }
 
       .mobile-title {
-        flex: 1;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         text-align: center;
       }
 
-      .logo-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .logo-wrapper img {
+      .mobile-title img {
         height: 35px;
         margin-bottom: 4px;
       }
 
-      .logo-wrapper div {
+      .mobile-title div {
         font-size: 1em;
         font-weight: bold;
         line-height: 1;
@@ -241,10 +236,8 @@
 <div class="mobile-header">
   <div class="menu-btn" id="menuToggle">☰</div>
   <div class="mobile-title">
-    <div class="logo-wrapper">
-      <img src="logo.jpg" alt="Logo" />
-      <div>Jammet Consultora SRL</div>
-    </div>
+    <img src="logo.jpg" alt="Logo" />
+    <div>Jammet Consultora SRL</div>
   </div>
 </div>
 <div class="mobile-menu" id="mobileMenu">
