@@ -217,6 +217,10 @@
       font-weight: bold;
     }
 
+    input, select, textarea, button {
+      font-size: 16px !important;
+    }
+
     @media (max-width: 768px) {
       header {
         display: none;
@@ -229,6 +233,18 @@
       main {
         margin-top: 80px;
         padding: 1em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      html, body {
+        width: 100vw;
+        overflow-x: hidden;
+        zoom: 1 !important;
+      }
+
+      body {
+        font-size: 16px !important;
       }
     }
   </style>
