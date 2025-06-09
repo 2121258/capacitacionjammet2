@@ -132,6 +132,9 @@
       text-decoration: none;
       display: inline-block;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
 
     .datos a:hover {
@@ -270,8 +273,10 @@
       }
 
       .datos span a {
-        word-break: break-word;
-        white-space: normal;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
       }
 
       .card {
@@ -281,7 +286,6 @@
   </style>
 </head>
 <body>
-<!-- Encabezado móvil -->
 
   <nav>
     <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
@@ -291,77 +295,80 @@
     <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
     <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
   </nav>
-</header>
 
-<main>
-  <h2>Contacto</h2>
-<div class="mobile-header">
-  <div class="menu-btn" id="menuToggle">☰</div>
-  <div class="mobile-title">
-    <div class="logo-wrapper">
-      <img src="logo.jpg" alt="Logo" />
-      <div>Jammet Consultora SRL</div>
+  <header></header>
+
+  <main>
+    <h2>Contacto</h2>
+
+    <div class="mobile-header">
+      <div class="menu-btn" id="menuToggle">☰</div>
+      <div class="mobile-title">
+        <div class="logo-wrapper">
+          <img src="logo.jpg" alt="Logo" />
+          <div>Jammet Consultora SRL</div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
-  <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
-  <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
-  <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
-  <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
-  <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
-</div>
-  <div class="card persona">
-    <h3>Juliana Jammet</h3>
-    <div class="cargo">Encargada Reservas</div>
-    <div class="subtitulo">Datos de contacto</div>
-    <div class="datos">
-      <span>👤 Nombre: Lic. Juliana Jammet</span>
-      <span>📧 Email: <a href="mailto:capacitacion@jammetconsultora.com.ar">capacitacion@jammetconsultora.com.ar</a></span>
-      <span>📞 Teléfono: <a href="tel:02974064006">297 4373734</a></span>
-      <span style="display: flex; align-items: center; gap: 8px;">
-        <img src="whatsapp.png" alt="WhatsApp" style="height: 18px; width: 18px;">
-        <a href="https://wa.me/542974373734" target="_blank">Enviar mensaje</a>
-      </span>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+      <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
+      <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
+      <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
+      <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+      <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
     </div>
-    <div class="subtitulo">Mensaje</div>
-    <div class="mensaje">Consultas sobre cursos y reservas</div>
-  </div>
 
-  <div class="card persona">
-    <h3>Brian Jammet</h3>
-    <div class="cargo">Encargado Reservas</div>
-    <div class="subtitulo">Datos de contacto</div>
-    <div class="datos">
-      <span>👤 Nombre: Brian Jammet</span>
-      <span>📧 Email: <a href="mailto:habilitaciones@jammetconsultora.com.ar">habilitaciones@jammetconsultora.com.ar</a></span>
-      <span>📞 Teléfono: <a href="tel:02974064006">0297 406 4006</a></span>
+    <div class="card persona">
+      <h3>Juliana Jammet</h3>
+      <div class="cargo">Encargada Reservas</div>
+      <div class="subtitulo">Datos de contacto</div>
+      <div class="datos">
+        <span>👤 Nombre: Lic. Juliana Jammet</span>
+        <span>📧 Email: <a href="mailto:capacitacion@jammetconsultora.com.ar">capacitacion@jammetconsultora.com.ar</a></span>
+        <span>📞 Teléfono: <a href="tel:02974064006">297 4373734</a></span>
+        <span style="display: flex; align-items: center; gap: 8px;">
+          <img src="whatsapp.png" alt="WhatsApp" style="height: 18px; width: 18px;">
+          <a href="https://wa.me/542974373734" target="_blank">Enviar mensaje</a>
+        </span>
+      </div>
+      <div class="subtitulo">Mensaje</div>
+      <div class="mensaje">Consultas sobre cursos y reservas</div>
     </div>
-    <div class="subtitulo">Mensaje</div>
-    <div class="mensaje">Consultas sobre cursos y reservas</div>
-  </div>
-</main>
 
-<footer>
-  © 2025 Jammet Consultora SRL
-</footer>
+    <div class="card persona">
+      <h3>Brian Jammet</h3>
+      <div class="cargo">Encargado Reservas</div>
+      <div class="subtitulo">Datos de contacto</div>
+      <div class="datos">
+        <span>👤 Nombre: Brian Jammet</span>
+        <span>📧 Email: <a href="mailto:habilitaciones@jammetconsultora.com.ar">habilitaciones@jammetconsultora.com.ar</a></span>
+        <span>📞 Teléfono: <a href="tel:02974064006">0297 406 4006</a></span>
+      </div>
+      <div class="subtitulo">Mensaje</div>
+      <div class="mensaje">Consultas sobre cursos y reservas</div>
+    </div>
+  </main>
 
-<script>
-  const toggle = document.getElementById("menuToggle");
-  const menu = document.getElementById("mobileMenu");
+  <footer>
+    © 2025 Jammet Consultora SRL
+  </footer>
 
-  toggle.addEventListener("click", () => {
-    menu.classList.toggle("active");
-  });
+  <script>
+    const toggle = document.getElementById("menuToggle");
+    const menu = document.getElementById("mobileMenu");
 
-  document.addEventListener("click", function (e) {
-    if (!menu.contains(e.target) && !toggle.contains(e.target)) {
-      menu.classList.remove("active");
-    }
-  });
-</script>
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle("active");
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+        menu.classList.remove("active");
+      }
+    });
+  </script>
 
 </body>
 </html>
