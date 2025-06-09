@@ -161,15 +161,24 @@
 
       .mobile-title {
         flex: 1;
-        text-align: center;
-        font-weight: bold;
-        font-size: 1em;
+        display: flex;
+        justify-content: center;
       }
 
-      .mobile-title img {
+      .mobile-logo-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .mobile-logo-wrapper img {
         height: 30px;
-        display: block;
-        margin: 0 auto 4px auto;
+        margin-bottom: 4px;
+      }
+
+      .mobile-logo-wrapper div {
+        font-weight: bold;
+        font-size: 1em;
       }
 
       .mobile-menu {
@@ -219,156 +228,4 @@
       }
 
       form {
-        padding: 1.5em;
-        margin-top: 1em;
-      }
-
-      label {
-        font-size: 0.85em;
-      }
-
-      input, select {
-        font-size: 1em;
-      }
-
-      button {
-        font-size: 1em;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<!-- Encabezado PC -->
-<header>
-  <div class="logo-container">
-    <a href="index.html">
-      <img src="logo.jpg" alt="Jammet Logo">
-      Jammet Consultora SRL
-    </a>
-  </div>
-  <nav>
-    <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
-    <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
-    <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
-    <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
-    <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
-    <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
-  </nav>
-</header>
-
-<!-- Encabezado móvil -->
-<div class="mobile-header">
-  <div class="menu-btn" id="menuToggle">☰</div>
-  <div class="mobile-title">
-    <img src="logo.jpg" alt="Logo" />
-    Jammet Consultora SRL
-  </div>
-</div>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
-  <a href="boleta.html"><i class="fas fa-file-invoice"></i> Generá tu boleta de pago</a>
-  <a href="certificado.html"><i class="fas fa-file-download"></i> Descargá tu certificado</a>
-  <a href="quienes.html"><i class="fas fa-info-circle"></i> ¿Quiénes somos?</a>
-  <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
-  <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
-</div>
-<div class="menu-overlay" id="menuOverlay"></div>
-
-<main>
-  <form id="formulario" enctype="multipart/form-data">
-    <h2>Inicio Cargas Generales</h2>
-    <p class="subtitulo">El curso dura dos días hábiles</p>
-
-    <label>Apellido</label>
-    <input type="text" name="apellido" placeholder="Obligatorio" required>
-
-    <label>Nombre</label>
-    <input type="text" name="nombre" placeholder="Obligatorio" required>
-
-    <label>DNI</label>
-    <input type="text" name="dni" placeholder="°Ingresa tu DNI°" required>
-
-    <label>Fecha del curso</label>
-    <select name="fechaCurso" id="fechaCurso" required></select>
-
-    <label>DNI Frente</label>
-    <input type="file" name="dniFrente" accept=".jpg,.jpeg,.pdf" required>
-
-    <label>DNI Dorso</label>
-    <input type="file" name="dniDorso" accept=".jpg,.jpeg,.pdf" required>
-
-    <label>Licencia Frente</label>
-    <input type="file" name="licenciaFrente" accept=".jpg,.jpeg,.pdf" required>
-
-    <label>Licencia Dorso</label>
-    <input type="file" name="licenciaDorso" accept=".jpg,.jpeg,.pdf" required>
-
-    <label>Comprobante de pago (opcional)</label>
-    <input type="file" name="comprobante" accept=".jpg,.jpeg,.pdf">
-
-    <button type="submit">Enviar</button>
-  </form>
-</main>
-
-<footer>
-  © 2025 Jammet Consultora SRL
-</footer>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const toggle = document.getElementById("menuToggle");
-    const menu = document.getElementById("mobileMenu");
-    const overlay = document.getElementById("menuOverlay");
-
-    function toggleMenu(forceClose = false) {
-      if (forceClose || menu.classList.contains("active")) {
-        menu.classList.remove("active");
-        overlay.classList.remove("active");
-      } else {
-        menu.classList.add("active");
-        overlay.classList.add("active");
-      }
-    }
-
-    toggle.addEventListener("click", () => toggleMenu());
-    overlay.addEventListener("click", () => toggleMenu(true));
-
-    fetch("https://script.google.com/macros/s/AKfycbw0nqrPDL4QdpcIh71pJSDzERVQU12NqkxYMTzwkjkYRKVlKHweD8K6Ycsj2Uexuo5_mQ/exec")
-      .then(res => res.json())
-      .then(data => {
-        const select = document.getElementById("fechaCurso");
-        const fechas = data.inicio || [];
-        fechas.forEach(fecha => {
-          const option = document.createElement("option");
-          option.value = fecha;
-          option.textContent = fecha;
-          select.appendChild(option);
-        });
-      })
-      .catch(err => {
-        console.error("Error al cargar fechas:", err);
-        alert("No se pudieron cargar las fechas del curso. Intente más tarde.");
-      });
-
-    document.getElementById("formulario").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const data = new FormData(this);
-      fetch("https://script.google.com/macros/s/AKfycbw-yspxJEZ0j1U4yewWa2_300CFpFRhDL30yUKTrztbHlqDGfSK_Qbn9wRWNRFhJn_EKA/exec", {
-        method: "POST",
-        body: data,
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = "reserva_inicio.html";
-        } else {
-          alert("Error al enviar el formulario.");
-        }
-      })
-      .catch(() => alert("Error de red al enviar el formulario."));
-    });
-  });
-</script>
-
-</body>
-</html>
+        padding: 1.5
