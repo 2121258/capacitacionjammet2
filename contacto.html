@@ -49,8 +49,6 @@
       font-size: 1.1em;
       display: flex;
       align-items: center;
-      position: relative;
-      top: -2px;
     }
 
     nav {
@@ -120,18 +118,14 @@
     }
 
     .datos span {
+      color: #333;
       display: flex;
       align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-      overflow-x: auto;
     }
 
     .datos a {
       color: #75025c;
       text-decoration: none;
-      display: inline-block;
-      white-space: nowrap;
     }
 
     .datos a:hover {
@@ -150,6 +144,7 @@
       color: #aaa;
     }
 
+    /* Menú hamburguesa unificado */
     .mobile-header {
       background-color: #75025c;
       color: white;
@@ -234,7 +229,8 @@
   </style>
 </head>
 <body>
-<!-- Encabezado móvil -->
+
+<!-- Menú móvil -->
 <div class="mobile-header">
   <div class="menu-btn" id="menuToggle">☰</div>
   <div class="mobile-title">
@@ -254,7 +250,7 @@
   <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
 </div>
 
-<!-- Encabezado escritorio -->
+<!-- Menú escritorio -->
 <header>
   <div class="logo-container">
     <a href="index.html">
