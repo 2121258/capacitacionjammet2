@@ -141,6 +141,7 @@
       color: #aaa;
     }
 
+    /* Encabezado móvil */
     .mobile-header {
       background-color: #75025c;
       color: white;
@@ -192,6 +193,7 @@
       overflow-y: auto;
       transition: left 0.3s ease;
       z-index: 1000;
+      font-size: 1em;
     }
 
     .mobile-menu.active {
@@ -204,7 +206,22 @@
       text-decoration: none;
       border-bottom: 1px solid #9e2a7b;
       font-weight: bold;
-      font-size: 0.95em;
+      font-size: 1em;
+    }
+
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      z-index: 999;
+    }
+
+    .menu-overlay.active {
+      display: block;
     }
 
     @media (max-width: 768px) {
@@ -244,7 +261,9 @@
   <a href="ubicacion.html"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
   <a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a>
 </div>
+<div class="menu-overlay" id="menuOverlay"></div>
 
+<!-- Encabezado escritorio -->
 <header>
   <div class="logo-container">
     <a href="index.html">
@@ -307,16 +326,20 @@
 <script>
   const toggle = document.getElementById("menuToggle");
   const menu = document.getElementById("mobileMenu");
+  const overlay = document.getElementById("menuOverlay");
 
-  toggle.addEventListener("click", () => {
-    menu.classList.toggle("active");
-  });
-
-  document.addEventListener("click", function (e) {
-    if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+  function toggleMenu(forceClose = false) {
+    if (forceClose || menu.classList.contains("active")) {
       menu.classList.remove("active");
+      overlay.classList.remove("active");
+    } else {
+      menu.classList.add("active");
+      overlay.classList.add("active");
     }
-  });
+  }
+
+  toggle.addEventListener("click", () => toggleMenu());
+  overlay.addEventListener("click", () => toggleMenu(true));
 </script>
 
 </body>
